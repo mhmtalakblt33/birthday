@@ -1,51 +1,65 @@
-// Konfeti container
 const confettiContainer = document.getElementById("confetti-container");
 
-// Sayfa yüklendiğinde konfeti sürekli aksın
+// Sayfa yüklenince başlat
 window.addEventListener("load", () => {
-    startConfettiInfinite();
+    startExplosionConfetti();
 });
 
-// Belirli sayıda konfeti parçacığı üret
-function spawnConfetti(count) {
-    if (!confettiContainer) return;
+// Rastgele sayı
+function rand(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
-    for (let i = 0; i < count; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti");
+// Tek bir patlama: ekrandaki rastgele noktadan 26–45 parça saçılır
+function createExplosion() {
+    const pieces = Math.floor(rand(26, 45));
 
-        // Rastgele konum ve renk
-        const startX = Math.random() * 100; // viewport %
-        const endX = startX + (Math.random() * 30 - 15); // biraz sağ-sol
-        const delay = Math.random() * 0.8;
-        const fallTime = 3 + Math.random() * 1.5;
+    // Patlamanın başlayacağı rastgele koordinat
+    const x = rand(10, 90); // yüzde
+    const y = rand(10, 80);
 
-        const colors = ["#ff6f91", "#ff9671", "#ffc75f", "#f9f871", "#4da3ff", "#9d8bff"];
-        const color = colors[Math.floor(Math.random() * colors.length)];
+    for (let i = 0; i < pieces; i++) {
+        const piece = document.createElement("div");
+        piece.classList.add("confetti-piece");
 
-        confetti.style.setProperty("--x-start", startX + "vw");
-        confetti.style.setProperty("--x-end", endX + "vw");
-        confetti.style.background = color;
-        confetti.style.left = startX + "vw";
-        confetti.style.animationDuration = fallTime + "s";
-        confetti.style.animationDelay = delay + "s";
+        // Renk paleti
+        const colors = [
+            "#ff6f91", "#ff9671", "#ffc75f",
+            "#f9f871", "#4da3ff", "#9d8bff", "#7affc3"
+        ];
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-        confettiContainer.appendChild(confetti);
+        // Başlangıç pozisyonu
+        piece.style.left = x + "vw";
+        piece.style.top = y + "vh";
 
-        // Animasyon bitince elemanı sil (memory şişmesin)
+        // Rastgele açı
+        const angle = rand(0, 360);
+        const distance = rand(60, 180); // patlama yarıçapı
+
+        // Son hedef koordinatı hesapla
+        const endX = x + Math.cos(angle) * distance;
+        const endY = y + Math.sin(angle) * distance;
+
+        piece.style.setProperty("--end-x", endX + "vw");
+        piece.style.setProperty("--end-y", endY + "vh");
+        piece.style.setProperty("--rot", rand(180, 800) + "deg");
+        piece.style.animationDuration = rand(0.9, 1.7) + "s";
+
+        confettiContainer.appendChild(piece);
+
+        // bittiğinde kaldır
         setTimeout(() => {
-            confetti.remove();
-        }, (fallTime + delay) * 1000);
+            piece.remove();
+        }, 2000);
     }
 }
 
-// Sonsuz konfeti akışı
-function startConfettiInfinite() {
-    // İlk burst
-    spawnConfetti(40);
+// Sürekli rastgele patlamalar
+function startExplosionConfetti() {
+    createExplosion(); // ilk patlama
 
-    // Her 400 ms'de küçük küçük at
     setInterval(() => {
-        spawnConfetti(12);
-    }, 400);
+        createExplosion();
+    }, 700); // her 0.7 saniyede 1 patlama
 }
