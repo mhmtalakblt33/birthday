@@ -5,7 +5,7 @@
     <title>İpek 21 – Dilek Zamanı 🎂</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Aynı font ve stil dosyası -->
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -13,10 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
 </head>
-<body>
-    <!-- Konfeti her sayfada çalışsın diye -->
-    <div id="confetti-container"></div>
-
+<body data-page="pasta">
     <main class="page">
         <section id="pasta-section" class="section active center-section">
             <h1>Dilek tut <span class="highlight">İpek</span> ✨</h1>
@@ -53,7 +50,7 @@
                 </div>
             </div>
 
-            <p class="instruction">Dileğini tuttuktan sonra, mumları söndürmek için tıkla.</p>
+            <p class="instruction">Dileğini tuttuktan sonra mumları söndürmek için tıkla.</p>
             <button id="blowButton" class="primary-btn">ÜFLE</button>
 
             <!-- Hediye kutusu alanı -->
@@ -65,7 +62,7 @@
                     <div class="ribbon horizontal"></div>
                     <div class="gift-tag">🎁</div>
                 </div>
-                <p class="instruction small">Dilek tuttuysan, hediyen yukarıdan geldi.</p>
+                <p class="instruction small">Dileğini tuttuysan, hediyen yukarıdan düştü.</p>
                 <button id="openGiftButton" class="secondary-btn hidden">
                     Hediyeni Aç
                 </button>
