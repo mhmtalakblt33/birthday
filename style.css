@@ -35,7 +35,7 @@ body {
     pointer-events: auto;
 }
 
-/* Ortalanmış açılış ekranı */
+/* Ortalanmış açılış/pasta ekranı */
 .center-section {
     min-height: calc(100vh - 64px);
     display: flex;
@@ -45,7 +45,7 @@ body {
     text-align: center;
 }
 
-/* Başlıklar */
+/* Başlıklar, yazılar */
 h1 {
     font-size: 2.6rem;
     font-weight: 800;
@@ -64,9 +64,15 @@ h1 {
 }
 
 .instruction {
+    margin-top: 10px;
     margin-bottom: 22px;
     font-size: 0.98rem;
     color: #e3e6ff;
+}
+
+.instruction.small {
+    font-size: 0.85rem;
+    color: #aab0ff;
 }
 
 /* Butonlar */
@@ -95,7 +101,20 @@ h1 {
     box-shadow: 0 10px 22px rgba(60, 120, 255, 0.6);
 }
 
-/* KONFETİ */
+.secondary-btn {
+    background: transparent;
+    color: #d0d4ff;
+    border: 1px solid rgba(173, 180, 255, 0.7);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-1px);
+}
+
+/* === KONFETİ (SADECE index.html KULLANACAK) === */
+
 #confetti-container {
     position: fixed;
     inset: 0;
@@ -104,39 +123,6 @@ h1 {
     z-index: 999;
 }
 
-.confetti {
-    position: absolute;
-    width: 8px;
-    height: 14px;
-    border-radius: 2px;
-    opacity: 0;
-    animation: confettiFall linear forwards;
-}
-
-@keyframes confettiFall {
-    0% {
-        transform: translate3d(var(--x-start), -10%, 0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    100% {
-        transform: translate3d(var(--x-end), 110%, 0) rotate(260deg);
-        opacity: 0;
-    }
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2rem;
-    }
-    .page {
-        padding: 20px 12px 48px;
-    }
-}
-/* TAM EKRANA SAÇILAN KONFETİ */
 .confetti-piece {
     position: absolute;
     width: 8px;
@@ -158,17 +144,8 @@ h1 {
     }
 }
 
+/* === PASTA === */
 
-
-
-
-
-
-
-
-/* PASTA SAYFASI */
-
-/* Pasta alanı */
 .cake-wrapper {
     display: flex;
     justify-content: center;
@@ -308,7 +285,7 @@ h1 {
     background: #555;
 }
 
-/* Basit duman efekti */
+/* Duman efekti */
 .candles.blown::after {
     content: "";
     position: absolute;
@@ -438,7 +415,12 @@ h1 {
     }
 }
 
-.instruction.small {
-    font-size: 0.85rem;
-    color: #aab0ff;
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .page {
+        padding: 20px 12px 48px;
+    }
 }
