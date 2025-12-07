@@ -136,3 +136,24 @@ h1 {
         padding: 20px 12px 48px;
     }
 }
+/* TAM EKRANA SAÇILAN KONFETİ */
+.confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    border-radius: 3px;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: explode var(--time, 1.2s) ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(var(--end-x) - 50vw), calc(var(--end-y) - 50vh)) rotate(var(--rot));
+    }
+}
