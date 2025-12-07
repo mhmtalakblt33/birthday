@@ -1,4 +1,7 @@
-/* GENEL */
+/* =========================
+   GENEL RESET + GÖVDE
+   ========================= */
+
 *,
 *::before,
 *::after {
@@ -21,7 +24,7 @@ body {
     padding: 32px 16px 64px;
 }
 
-/* Bölüm yapısı */
+/* Bölümler */
 .section {
     opacity: 0;
     transform: translateY(16px);
@@ -35,7 +38,7 @@ body {
     pointer-events: auto;
 }
 
-/* Ortalanmış açılış/pasta ekranı */
+/* Ortalanmış açılış / içerik ekranları */
 .center-section {
     min-height: calc(100vh - 64px);
     display: flex;
@@ -45,10 +48,24 @@ body {
     text-align: center;
 }
 
-/* Başlıklar, yazılar */
+/* Bazı bölümleri gizlemek için */
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   BAŞLIK + ALT BAŞLIK BLOĞU
+   ========================= */
+
 h1 {
     font-size: 2.6rem;
     font-weight: 800;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
     margin-bottom: 10px;
 }
 
@@ -75,7 +92,13 @@ h1 {
     color: #aab0ff;
 }
 
-/* Butonlar */
+/* === BAŞLIK + ALT BAŞLIK BLOĞU BURADA BİTİYOR === */
+
+
+/* =========================
+   BUTONLAR
+   ========================= */
+
 .primary-btn,
 .secondary-btn {
     border: none;
@@ -113,7 +136,10 @@ h1 {
     transform: translateY(-1px);
 }
 
-/* === KONFETİ (SADECE index.html KULLANACAK) === */
+
+/* =========================
+   KONFETİ (SADECE index.html)
+   ========================= */
 
 #confetti-container {
     position: fixed;
@@ -144,8 +170,18 @@ h1 {
     }
 }
 
-/* === PASTA === */
 
+/* =========================
+   PASTA SAYFASI (pasta.html)
+   ========================= */
+
+/* Pasta sayfasında içeriği biraz yukarı al */
+body[data-page="pasta"] .center-section {
+    justify-content: flex-start;
+    padding-top: 40px;
+}
+
+/* Pasta alanı */
 .cake-wrapper {
     display: flex;
     justify-content: center;
@@ -154,88 +190,114 @@ h1 {
 }
 
 .cake-shadow {
-    width: 180px;
-    height: 20px;
-    background: rgba(0, 0, 0, 0.4);
+    width: 220px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.45);
     border-radius: 50%;
-    filter: blur(6px);
+    filter: blur(8px);
     position: absolute;
-    bottom: -6px;
+    bottom: -8px;
 }
 
 .cake {
     position: relative;
-    width: 180px;
-    height: 150px;
+    width: 220px;
+    height: 210px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
 }
 
-.cake-top {
+/* İki katlı pasta gövdeleri */
+.cake-tier {
     position: absolute;
-    top: 32px;
-    width: 150px;
-    height: 18px;
-    background: linear-gradient(to bottom, #ffe6ff, #ffc4f5);
-    border-radius: 80px 80px 50px 50px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
-}
-
-.cake-body {
-    position: absolute;
-    bottom: 26px;
-    width: 150px;
-    height: 80px;
+    left: 50%;
+    transform: translateX(-50%);
     background: linear-gradient(135deg, #4b5ccf, #222c7f);
-    border-radius: 0 0 18px 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+    border-radius: 24px 24px 18px 18px;
     overflow: hidden;
 }
 
-.sprinkle {
+/* Alt kat */
+.bottom-tier {
+    width: 190px;
+    height: 90px;
+    bottom: 46px;
+}
+
+/* Üst kat */
+.top-tier {
+    width: 130px;
+    height: 70px;
+    bottom: 110px;
+}
+
+/* Üst yüzey “icing” kısmı */
+.cake-icing {
     position: absolute;
-    width: 6px;
-    height: 16px;
-    border-radius: 999px;
-    background: #ffd966;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    height: 24px;
+    background: radial-gradient(circle at 30% 0, #ffffff, #ffe5ff 55%, #ffc4f5 100%);
+    border-radius: 999px 999px 60px 60px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.35);
 }
 
-.s1 {
-    left: 20%;
-    top: 10px;
-    transform: rotate(18deg);
-    background: #ffb3c6;
-}
-.s2 {
-    left: 48%;
-    top: 20px;
-    transform: rotate(-8deg);
-    background: #b8e3ff;
-}
-.s3 {
-    left: 72%;
-    top: 5px;
-    transform: rotate(14deg);
-    background: #ffe08a;
+.bottom-icing {
+    top: -2px;
 }
 
+.top-icing {
+    top: -2px;
+}
+
+/* Gövdede hafif parlama */
+.bottom-tier::after,
+.top-tier::after {
+    content: "";
+    position: absolute;
+    inset: 24px 6px 4px;
+    border-radius: 18px;
+    background: linear-gradient(
+        180deg,
+        rgba(120, 135, 255, 0.8),
+        rgba(40, 50, 120, 0.95)
+    );
+    opacity: 0.65;
+}
+
+/* Tabak */
 .cake-plate {
     position: absolute;
-    bottom: 0;
-    width: 200px;
-    height: 18px;
-    background: linear-gradient(to bottom, #cfd4ff, #aab1ff);
-    border-radius: 99px;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 230px;
+    height: 20px;
+    background: linear-gradient(90deg, #cfd4ff, #f6f7ff, #aab1ff);
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
 }
 
-/* Mumlar */
-.candles {
+/* Mum satırları */
+.candles-row {
     position: absolute;
-    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    gap: 12px;
+    align-items: flex-end;
 }
 
+/* Alt katın üstüne dizilen normal mumlar */
+.bottom-candles {
+    bottom: 112px;
+    gap: 14px;
+}
+
+/* Normal mum */
 .candle {
     width: 14px;
     height: 42px;
@@ -261,7 +323,7 @@ h1 {
     margin-top: -6px;
 }
 
-/* Alev */
+/* Alev (normal mumlar) */
 .flame {
     position: absolute;
     top: -20px;
@@ -275,54 +337,90 @@ h1 {
     animation: flameFlicker 0.4s infinite alternate;
 }
 
-/* Mumlar sönünce */
-.candles.blown .flame {
+/* Üst kat “21” mumu */
+.top-number-candle {
+    bottom: 154px;
+}
+
+.number-candle {
+    position: relative;
+    padding: 6px 12px 8px;
+    background: linear-gradient(135deg, #ffffff, #ffe6ff);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 180, 230, 0.7);
+}
+
+.number-candle span {
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #ff5f91;
+    font-size: 1.1rem;
+}
+
+/* 21 için alev */
+.number-flame {
+    top: -24px;
+    width: 18px;
+    height: 26px;
+}
+
+/* Mumlar sönünce: alt mumlar + 21 alevi kapansın */
+#candles.blown .flame,
+#candles.blown ~ .top-number-candle .number-flame {
     opacity: 0;
     box-shadow: none;
 }
 
-.candles.blown .wick {
+/* Sönen alt fitiller koyulaşsın */
+#candles.blown .wick {
     background: #555;
 }
 
-/* Duman efekti */
-.candles.blown::after {
+/* Duman efekti (alt mumların ortasından) */
+#candles.blown::after {
     content: "";
     position: absolute;
-    top: -26px;
+    top: -32px;
     left: 50%;
-    width: 10px;
-    height: 32px;
+    width: 18px;
+    height: 40px;
     transform: translateX(-50%);
-    background: radial-gradient(circle at 50% 0, rgba(220, 220, 220, 0.8), transparent 70%);
+    background: radial-gradient(circle at 50% 0, rgba(220, 220, 220, 0.9), transparent 70%);
     filter: blur(2px);
-    opacity: 0.7;
+    opacity: 0.8;
     animation: smokeUp 1.7s ease-out forwards;
 }
 
+/* Alev animasyonu */
 @keyframes flameFlicker {
     0% {
         transform: translateX(-50%) scale(1);
         box-shadow: 0 0 10px rgba(255, 200, 80, 0.9);
     }
     100% {
-        transform: translateX(-50%) scale(1.07);
+        transform: translateX(-50%) scale(1.08);
         box-shadow: 0 0 18px rgba(255, 220, 130, 1);
     }
 }
 
+/* Duman animasyonu */
 @keyframes smokeUp {
     0% {
-        opacity: 0.8;
+        opacity: 0.9;
         transform: translate(-50%, 0) scale(1);
     }
     100% {
         opacity: 0;
-        transform: translate(-50%, -26px) scale(1.3);
+        transform: translate(-50%, -30px) scale(1.3);
     }
 }
 
-/* Hediye kutusu */
+
+/* =========================
+   HEDİYE KUTUSU
+   ========================= */
+
 .gift-area {
     margin-top: 30px;
     text-align: center;
@@ -388,12 +486,13 @@ h1 {
     font-size: 1.1rem;
 }
 
-/* Hediye düşme animasyonu */
+/* Başta yukarıda */
 .falling {
     opacity: 0;
     transform: translateY(-220px);
 }
 
+/* Düşme animasyonu – bitince olduğu yerde kalır */
 .falling.drop {
     animation: giftDrop 1.1s cubic-bezier(0.22, 0.9, 0.35, 1.2) forwards;
 }
@@ -411,16 +510,26 @@ h1 {
         transform: translateY(-6px);
     }
     100% {
+        opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* Responsive */
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
 @media (max-width: 600px) {
     h1 {
         font-size: 2rem;
     }
+
     .page {
         padding: 20px 12px 48px;
+    }
+
+    .cake {
+        transform: scale(0.9);
     }
 }
