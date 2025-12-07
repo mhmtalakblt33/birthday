@@ -157,3 +157,288 @@ h1 {
         transform: translate(calc(var(--end-x) - 50vw), calc(var(--end-y) - 50vh)) rotate(var(--rot));
     }
 }
+
+
+
+
+
+
+
+
+
+/* PASTA SAYFASI */
+
+/* Pasta alanı */
+.cake-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0 8px;
+    position: relative;
+}
+
+.cake-shadow {
+    width: 180px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    filter: blur(6px);
+    position: absolute;
+    bottom: -6px;
+}
+
+.cake {
+    position: relative;
+    width: 180px;
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.cake-top {
+    position: absolute;
+    top: 32px;
+    width: 150px;
+    height: 18px;
+    background: linear-gradient(to bottom, #ffe6ff, #ffc4f5);
+    border-radius: 80px 80px 50px 50px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.cake-body {
+    position: absolute;
+    bottom: 26px;
+    width: 150px;
+    height: 80px;
+    background: linear-gradient(135deg, #4b5ccf, #222c7f);
+    border-radius: 0 0 18px 18px;
+    overflow: hidden;
+}
+
+.sprinkle {
+    position: absolute;
+    width: 6px;
+    height: 16px;
+    border-radius: 999px;
+    background: #ffd966;
+}
+
+.s1 {
+    left: 20%;
+    top: 10px;
+    transform: rotate(18deg);
+    background: #ffb3c6;
+}
+.s2 {
+    left: 48%;
+    top: 20px;
+    transform: rotate(-8deg);
+    background: #b8e3ff;
+}
+.s3 {
+    left: 72%;
+    top: 5px;
+    transform: rotate(14deg);
+    background: #ffe08a;
+}
+
+.cake-plate {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 18px;
+    background: linear-gradient(to bottom, #cfd4ff, #aab1ff);
+    border-radius: 99px;
+}
+
+/* Mumlar */
+.candles {
+    position: absolute;
+    top: 0;
+    display: flex;
+    gap: 12px;
+}
+
+.candle {
+    width: 14px;
+    height: 42px;
+    background: repeating-linear-gradient(
+        135deg,
+        #ffffff,
+        #ffffff 6px,
+        #ffd0e6 6px,
+        #ffd0e6 12px
+    );
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.wick {
+    width: 2px;
+    height: 7px;
+    background: #222;
+    border-radius: 999px;
+    margin-top: -6px;
+}
+
+/* Alev */
+.flame {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 24px;
+    background: radial-gradient(circle at 30% 30%, #fff7a3 0%, #ffb347 55%, #ff7b00 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 14px rgba(255, 200, 70, 0.9);
+    animation: flameFlicker 0.4s infinite alternate;
+}
+
+/* Mumlar sönünce */
+.candles.blown .flame {
+    opacity: 0;
+    box-shadow: none;
+}
+
+.candles.blown .wick {
+    background: #555;
+}
+
+/* Basit duman efekti */
+.candles.blown::after {
+    content: "";
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    width: 10px;
+    height: 32px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle at 50% 0, rgba(220, 220, 220, 0.8), transparent 70%);
+    filter: blur(2px);
+    opacity: 0.7;
+    animation: smokeUp 1.7s ease-out forwards;
+}
+
+@keyframes flameFlicker {
+    0% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 10px rgba(255, 200, 80, 0.9);
+    }
+    100% {
+        transform: translateX(-50%) scale(1.07);
+        box-shadow: 0 0 18px rgba(255, 220, 130, 1);
+    }
+}
+
+@keyframes smokeUp {
+    0% {
+        opacity: 0.8;
+        transform: translate(-50%, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -26px) scale(1.3);
+    }
+}
+
+/* Hediye kutusu */
+.gift-area {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.gift {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 12px;
+    position: relative;
+}
+
+.gift-box-body {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 75%;
+    background: linear-gradient(135deg, #ff6f91, #ff9671);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+.gift-lid {
+    position: absolute;
+    top: 0;
+    width: 110%;
+    left: -5%;
+    height: 32%;
+    background: linear-gradient(135deg, #ffe6f2, #ffd1e3);
+    border-radius: 10px;
+}
+
+.ribbon.vertical {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 16px;
+    height: 100%;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #ffe96a, #ffb347);
+}
+
+.ribbon.horizontal {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: linear-gradient(to right, #ffe96a, #ffb347);
+}
+
+.gift-tag {
+    position: absolute;
+    top: -16px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+    background: #1c2750;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+/* Hediye düşme animasyonu */
+.falling {
+    opacity: 0;
+    transform: translateY(-220px);
+}
+
+.falling.drop {
+    animation: giftDrop 1.1s cubic-bezier(0.22, 0.9, 0.35, 1.2) forwards;
+}
+
+@keyframes giftDrop {
+    0% {
+        opacity: 0;
+        transform: translateY(-240px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(14px);
+    }
+    80% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.instruction.small {
+    font-size: 0.85rem;
+    color: #aab0ff;
+}
