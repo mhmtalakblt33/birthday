@@ -1,11 +1,8 @@
+const body = document.body;
+const page = body.dataset.page || "";
 const confettiContainer = document.getElementById("confetti-container");
 
-// === KONFETİ SİSTEMİ (TAM EKRAN, TÜM CİHAZLAR) ===
-
-window.addEventListener("load", () => {
-    startExplosionConfetti();
-});
-
+/* === KONFETİ – SADECE index.html === */
 function rand(min, max) {
     return Math.random() * (max - min) + min;
 }
@@ -14,8 +11,8 @@ function createExplosion() {
     if (!confettiContainer) return;
 
     const pieces = Math.floor(rand(26, 45));
-    const x = rand(10, 90); // vw
-    const y = rand(10, 80); // vh
+    const x = rand(10, 90);
+    const y = rand(10, 80);
 
     for (let i = 0; i < pieces; i++) {
         const piece = document.createElement("div");
@@ -56,33 +53,33 @@ function startExplosionConfetti() {
     }, 700);
 }
 
-// === PASTA SAYFASI MANTIK ===
+/* === PASTA SAYFASI MANTIK === */
 
-const blowButton = document.getElementById("blowButton");
-const candles = document.getElementById("candles");
-const giftArea = document.getElementById("gift-area");
-const giftBox = document.getElementById("gift-box");
-const openGiftButton = document.getElementById("openGiftButton");
+function initPastaPage() {
+    const blowButton = document.getElementById("blowButton");
+    const candles = document.getElementById("candles");
+    const giftArea = document.getElementById("gift-area");
+    const giftBox = document.getElementById("gift-box");
+    const openGiftButton = document.getElementById("openGiftButton");
 
-// ÜFLE butonu
-if (blowButton && candles) {
+    if (!blowButton || !candles) return;
+
     blowButton.addEventListener("click", () => {
         // Mumları söndür
         candles.classList.add("blown");
 
-        // Küçük ekstra konfeti patlaması
-        createExplosion();
+        // Butonu devre dışı bırak
+        blowButton.disabled = true;
+        blowButton.style.opacity = "0.7";
 
         // Hediye alanını göster
         if (giftArea && giftBox && openGiftButton) {
             giftArea.classList.remove("hidden");
 
-            // Kutuyu düşür
             setTimeout(() => {
                 giftBox.classList.add("drop");
             }, 350);
 
-            // Animasyon bitince "Hediyeni Aç" butonunu göster
             giftBox.addEventListener(
                 "animationend",
                 () => {
@@ -90,17 +87,21 @@ if (blowButton && candles) {
                 },
                 { once: true }
             );
+
+            openGiftButton.addEventListener("click", () => {
+                window.location.href = "video.html";
+            });
         }
-
-        // Butonu devre dışı bırak
-        blowButton.disabled = true;
-        blowButton.style.opacity = "0.7";
     });
 }
 
-// Hediyeyi aç → video.html'e git
-if (openGiftButton) {
-    openGiftButton.addEventListener("click", () => {
-        window.location.href = "video.html";
-    });
-}
+/* === SAYFAYA GÖRE ÇALIŞTIR === */
+
+window.addEventListener("load", () => {
+    if (page === "index") {
+        startExplosionConfetti();
+    } else if (page === "pasta") {
+        initPastaPage();
+    }
+});
+
