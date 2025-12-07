@@ -1,13 +1,13 @@
 // Konfeti container
 const confettiContainer = document.getElementById("confetti-container");
 
-// Sayfa yüklendiğinde konfeti başlat
+// Sayfa yüklendiğinde konfeti sürekli aksın
 window.addEventListener("load", () => {
-    startConfetti(90, 1600); // (parça sayısı, toplam süre ms)
+    startConfettiInfinite();
 });
 
-// Basit konfeti üretici
-function startConfetti(count, duration) {
+// Belirli sayıda konfeti parçacığı üret
+function spawnConfetti(count) {
     if (!confettiContainer) return;
 
     for (let i = 0; i < count; i++) {
@@ -32,14 +32,20 @@ function startConfetti(count, duration) {
 
         confettiContainer.appendChild(confetti);
 
-        // Bireysel parçayı süre bitince sil
+        // Animasyon bitince elemanı sil (memory şişmesin)
         setTimeout(() => {
             confetti.remove();
         }, (fallTime + delay) * 1000);
     }
+}
 
-    // Genel süre sonunda container içini temizle
-    setTimeout(() => {
-        if (confettiContainer) confettiContainer.innerHTML = "";
-    }, duration);
+// Sonsuz konfeti akışı
+function startConfettiInfinite() {
+    // İlk burst
+    spawnConfetti(40);
+
+    // Her 400 ms'de küçük küçük at
+    setInterval(() => {
+        spawnConfetti(12);
+    }, 400);
 }
