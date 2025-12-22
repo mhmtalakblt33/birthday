@@ -195,6 +195,14 @@ function layoutForProgress(p){
   // bebek->kadın geçişi: p arttıkça SVG değişsin (kademeli geçiş istersen sonra morph yaparız)
   if (p < 0.55) moverIcon.innerHTML = BABY_SVG;
   else moverIcon.innerHTML = WOMAN_SVG;
+
+  const babyLayer = moverIcon.querySelector(".morphBaby");
+const womanLayer = moverIcon.querySelector(".morphWoman");
+if (babyLayer && womanLayer) {
+  // 0.00-1.00 arası yumuşak geçiş
+  const w = clamp((p - 0.40) / 0.45, 0, 1); // 40% sonrası kadına doğru
+  womanLayer.style.opacity = String(w);
+  babyLayer.style.opacity = String(1 - w);
 }
 
 function animate(){
