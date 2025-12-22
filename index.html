@@ -17,10 +17,11 @@
     <section class="card" aria-label="Doğum günü giriş">
       <h1 class="title">Bir yolculuk...</h1>
 
+      <!-- GÜN-AY-YIL -->
       <div class="counter" role="group" aria-label="Tarih sayacı">
         <div class="unit">
-          <div class="num" id="yVal">2005</div>
-          <div class="lbl">Yıl</div>
+          <div class="num" id="dVal">22</div>
+          <div class="lbl">Gün</div>
         </div>
         <div class="sep">•</div>
         <div class="unit">
@@ -29,39 +30,44 @@
         </div>
         <div class="sep">•</div>
         <div class="unit">
-          <div class="num" id="dVal">22</div>
-          <div class="lbl">Gün</div>
+          <div class="num" id="yVal">2005</div>
+          <div class="lbl">Yıl</div>
         </div>
       </div>
 
       <p class="sub" id="rangeText">22.07.2005 → 22.07.2026</p>
 
+      <!-- BAŞLAT -->
+      <button class="btn" id="startBtn" type="button">Başlat</button>
+
       <div class="progressWrap" id="progressWrap" aria-label="Tamamlanma çubuğu">
-        <div class="track">
+        <div class="track" id="track">
           <div class="fill" id="fill"></div>
 
-          <!-- Soldaki ikon -->
+          <!-- SOL: BEBEK -->
           <div class="avatar left" aria-hidden="true" title="Bebek">
-            👶
+            <div class="svgWrap" id="babyIcon"></div>
           </div>
 
-          <!-- Sağdaki ikon -->
+          <!-- SAĞ: GENÇ KADIN -->
           <div class="avatar right" aria-hidden="true" title="Genç kadın">
-            👩
+            <div class="svgWrap" id="womanIcon"></div>
           </div>
 
-          <!-- Hareketli ikon (büyüme efekti burada) -->
-          <div class="avatar mover" id="mover" aria-hidden="true">👶</div>
+          <!-- HAREKETLİ KARAKTER (büyüme) -->
+          <div class="avatar mover" id="mover" aria-hidden="true">
+            <div class="svgWrap" id="moverIcon"></div>
+          </div>
 
-          <div class="pct" id="pct">0%</div>
+          <!-- YAŞ ETİKETİ -->
+          <div class="age" id="age">Yaş: 0</div>
         </div>
       </div>
 
-      <button class="btn hidden" id="nextBtn" type="button">
-        Devam Et →
-      </button>
+      <!-- BİTİNCE -->
+      <button class="btn hidden" id="nextBtn" type="button">Devam Et →</button>
 
-      <div class="hint" id="hint">Yükleniyor…</div>
+      <div class="hint" id="hint">Hazır.</div>
     </section>
   </main>
 
