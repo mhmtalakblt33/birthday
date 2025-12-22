@@ -207,3 +207,17 @@ body{
   font-size: 12px;
   color: rgba(185,198,230,.8);
 }
+
+
+.morph{
+  position:absolute;
+  inset: 8%;
+  display:block;
+  transition: opacity 80ms linear;
+}
+.morph svg{ width:100%; height:100%; display:block; }
+.morphBaby{ opacity: 1; }
+.morphWoman{ opacity: 0; }
+
+
+
