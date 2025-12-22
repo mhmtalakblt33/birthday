@@ -25,19 +25,6 @@ body{
 }
 
 .bg{ position:fixed; inset:0; pointer-events:none; }
-.glow{
-  position:absolute;
-  width:520px;height:520px;border-radius:50%;
-  background: radial-gradient(circle at 30% 30%, rgba(122,167,255,.55), transparent 60%);
-  top:-140px;left:-120px;
-  animation: floaty 10s ease-in-out infinite;
-}
-.glow.g2{ top:40%; left:70%; animation-duration:12s; }
-.glow.g3{ top:65%; left:10%; animation-duration:14s; }
-@keyframes floaty{
-  0%,100%{ transform:translate(0,0); opacity:.9; }
-  50%{ transform:translate(25px,-18px); opacity:.7; }
-}
 
 .wrap{
   height:100%;
@@ -81,7 +68,7 @@ body{
   font-weight:700;
   cursor:pointer;
 }
-.btn:hover{ opacity:.9; }
+
 .hidden{ display:none; }
 
 .progressWrap{ margin-top:12px; }
@@ -117,10 +104,7 @@ body{
 }
 .avatar.left{ left:8px; }
 .avatar.right{ right:8px; }
-.avatar.mover{
-  left:8px;
-  transition:left 60ms linear;
-}
+.avatar.mover{ left:8px; transition:left 60ms linear; }
 
 .age{
   position:absolute;
@@ -134,3 +118,18 @@ body{
 }
 
 .hint{ margin-top:10px; font-size:12px; color:var(--muted); }
+
+/* ⬆️ Alttan çıkan Devam butonu */
+.next{
+  position: relative;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slideUp .6s ease forwards;
+}
+
+@keyframes slideUp{
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
