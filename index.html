@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg">
+  <div class="bg" aria-hidden="true">
     <div class="glow"></div>
     <div class="glow g2"></div>
     <div class="glow g3"></div>
@@ -40,7 +40,8 @@
       <!-- BAŞLAT -->
       <button class="btn" id="startBtn" type="button">Başlat</button>
 
-      <div class="progressWrap" id="progressWrap" aria-label="Tamamlanma çubuğu">
+      <!-- PROGRESS -->
+      <div class="progressWrap hidden" id="progressWrap" aria-label="Tamamlanma çubuğu">
         <div class="track" id="track">
           <div class="fill" id="fill"></div>
 
@@ -54,12 +55,12 @@
             <div class="svgWrap" id="womanIcon"></div>
           </div>
 
-          <!-- HAREKETLİ KARAKTER (büyüme) -->
+          <!-- HAREKETLİ KARAKTER -->
           <div class="avatar mover" id="mover" aria-hidden="true">
             <div class="svgWrap" id="moverIcon"></div>
           </div>
 
-          <!-- YAŞ ETİKETİ -->
+          <!-- YAŞ -->
           <div class="age" id="age">Yaş: 0</div>
         </div>
       </div>
