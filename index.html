@@ -1,37 +1,70 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <title>İpek 21 Yaşında 🎉</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giriş</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body data-page="index">
-    <div id="confetti-container"></div>
+<body>
+  <div class="bg">
+    <div class="glow"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+  </div>
 
-    <main class="page">
-        <section class="section active center-section">
-            <h1>İyi ki doğdun <span class="highlight">İpek</span> 🎂</h1>
-            <p class="subtitle">
-                21. yaşına hoş geldin.<br>
-                Lacivert gökyüzüne küçük bir sürpriz…
-            </p>
+  <main class="wrap">
+    <section class="card" aria-label="Doğum günü giriş">
+      <h1 class="title">Bir yolculuk...</h1>
 
-            <p class="instruction">
-                Hazırsan kutlamaya başlayalım.
-            </p>
+      <div class="counter" role="group" aria-label="Tarih sayacı">
+        <div class="unit">
+          <div class="num" id="yVal">2005</div>
+          <div class="lbl">Yıl</div>
+        </div>
+        <div class="sep">•</div>
+        <div class="unit">
+          <div class="num" id="mVal">07</div>
+          <div class="lbl">Ay</div>
+        </div>
+        <div class="sep">•</div>
+        <div class="unit">
+          <div class="num" id="dVal">22</div>
+          <div class="lbl">Gün</div>
+        </div>
+      </div>
 
-            <a href="pasta.html" class="primary-btn">
-                Kutlamaya Başla
-            </a>
-        </section>
-    </main>
+      <p class="sub" id="rangeText">22.07.2005 → 22.07.2026</p>
+
+      <div class="progressWrap" id="progressWrap" aria-label="Tamamlanma çubuğu">
+        <div class="track">
+          <div class="fill" id="fill"></div>
+
+          <!-- Soldaki ikon -->
+          <div class="avatar left" aria-hidden="true" title="Bebek">
+            👶
+          </div>
+
+          <!-- Sağdaki ikon -->
+          <div class="avatar right" aria-hidden="true" title="Genç kadın">
+            👩
+          </div>
+
+          <!-- Hareketli ikon (büyüme efekti burada) -->
+          <div class="avatar mover" id="mover" aria-hidden="true">👶</div>
+
+          <div class="pct" id="pct">0%</div>
+        </div>
+      </div>
+
+      <button class="btn hidden" id="nextBtn" type="button">
+        Devam Et →
+      </button>
+
+      <div class="hint" id="hint">Yükleniyor…</div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
