@@ -7,17 +7,18 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg" aria-hidden="true">
+  <div class="bg">
     <div class="glow"></div>
     <div class="glow g2"></div>
     <div class="glow g3"></div>
   </div>
 
   <main class="wrap">
-    <section class="card" aria-label="Doğum günü giriş">
+    <section class="card">
       <h1 class="title">Bir yolculuk...</h1>
 
-      <div class="counter" role="group" aria-label="Tarih sayacı">
+      <!-- Gün-Ay-Yıl -->
+      <div class="counter">
         <div class="unit">
           <div class="num" id="dVal">22</div>
           <div class="lbl">Gün</div>
@@ -36,73 +37,30 @@
 
       <p class="sub">22.07.2005 → 22.07.2026</p>
 
-      <button class="btn" id="startBtn" type="button">Başlat</button>
+      <button class="btn" id="startBtn">Başlat</button>
 
-      <div class="progressWrap hidden" id="progressWrap" aria-label="Tamamlanma çubuğu">
+      <div class="progressWrap hidden" id="progressWrap">
         <div class="track" id="track">
           <div class="fill" id="fill"></div>
 
-          <!-- SOL: bebek -->
-          <div class="avatar left" aria-hidden="true" title="Bebek">
-            <div class="imgWrap cartoon">
-              <img src="baby.jpg" alt="" />
-            </div>
-          </div>
+          <!-- Sol: Bebek -->
+          <div class="avatar left">👶</div>
 
-          <!-- SAĞ: genç kadın -->
-          <div class="avatar right" aria-hidden="true" title="Genç kadın">
-            <div class="imgWrap cartoon">
-              <img src="adult.jpg" alt="" />
-            </div>
-          </div>
+          <!-- Sağ: Kadın -->
+          <div class="avatar right">👩</div>
 
-          <!-- HAREKETLİ: crossfade -->
-          <div class="avatar mover" id="mover" aria-hidden="true">
-            <div class="imgWrap cartoon">
-              <img class="layer baby" src="baby.jpg" alt="" />
-              <img class="layer woman" src="adult.jpg" alt="" />
-            </div>
-          </div>
+          <!-- Hareketli emoji -->
+          <div class="avatar mover" id="mover">👶</div>
 
+          <!-- Yaş -->
           <div class="age" id="age">Yaş: 0</div>
         </div>
       </div>
 
-      <button class="btn hidden" id="nextBtn" type="button">Devam Et →</button>
+      <button class="btn hidden" id="nextBtn">Devam Et →</button>
       <div class="hint" id="hint">Hazır.</div>
     </section>
   </main>
-
-  <!-- SVG filter: cartoon -->
-  <svg width="0" height="0" style="position:absolute">
-    <filter id="cartoon">
-      <!-- renkleri “posterize” hissine yaklaştır -->
-      <feComponentTransfer>
-        <feFuncR type="gamma" amplitude="1.1" exponent="0.9" offset="0"/>
-        <feFuncG type="gamma" amplitude="1.1" exponent="0.9" offset="0"/>
-        <feFuncB type="gamma" amplitude="1.1" exponent="0.9" offset="0"/>
-      </feComponentTransfer>
-
-      <!-- hafif blur -->
-      <feGaussianBlur stdDeviation="0.6" result="blur"/>
-
-      <!-- kenar/çizgi -->
-      <feColorMatrix in="blur" type="matrix"
-        values="
-          -1  0  0  0  1
-           0 -1  0  0  1
-           0  0 -1  0  1
-           0  0  0  1  0" result="inv"/>
-
-      <feConvolveMatrix in="inv" order="3" kernelMatrix="
-        -1 -1 -1
-        -1  8 -1
-        -1 -1 -1" result="edges"/>
-
-      <feComposite in="blur" in2="edges" operator="arithmetic"
-        k1="1" k2="0" k3="0.35" k4="0" />
-    </filter>
-  </svg>
 
   <script src="script.js"></script>
 </body>
