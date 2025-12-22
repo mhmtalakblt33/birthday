@@ -5,7 +5,6 @@ const START_MS = Date.UTC(2005,6,22);
 const END_MS   = Date.UTC(2026,6,22);
 const DURATION_MS = 33000;
 
-// ease in-out
 function easeInOut(t){
   return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2,3)/2;
 }
@@ -27,12 +26,14 @@ const ageEl = document.getElementById("age");
 let running = false;
 let lastP = 0;
 
-// emoji aşamaları
-function emojiFor(p){
-  if (p < 0.25) return "👶";   // bebek
-  if (p < 0.5)  return "🧒";   // çocuk
-  if (p < 0.75) return "👧";   // genç kız
-  return "👩";                // kadın
+// Yaşa göre emoji
+function emojiForByAge(age){
+  if (age <= 2) return "🤱🏼";
+  if (age <= 5) return "👶🏻";
+  if (age <= 12) return "👧🏻";
+  if (age <= 17) return "👩🏻‍🦱";
+  if (age <= 19) return "👩🏻";
+  return "👱🏼‍♀️";
 }
 
 function setDateUTC(ms){
@@ -44,12 +45,12 @@ function setDateUTC(ms){
 
 function layout(p){
   lastP = p;
+
   fillEl.style.width = `${Math.round(p*100)}%`;
 
   const age = Math.round(p * 21);
   ageEl.textContent = `Yaş: ${age}`;
-
-  moverEl.textContent = emojiFor(p);
+  moverEl.textContent = emojiForByAge(age);
 
   const leftPad = 8;
   const rightPad = 8;
@@ -80,9 +81,10 @@ function animate(){
     }else{
       setDateUTC(END_MS);
       layout(1);
+
       hint.textContent = "Hazır.";
-      progressWrap.classList.add("hidden");
-      nextBtn.classList.remove("hidden");
+      // ❌ bar gizlenmiyor
+      nextBtn.classList.remove("hidden"); // ✅ alttan çıkıyor
       running = false;
     }
   }
