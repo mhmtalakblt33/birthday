@@ -145,9 +145,14 @@ const WOMAN_SVG = `
 </svg>`;
 
 
-babyIcon.innerHTML = BABY_SVG;
+babyIcon.innerHTML  = BABY_SVG;
 womanIcon.innerHTML = WOMAN_SVG;
-moverIcon.innerHTML = BABY_SVG; // başta bebek
+
+moverIcon.innerHTML = `
+  <div class="morph morphBaby">${BABY_SVG}</div>
+  <div class="morph morphWoman">${WOMAN_SVG}</div>
+`;
+
 
 let running = false;
 
