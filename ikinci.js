@@ -116,3 +116,72 @@ sheet.addEventListener("click", (e) => {
     window.location.href = "index.html";
   }
 });
+
+
+const menuOverlay = document.getElementById("menuOverlay");
+const panels = document.querySelectorAll(".panel");
+
+function showPanel(id){
+  panels.forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+// Hediye kutusuna basınca menüyü aç
+giftBtn.addEventListener("click", ()=>{
+  giftBtn.classList.add("open");
+  menuOverlay.classList.remove("hidden");
+  showPanel("panelMain");
+});
+
+// Menü butonları
+menuOverlay.addEventListener("click", e=>{
+  const go = e.target.dataset.go;
+  const back = e.target.hasAttribute("data-back");
+  const close = e.target.hasAttribute("data-close");
+
+  if(go){
+    showPanel("panel"+go.charAt(0).toUpperCase()+go.slice(1));
+  }
+  if(back){
+    showPanel("panelMain");
+  }
+  if(close){
+    menuOverlay.classList.add("hidden");
+  }
+});
+
+// Arkadaş mektupları
+const letters = [
+  {name:"Esra", text:"İyi ki doğdun! Hayatımda olduğun için çok şanslıyım."},
+  {name:"İpek", text:"Her zaman yanındayım. Nice güzel yaşlara!"},
+  {name:"Hira", text:"Gülüşün her şeyi aydınlatıyor."},
+  {name:"Zeynep", text:"Yeni yaşın sana mutluluk getirsin."},
+  {name:"Ayşenur", text:"Seni çok seviyoruz, iyi ki varsın."},
+  {name:"Burak", text:"Daha nice anılar biriktirelim."},
+  {name:"Yusuf", text:"Doğum günün kutlu olsun!"}
+];
+
+document.querySelectorAll("[data-letter]").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const i = btn.dataset.letter;
+    document.getElementById("letterName").textContent = letters[i].name;
+    document.getElementById("letterText").textContent = letters[i].text;
+    showPanel("panelLetter");
+  });
+});
+
+// Memories carousel
+const memImgs = Array.from({length:21},(_,i)=>`anilar/${i+1}.jpg`);
+const memNotes = memImgs.map((_,i)=>`Anı ${i+1}`);
+let memIndex = 0;
+
+function updateMem(){
+  memImg.src = memImgs[memIndex];
+  memNote.textContent = memNotes[memIndex];
+  memCount.textContent = `${memIndex+1} / ${memImgs.length}`;
+}
+updateMem();
+
+prevMem.onclick = ()=>{ memIndex=(memIndex-1+memImgs.length)%memImgs.length; updateMem(); };
+nextMem.onclick = ()=>{ memIndex=(memIndex+1)%memImgs.length; updateMem(); };
+
