@@ -558,3 +558,113 @@ body{
   line-height: 1.35;
   font-size: 14px;
 }
+
+.menuOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(6px);
+  display:grid;
+  place-items:center;
+  z-index:999;
+}
+.menuOverlay.hidden{ display:none; }
+
+.menuBox{
+  width:min(420px,90vw);
+  background:rgba(10,16,40,.95);
+  border-radius:20px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+
+.panel{ display:none; animation: fade .25s ease; }
+.panel.active{ display:block; }
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.panelHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+.panelHeader span{ font-weight:800; }
+.panelHeader .x{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.menuItem{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  text-align:left;
+}
+
+.list{ display:grid; gap:8px; }
+.listItem{
+  padding:10px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.05);
+  color:#fff;
+  cursor:pointer;
+}
+
+.letterText{
+  font-size:14px;
+  line-height:1.4;
+  color:#eee;
+}
+
+/* Memories */
+.carousel{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.memBox{
+  flex:1;
+  text-align:center;
+}
+.memBox img{
+  max-width:100%;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.2);
+}
+.memNote{ margin-top:6px; font-size:13px; }
+.memCount{ font-size:12px; opacity:.7; }
+.nav{
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.reasons{
+  padding-left:18px;
+  line-height:1.5;
+}
+
+.surpriseBox{
+  text-align:center;
+  padding:20px;
+  background:rgba(255,255,255,.08);
+  border-radius:14px;
+}
+
