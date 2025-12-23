@@ -20,12 +20,13 @@
         <p class="sub">Dileğini tut… sonra mumları üfle.</p>
       </header>
 
-      <!-- CAKE STAGE -->
+      <!-- STAGE -->
       <div class="stage">
         <div class="cakeShadow" aria-hidden="true"></div>
 
+        <!-- CAKE -->
         <div class="cake" id="cake" aria-label="Pasta">
-          <!-- Top frosting surface -->
+          <!-- Top frosting -->
           <div class="topFrost"></div>
 
           <!-- Candles -->
@@ -62,15 +63,12 @@
             </div>
           </div>
 
-          <!-- Cake body -->
+          <!-- Cake tiers -->
           <div class="tier tierTop"></div>
           <div class="tier tierMid"></div>
           <div class="tier tierBot"></div>
 
-          <!-- Drips -->
           <div class="drips"></div>
-
-          <!-- Sprinkles -->
           <div class="sprinkles" aria-hidden="true"></div>
 
           <!-- Plate -->
@@ -84,7 +82,7 @@
         <div class="status" id="status">Mumlar yanıyor…</div>
       </div>
 
-      <!-- Gift appears after 5 seconds -->
+      <!-- Gift (5sn sonra görünür) -->
       <div class="giftArea hidden" id="giftArea" aria-label="Hediye kutusu alanı">
         <div class="giftTitle">Sürpriz 🎁</div>
 
@@ -105,150 +103,116 @@
         <div class="giftHint">Açmak için tıkla</div>
       </div>
 
-<!-- MENU OVERLAY -->
-<div class="menuOverlay hidden" id="menuOverlay">
-  <div class="menuBox">
-
-    <!-- ANA MENÜ -->
-    <div class="panel active" id="panelMain">
-      <h2>Menü</h2>
-      <button class="menuItem" data-go="friends">🧡 Arkadaşlarımdan</button>
-      <button class="menuItem" data-go="memories">📷 Anılar</button>
-      <button class="menuItem" data-go="reasons">✨ 21 Neden</button>
-      <button class="menuItem" data-go="surprise">🎁 Son Sürpriz</button>
-      <button class="menuItem" data-close>⬅ Geri Dön</button>
-    </div>
-
-    <!-- ARKADAŞ LİSTESİ -->
-    <div class="panel" id="panelFriends">
-      <div class="panelHeader">
-        <span>Arkadaşlar</span>
-        <button class="x" data-back>✕</button>
-      </div>
-      <div class="list">
-        <button class="listItem" data-letter="0">Esra</button>
-        <button class="listItem" data-letter="1">İpek</button>
-        <button class="listItem" data-letter="2">Hira</button>
-        <button class="listItem" data-letter="3">Zeynep</button>
-        <button class="listItem" data-letter="4">Ayşenur</button>
-        <button class="listItem" data-letter="5">Burak</button>
-        <button class="listItem" data-letter="6">Yusuf</button>
-      </div>
-    </div>
-
-    <!-- MEKTUP BANNER -->
-    <div class="panel" id="panelLetter">
-      <div class="panelHeader">
-        <span id="letterName">İsim</span>
-        <button class="x" data-back>✕</button>
-      </div>
-      <div class="letterText" id="letterText"></div>
-    </div>
-
-    <!-- ANILAR -->
-    <div class="panel" id="panelMemories">
-      <div class="panelHeader">
-        <span>Anılar</span>
-        <button class="x" data-back>✕</button>
-      </div>
-      <div class="carousel">
-        <button class="nav" id="prevMem">◀</button>
-        <div class="memBox">
-          <img id="memImg" src="anilar/1.jpg" alt="">
-          <div class="memNote" id="memNote">Not burada</div>
-          <div class="memCount" id="memCount">1 / 21</div>
-        </div>
-        <button class="nav" id="nextMem">▶</button>
-      </div>
-    </div>
-
-    <!-- 21 NEDEN -->
-    <div class="panel" id="panelReasons">
-      <div class="panelHeader">
-        <span>21 Neden</span>
-        <button class="x" data-back>✕</button>
-      </div>
-      <ul class="reasons">
-        <li>Gülüşün her şeyi güzelleştiriyor.</li>
-        <li>Yanındayken zaman hızlı geçiyor.</li>
-        <li>...</li>
-      </ul>
-    </div>
-
-    <!-- SON SÜRPRİZ -->
-    <div class="panel" id="panelSurprise">
-      <div class="panelHeader">
-        <span>Son Sürpriz</span>
-        <button class="x" data-back>✕</button>
-      </div>
-      <div class="surpriseBox">
-        💖 Buraya özel sürprizini koyacaksın.
-      </div>
-    </div>
-
-  </div>
-</div>
-      
     </section>
   </main>
 
-  <!-- Phone-style menu sheet -->
-  <div class="overlay hidden" id="overlay" aria-hidden="true"></div>
+  <!-- MENU OVERLAY (şablonundaki gibi) -->
+  <div class="menuOverlay hidden" id="menuOverlay" aria-hidden="true">
+    <div class="menuBox">
 
-  <section class="sheet hidden" id="sheet" aria-label="Menü">
-    <div class="sheetHandle" aria-hidden="true"></div>
+      <!-- MAIN MENU -->
+      <div class="panel active" id="panelMain">
+        <h2 class="menuTitle">Menü</h2>
 
-    <div class="sheetHeader">
-      <div class="sheetTitle">Menü</div>
-      <button class="sheetClose" id="sheetClose" type="button" aria-label="Menüyü kapat">✕</button>
+        <button class="menuItem" data-go="friends">
+          <span class="dot red"></span> Arkadaşlarımdan
+        </button>
+
+        <button class="menuItem" data-go="memories">
+          <span class="dot blue"></span> Anılar
+        </button>
+
+        <button class="menuItem" data-go="reasons">
+          <span class="dot yellow"></span> 21 Neden
+        </button>
+
+        <button class="menuItem" data-go="surprise">
+          <span class="dot orange"></span> Son Sürpriz
+        </button>
+
+        <button class="menuItem" data-close>
+          <span class="dot purple"></span> Geri Dön
+        </button>
+      </div>
+
+      <!-- FRIENDS LIST -->
+      <div class="panel" id="panelFriends">
+        <div class="panelHeader">
+          <span>Arkadaşlarımdan</span>
+          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
+        </div>
+
+        <div class="list">
+          <button class="listItem" type="button" data-letter="0">İsim 1</button>
+          <button class="listItem" type="button" data-letter="1">İsim 2</button>
+          <button class="listItem" type="button" data-letter="2">İsim 3</button>
+          <button class="listItem" type="button" data-letter="3">İsim 4</button>
+          <button class="listItem" type="button" data-letter="4">İsim 5</button>
+          <button class="listItem" type="button" data-letter="5">İsim 6</button>
+          <button class="listItem" type="button" data-letter="6">İsim 7</button>
+        </div>
+      </div>
+
+      <!-- LETTER VIEW -->
+      <div class="panel" id="panelLetter">
+        <div class="panelHeader">
+          <span id="letterName">İsim</span>
+          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
+        </div>
+        <div class="letterText" id="letterText"></div>
+      </div>
+
+      <!-- MEMORIES -->
+      <div class="panel" id="panelMemories">
+        <div class="panelHeader">
+          <span>Anılar</span>
+          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
+        </div>
+
+        <div class="carousel">
+          <button class="nav" id="prevMem" type="button" aria-label="Önceki">◀</button>
+
+          <div class="memBox">
+            <!-- anilar/1.jpg ... anilar/21.jpg -->
+            <img id="memImg" src="anilar/1.jpg" alt="Anı" />
+            <div class="memNote" id="memNote">Not burada</div>
+            <div class="memCount" id="memCount">1 / 21</div>
+          </div>
+
+          <button class="nav" id="nextMem" type="button" aria-label="Sonraki">▶</button>
+        </div>
+
+        <div class="memHint">Klasör: <code>anilar/1.jpg</code> … <code>anilar/21.jpg</code></div>
+      </div>
+
+      <!-- 21 REASONS -->
+      <div class="panel" id="panelReasons">
+        <div class="panelHeader">
+          <span>21 Neden</span>
+          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
+        </div>
+
+        <ul class="reasons">
+          <li>Gülüşün her şeyi güzelleştiriyor.</li>
+          <li>İnsanlara iyi geliyorsun.</li>
+          <li>Seninle konuşmak hep rahat.</li>
+          <li>...</li>
+        </ul>
+      </div>
+
+      <!-- SURPRISE -->
+      <div class="panel" id="panelSurprise">
+        <div class="panelHeader">
+          <span>Son Sürpriz</span>
+          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
+        </div>
+
+        <div class="surpriseBox">
+          Buraya “kilitli sürpriz” koyacağız: şifre / mini oyun / link / video.
+        </div>
+      </div>
+
     </div>
-
-    <div class="sheetList">
-      <button class="sheetItem" type="button" data-action="letters">
-        <div class="ico">💌</div>
-        <div class="txt">
-          <div class="h">Arkadaş Mektupları</div>
-          <div class="d">7 not / banner şeklinde</div>
-        </div>
-        <div class="go">›</div>
-      </button>
-
-      <button class="sheetItem" type="button" data-action="wishes">
-        <div class="ico">✨</div>
-        <div class="txt">
-          <div class="h">Dilekler</div>
-          <div class="d">21 yaş için 21 dilek</div>
-        </div>
-        <div class="go">›</div>
-      </button>
-
-      <button class="sheetItem" type="button" data-action="memories">
-        <div class="ico">🖼️</div>
-        <div class="txt">
-          <div class="h">Anılar</div>
-          <div class="d">foto/video bölümü</div>
-        </div>
-        <div class="go">›</div>
-      </button>
-
-      <button class="sheetItem" type="button" data-action="back">
-        <div class="ico">↩️</div>
-        <div class="txt">
-          <div class="h">Girişe Dön</div>
-          <div class="d">1. sayfaya geri</div>
-        </div>
-        <div class="go">›</div>
-      </button>
-    </div>
-  </section>
-
-  <!-- Banner (for letters) -->
-  <div class="banner hidden" id="banner" role="dialog" aria-live="polite">
-    <div class="bannerTop">
-      <div class="bannerName" id="bannerName">İsim</div>
-      <button class="bannerClose" id="bannerClose" type="button" aria-label="Kapat">✕</button>
-    </div>
-    <div class="bannerText" id="bannerText">Metin…</div>
   </div>
 
   <script src="ikinci.js"></script>
