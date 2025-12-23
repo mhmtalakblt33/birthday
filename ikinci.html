@@ -104,6 +104,91 @@
 
         <div class="giftHint">Açmak için tıkla</div>
       </div>
+
+<!-- MENU OVERLAY -->
+<div class="menuOverlay hidden" id="menuOverlay">
+  <div class="menuBox">
+
+    <!-- ANA MENÜ -->
+    <div class="panel active" id="panelMain">
+      <h2>Menü</h2>
+      <button class="menuItem" data-go="friends">🧡 Arkadaşlarımdan</button>
+      <button class="menuItem" data-go="memories">📷 Anılar</button>
+      <button class="menuItem" data-go="reasons">✨ 21 Neden</button>
+      <button class="menuItem" data-go="surprise">🎁 Son Sürpriz</button>
+      <button class="menuItem" data-close>⬅ Geri Dön</button>
+    </div>
+
+    <!-- ARKADAŞ LİSTESİ -->
+    <div class="panel" id="panelFriends">
+      <div class="panelHeader">
+        <span>Arkadaşlar</span>
+        <button class="x" data-back>✕</button>
+      </div>
+      <div class="list">
+        <button class="listItem" data-letter="0">Esra</button>
+        <button class="listItem" data-letter="1">İpek</button>
+        <button class="listItem" data-letter="2">Hira</button>
+        <button class="listItem" data-letter="3">Zeynep</button>
+        <button class="listItem" data-letter="4">Ayşenur</button>
+        <button class="listItem" data-letter="5">Burak</button>
+        <button class="listItem" data-letter="6">Yusuf</button>
+      </div>
+    </div>
+
+    <!-- MEKTUP BANNER -->
+    <div class="panel" id="panelLetter">
+      <div class="panelHeader">
+        <span id="letterName">İsim</span>
+        <button class="x" data-back>✕</button>
+      </div>
+      <div class="letterText" id="letterText"></div>
+    </div>
+
+    <!-- ANILAR -->
+    <div class="panel" id="panelMemories">
+      <div class="panelHeader">
+        <span>Anılar</span>
+        <button class="x" data-back>✕</button>
+      </div>
+      <div class="carousel">
+        <button class="nav" id="prevMem">◀</button>
+        <div class="memBox">
+          <img id="memImg" src="anilar/1.jpg" alt="">
+          <div class="memNote" id="memNote">Not burada</div>
+          <div class="memCount" id="memCount">1 / 21</div>
+        </div>
+        <button class="nav" id="nextMem">▶</button>
+      </div>
+    </div>
+
+    <!-- 21 NEDEN -->
+    <div class="panel" id="panelReasons">
+      <div class="panelHeader">
+        <span>21 Neden</span>
+        <button class="x" data-back>✕</button>
+      </div>
+      <ul class="reasons">
+        <li>Gülüşün her şeyi güzelleştiriyor.</li>
+        <li>Yanındayken zaman hızlı geçiyor.</li>
+        <li>...</li>
+      </ul>
+    </div>
+
+    <!-- SON SÜRPRİZ -->
+    <div class="panel" id="panelSurprise">
+      <div class="panelHeader">
+        <span>Son Sürpriz</span>
+        <button class="x" data-back>✕</button>
+      </div>
+      <div class="surpriseBox">
+        💖 Buraya özel sürprizini koyacaksın.
+      </div>
+    </div>
+
+  </div>
+</div>
+      
     </section>
   </main>
 
