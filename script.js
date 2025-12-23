@@ -3,7 +3,7 @@ function clamp(v,a,b){ return Math.min(b, Math.max(a,v)); }
 
 const START_MS = Date.UTC(2005,6,22);
 const END_MS   = Date.UTC(2026,6,22);
-const DURATION_MS = 15000;
+const DURATION_MS = 10000;
 
 function easeInOut(t){
   return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2,3)/2;
