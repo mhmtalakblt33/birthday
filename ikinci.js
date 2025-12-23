@@ -39,7 +39,7 @@ function blowOut(){
   setTimeout(() => {
     giftArea.classList.remove("hidden");
     statusEl.textContent = "Sürpriz hazır 🎁";
-  }, 2000);
+  }, 1000);
 }
 
 blowBtn.addEventListener("click", blowOut);
