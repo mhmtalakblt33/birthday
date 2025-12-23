@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="bg" aria-hidden="true">
-    <div class="glow"></div>
+    <div class="glow g1"></div>
     <div class="glow g2"></div>
     <div class="glow g3"></div>
   </div>
@@ -17,75 +17,154 @@
     <section class="card">
       <header class="top">
         <h1 class="title">İyi ki doğdun!</h1>
-        <p class="sub">Dileğini tut, sonra mumları üfle.</p>
+        <p class="sub">Dileğini tut… sonra mumları üfle.</p>
       </header>
 
-      <!-- CAKE -->
-      <div class="stage" aria-label="Pasta sahnesi">
-        <div class="sparkles" aria-hidden="true"></div>
+      <!-- CAKE STAGE -->
+      <div class="stage">
+        <div class="cakeShadow" aria-hidden="true"></div>
 
-        <div class="cake" id="cake">
-          <div class="plate"></div>
+        <div class="cake" id="cake" aria-label="Pasta">
+          <!-- Top frosting surface -->
+          <div class="topFrost"></div>
 
-          <div class="tier tier3"></div>
-          <div class="tier tier2"></div>
-          <div class="tier tier1"></div>
-
-          <div class="icing drip"></div>
-
+          <!-- Candles -->
           <div class="candles" id="candles" aria-label="Mumlar">
-            <!-- 5 mum örneği (arttırabilirsin) -->
-            <div class="candle" style="--x:18%;">
+            <div class="candle" style="--x:16%;">
+              <div class="cBody"></div>
               <div class="wick"></div>
               <div class="flame"></div>
               <div class="smoke"></div>
             </div>
-            <div class="candle" style="--x:34%;">
+            <div class="candle" style="--x:32%;">
+              <div class="cBody"></div>
               <div class="wick"></div>
               <div class="flame"></div>
               <div class="smoke"></div>
             </div>
-            <div class="candle" style="--x:50%;">
+            <div class="candle" style="--x:48%;">
+              <div class="cBody"></div>
               <div class="wick"></div>
               <div class="flame"></div>
               <div class="smoke"></div>
             </div>
-            <div class="candle" style="--x:66%;">
+            <div class="candle" style="--x:64%;">
+              <div class="cBody"></div>
               <div class="wick"></div>
               <div class="flame"></div>
               <div class="smoke"></div>
             </div>
-            <div class="candle" style="--x:82%;">
+            <div class="candle" style="--x:80%;">
+              <div class="cBody"></div>
               <div class="wick"></div>
               <div class="flame"></div>
               <div class="smoke"></div>
             </div>
           </div>
+
+          <!-- Cake body -->
+          <div class="tier tierTop"></div>
+          <div class="tier tierMid"></div>
+          <div class="tier tierBot"></div>
+
+          <!-- Drips -->
+          <div class="drips"></div>
+
+          <!-- Sprinkles -->
+          <div class="sprinkles" aria-hidden="true"></div>
+
+          <!-- Plate -->
+          <div class="plate"></div>
         </div>
       </div>
 
-      <!-- CONTROLS -->
+      <!-- Controls -->
       <div class="controls">
         <button class="btn" id="blowBtn" type="button">Üfle 🌬️</button>
         <div class="status" id="status">Mumlar yanıyor…</div>
       </div>
 
-      <!-- GIFT (5sn sonra gelir) -->
-      <div class="giftWrap hidden" id="giftWrap" aria-label="Hediye kutusu">
-        <div class="giftHint">Sürpriz hazır 🎁</div>
+      <!-- Gift appears after 5 seconds -->
+      <div class="giftArea hidden" id="giftArea" aria-label="Hediye kutusu alanı">
+        <div class="giftTitle">Sürpriz 🎁</div>
 
         <button class="gift" id="giftBtn" type="button" aria-label="Hediye kutusunu aç">
-          <div class="lid"></div>
-          <div class="bow">
-            <span></span><span></span>
+          <div class="giftLid">
+            <div class="ribbonV"></div>
+            <div class="ribbonH"></div>
+            <div class="bow">
+              <span></span><span></span>
+            </div>
           </div>
-          <div class="box"></div>
+          <div class="giftBox">
+            <div class="ribbonV"></div>
+            <div class="ribbonH"></div>
+          </div>
         </button>
 
-        <div class="giftSub">Tıkla</div>
+        <div class="giftHint">Açmak için tıkla</div>
       </div>
     </section>
   </main>
+
+  <!-- Phone-style menu sheet -->
+  <div class="overlay hidden" id="overlay" aria-hidden="true"></div>
+
+  <section class="sheet hidden" id="sheet" aria-label="Menü">
+    <div class="sheetHandle" aria-hidden="true"></div>
+
+    <div class="sheetHeader">
+      <div class="sheetTitle">Menü</div>
+      <button class="sheetClose" id="sheetClose" type="button" aria-label="Menüyü kapat">✕</button>
+    </div>
+
+    <div class="sheetList">
+      <button class="sheetItem" type="button" data-action="letters">
+        <div class="ico">💌</div>
+        <div class="txt">
+          <div class="h">Arkadaş Mektupları</div>
+          <div class="d">7 not / banner şeklinde</div>
+        </div>
+        <div class="go">›</div>
+      </button>
+
+      <button class="sheetItem" type="button" data-action="wishes">
+        <div class="ico">✨</div>
+        <div class="txt">
+          <div class="h">Dilekler</div>
+          <div class="d">21 yaş için 21 dilek</div>
+        </div>
+        <div class="go">›</div>
+      </button>
+
+      <button class="sheetItem" type="button" data-action="memories">
+        <div class="ico">🖼️</div>
+        <div class="txt">
+          <div class="h">Anılar</div>
+          <div class="d">foto/video bölümü</div>
+        </div>
+        <div class="go">›</div>
+      </button>
+
+      <button class="sheetItem" type="button" data-action="back">
+        <div class="ico">↩️</div>
+        <div class="txt">
+          <div class="h">Girişe Dön</div>
+          <div class="d">1. sayfaya geri</div>
+        </div>
+        <div class="go">›</div>
+      </button>
+    </div>
+  </section>
+
+  <!-- Banner (for letters) -->
+  <div class="banner hidden" id="banner" role="dialog" aria-live="polite">
+    <div class="bannerTop">
+      <div class="bannerName" id="bannerName">İsim</div>
+      <button class="bannerClose" id="bannerClose" type="button" aria-label="Kapat">✕</button>
+    </div>
+    <div class="bannerText" id="bannerText">Metin…</div>
+  </div>
 
   <script src="ikinci.js"></script>
 </body>
