@@ -1,244 +1,38 @@
-<!doctype html>
-<html lang="tr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>🎂 Doğum Günü</title>
-  <link rel="stylesheet" href="ikinci.css" />
-</head>
-<body>
-  <div class="bg" aria-hidden="true">
-    <div class="glow g1"></div>
-    <div class="glow g2"></div>
-    <div class="glow g3"></div>
-  </div>
+<main class="wrap">
+  <section class="card">
+    <header class="top">
+      <h1 class="title">🎉 İyi ki doğdun! 🎉</h1>
+      <p class="sub">✨ Dileğini tut… sonra mumları üfle ✨</p>
+    </header>
 
-  <main class="wrap">
-    <section class="card">
-      <header class="top">
-        <h1 class="title">🎉 İyi ki doğdun! 🎉</h1>
-        <p class="sub">✨ Dileğini tut… sonra mumları üfle ✨</p>
-      </header>
-
-      <!-- STAGE -->
-      <div class="stage">
-        <div class="cakeShadow" aria-hidden="true"></div>
-
-        <!-- CAKE -->
-        <div class="cake" id="cake" aria-label="Pasta">
-          <!-- Top frosting -->
-          <div class="topFrost"></div>
-
-          <!-- Candles -->
-          <div class="candles" id="candles" aria-label="Mumlar">
-            <div class="candle" style="--x:16%;">
-              <div class="cBody"></div>
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle" style="--x:32%;">
-              <div class="cBody"></div>
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle" style="--x:48%;">
-              <div class="cBody"></div>
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle" style="--x:64%;">
-              <div class="cBody"></div>
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
-            </div>
-            <div class="candle" style="--x:80%;">
-              <div class="cBody"></div>
-              <div class="wick"></div>
-              <div class="flame"></div>
-              <div class="smoke"></div>
+    <div class="stage">
+      <div class="cake-container">
+        <div class="plate"></div>
+        
+        <div class="cake-body">
+          <div class="tier tier-bot"></div>
+          <div class="tier tier-mid"></div>
+          <div class="tier tier-top">
+             <div class="frosting"></div>
+            <div class="sprinkles"></div>
+            
+            <div class="candles" id="candles">
+              <div class="candle" style="--x: 20%"><div class="flame"></div><div class="smoke"></div></div>
+              <div class="candle" style="--x: 40%"><div class="flame"></div><div class="smoke"></div></div>
+              <div class="candle" style="--x: 60%"><div class="flame"></div><div class="smoke"></div></div>
+              <div class="candle" style="--x: 80%"><div class="flame"></div><div class="smoke"></div></div>
             </div>
           </div>
-
-          <!-- Cake tiers -->
-          <div class="tier tierTop"></div>
-          <div class="tier tierMid"></div>
-          <div class="tier tierBot"></div>
-
-          <div class="drips"></div>
-          <div class="sprinkles" aria-hidden="true"></div>
-
-          <!-- Plate -->
-          <div class="plate"></div>
         </div>
       </div>
-
-      <!-- Controls -->
-      <div class="controls">
-        <button class="btn" id="blowBtn" type="button">💨 Üfle 🌬️</button>
-        <div class="status" id="status">🕯️ Mumlar yanıyor…</div>
-      </div>
-
-      <!-- Gift -->
-      <div class="giftArea hidden" id="giftArea" aria-label="Hediye kutusu alanı">
-        <div class="giftTitle">🎁 Sürpriz Hazır! 🎁</div>
-
-        <button class="gift" id="giftBtn" type="button" aria-label="Hediye kutusunu aç">
-          <div class="giftLid">
-            <div class="ribbonV"></div>
-            <div class="ribbonH"></div>
-            <div class="bow">
-              <span></span><span></span>
-            </div>
-          </div>
-          <div class="giftBox">
-            <div class="ribbonV"></div>
-            <div class="ribbonH"></div>
-          </div>
-        </button>
-
-        <div class="giftHint">✨ Açmak için tıkla ✨</div>
-      </div>
-
-    </section>
-  </main>
-
-  <!-- MENU OVERLAY -->
-  <div class="menuOverlay hidden" id="menuOverlay" aria-hidden="true">
-    <div class="menuBox">
-
-      <!-- MAIN MENU -->
-      <div class="panel active" id="panelMain">
-        <h2 class="menuTitle">📋 Menü</h2>
-
-        <button class="menuItem" data-go="friends">
-          <span class="dot red"></span> 💌 Arkadaşlarımdan
-        </button>
-
-        <button class="menuItem" data-go="memories">
-          <span class="dot blue"></span> 📸 Anılar
-        </button>
-
-        <button class="menuItem" data-go="reasons">
-          <span class="dot yellow"></span> 💝 21 Neden
-        </button>
-
-        <button class="menuItem" data-go="surprise">
-          <span class="dot orange"></span> 🎁 Son Sürpriz
-        </button>
-
-        <button class="menuItem" data-close>
-          <span class="dot purple"></span> ↩️ Geri Dön
-        </button>
-      </div>
-
-      <!-- FRIENDS LIST -->
-      <div class="panel" id="panelFriends">
-        <div class="panelHeader">
-          <span>💌 Arkadaşlarımdan</span>
-          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
-        </div>
-
-        <div class="list">
-          <button class="listItem" type="button" data-letter="0">👤 İsim 1</button>
-          <button class="listItem" type="button" data-letter="1">👤 İsim 2</button>
-          <button class="listItem" type="button" data-letter="2">👤 İsim 3</button>
-          <button class="listItem" type="button" data-letter="3">👤 İsim 4</button>
-          <button class="listItem" type="button" data-letter="4">👤 İsim 5</button>
-          <button class="listItem" type="button" data-letter="5">👤 İsim 6</button>
-          <button class="listItem" type="button" data-letter="6">👤 İsim 7</button>
-        </div>
-      </div>
-
-      <!-- LETTER VIEW -->
-      <div class="panel" id="panelLetter">
-        <div class="panelHeader">
-          <span id="letterName">✉️ İsim</span>
-          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
-        </div>
-        <div class="letterText" id="letterText"></div>
-      </div>
-
-      <!-- MEMORIES -->
-      <div class="panel" id="panelMemories">
-        <div class="panelHeader">
-          <span>📸 Anılar</span>
-          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
-        </div>
-
-        <div class="carousel">
-          <button class="nav" id="prevMem" type="button" aria-label="Önceki">◀</button>
-
-          <div class="memBox">
-            <img id="memImg" src="anilar/1.jpg" alt="Anı" />
-            <div class="memNote" id="memNote">📝 Not burada</div>
-            <div class="memCount" id="memCount">1 / 21</div>
-          </div>
-
-          <button class="nav" id="nextMem" type="button" aria-label="Sonraki">▶</button>
-        </div>
-
-        <div class="memHint">📁 Klasör: <code>anilar/1.jpg</code> … <code>anilar/21.jpg</code></div>
-      </div>
-
-      <!-- 21 REASONS -->
-      <div class="panel" id="panelReasons">
-        <div class="panelHeader">
-          <span>💝 21 Neden</span>
-          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
-        </div>
-
-        <ul class="reasons">
-          <li style="--i:0">Gülüşün her şeyi güzelleştiriyor.</li>
-          <li style="--i:1">İnsanlara iyi geliyorsun.</li>
-          <li style="--i:2">Seninle konuşmak hep rahat.</li>
-          <li style="--i:3">Pozitif enerjin bulaşıcı.</li>
-          <li style="--i:4">Her zaman güvenilirsin.</li>
-          <li style="--i:5">Samimiyetin çok değerli.</li>
-          <li style="--i:6">Hayata bakış açın ilham verici.</li>
-          <li style="--i:7">Dostluğun her şeyden önemli.</li>
-          <li style="--i:8">Eğlenceli anlar yaratıyorsun.</li>
-          <li style="--i:9">İyi bir dinleyicisin.</li>
-          <li style="--i:10">Cesaretlendirici sözlerin motive ediyor.</li>
-          <li style="--i:11">Özgünlüğünü seviyorum.</li>
-          <li style="--i:12">Etrafındakileri düşünüyorsun.</li>
-          <li style="--i:13">Sabırlı ve anlayışlısın.</li>
-          <li style="--i:14">Hayalperestliğin çok güzel.</li>
-          <li style="--i:15">Zor zamanlarda yanımda oldun.</li>
-          <li style="--i:16">Gülümsemen günümü aydınlatıyor.</li>
-          <li style="--i:17">Tutkuların seni özel kılıyor.</li>
-          <li style="--i:18">Yaratıcılığın harika.</li>
-          <li style="--i:19">İyimserliğin umut veriyor.</li>
-          <li style="--i:20">Sen olduğun için!</li>
-        </ul>
-      </div>
-
-      <!-- SURPRISE -->
-      <div class="panel" id="panelSurprise">
-        <div class="panelHeader">
-          <span>🎁 Son Sürpriz</span>
-          <button class="x" type="button" data-back aria-label="Kapat">✕</button>
-        </div>
-
-        <div class="surpriseBox">
-          <h3 style="margin: 0 0 12px; font-size: 18px;">🔒 Özel Sürpriz</h3>
-          <p style="margin: 8px 0;">Buraya "kilitli sürpriz" koyacağız:</p>
-          <ul style="text-align: left; margin: 12px 0; padding-left: 24px;">
-            <li>🔐 Şifre korumalı mesaj</li>
-            <li>🎮 Mini oyun veya puzzle</li>
-            <li>🎬 Özel video mesajı</li>
-            <li>🔗 Gizli link veya içerik</li>
-          </ul>
-          <p style="margin-top: 16px; font-size: 13px; opacity: 0.8;">Yakında açılacak... 🎉</p>
-        </div>
-      </div>
-
     </div>
-  </div>
 
-  <script src="ikinci.js"></script>
-</body>
-</html>
+    <div class="controls">
+      <button class="btn" id="blowBtn">💨 Üfle 🌬️</button>
+      <div class="status" id="status">🕯️ Mumlar yanıyor…</div>
+    </div>
+    
+    <div class="giftArea hidden" id="giftArea">
+       </div>
+  </section>
+</main>
