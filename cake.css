@@ -1,121 +1,136 @@
 :root {
-  --bg-color: #050b1a;
-  --cake-pink: #f48fb1;
-  --cream-white: #ffffff;
-  --strawberry-red: #ff1744;
+  --deep-blue: #050b1a;
+  --cake-pink: #e07a9b;
+  --icing-white: #ffffff;
+  --glow-ui: #00d2ff;
 }
 
 body {
   margin: 0;
   height: 100vh;
-  background-color: var(--bg-color);
-  background: radial-gradient(circle at center, #0d1b3e 0%, #050b1a 100%);
+  background: radial-gradient(circle at center, #0a1b3e 0%, var(--deep-blue) 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
 
-/* Arka Plan Parıltıları */
-.stars-container {
+/* Bokeh Arkaplan */
+.bokeh {
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(122,167,255,0.05) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,182,193,0.05) 0%, transparent 40%);
+  filter: blur(50px);
 }
 
-/* Pasta Tasarımı (Premium Layering) */
-.cake-premium {
+/* Pasta Tasarımı */
+.premium-cake {
   position: relative;
-  width: 240px;
-  height: 160px;
-  z-index: 2;
+  width: 260px;
+  height: 180px;
+  z-index: 5;
 }
 
-.cake-layer {
+.cake-body {
+  position: absolute;
   width: 100%;
-  height: 50%;
   background: var(--cake-pink);
-  border-radius: 50% / 20px;
-  position: absolute;
-  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+  border-radius: 50% / 25px;
+  box-shadow: inset -10px -5px 20px rgba(0,0,0,0.2), inset 10px 5px 20px rgba(255,255,255,0.1);
 }
 
-.layer-1 { bottom: 0; background: #f06292; }
-.layer-2 { bottom: 35px; background: #f48fb1; }
+.top-layer { height: 70px; top: 20px; width: 85%; left: 7.5%; z-index: 2; }
+.bottom-layer { height: 90px; bottom: 0; z-index: 1; }
 
-.cream-top {
+/* Akan Krema (Icing) */
+.icing {
   position: absolute;
-  top: 35px;
-  width: 100%;
-  height: 40px;
-  background: var(--cream-white);
-  border-radius: 50% / 20px;
+  top: 35px; width: 85%; left: 7.5%;
+  height: 35px;
+  background: var(--icing-white);
+  border-radius: 50% / 15px;
   z-index: 3;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* Akan Krema Efekti */
-.dripping-effect {
-  position: absolute;
-  top: 55px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  z-index: 4;
 }
 
 .drip {
-  width: 20px;
-  height: 40px;
-  background: var(--cream-white);
-  border-radius: 0 0 10px 10px;
-  animation: dripScale 3s infinite alternate;
+  position: absolute;
+  background: var(--icing-white);
+  width: 25px; height: 45px;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
+.drip-1 { left: 10%; height: 55px; }
+.drip-2 { left: 35%; height: 40px; }
+.drip-3 { left: 65%; height: 60px; }
+.drip-4 { right: 5%; height: 45px; }
 
-/* Cam Tabak (RTX On) */
+/* Çilekler */
+.berry {
+  position: absolute;
+  z-index: 10;
+  font-size: 28px;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+}
+.b1 { top: -10px; left: 20%; transform: rotate(-15deg); }
+.b2 { top: -20px; left: 45%; }
+.b3 { top: -10px; right: 20%; transform: rotate(15deg); }
+
+/* Cam Tabak ve Neon UI */
 .glass-plate {
-  width: 320px;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.05);
+  width: 360px; height: 100px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  margin-top: -60px;
-  backdrop-filter: blur(8px);
-  z-index: 1;
+  margin: -60px auto 0;
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 2;
 }
 
-/* Mum ve Gerçekçi Işık */
+.plate-glow {
+  width: 140px; height: 40px;
+  background: var(--glow-ui);
+  margin: -25px auto 0;
+  border-radius: 50px;
+  filter: blur(25px);
+  opacity: 0.4;
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { opacity: 0.3; transform: scale(1); }
+  to { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* Mum ve Gerçekçi Alev */
 .flame {
-  width: 18px;
-  height: 30px;
-  background: #ffa000;
-  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
-  margin: 0 auto;
-  box-shadow: 0 0 30px #ff6f00, 0 0 60px rgba(255, 160, 0, 0.4);
+  width: 18px; height: 32px;
+  background: radial-gradient(circle at bottom, #fff 0%, #ffdb58 40%, #ff8c00 100%);
+  border-radius: 50% 50% 20% 20%;
+  margin: 0 auto 5px;
+  box-shadow: 0 0 30px #ffdb58, 0 0 60px rgba(255, 140, 0, 0.5);
   animation: flicker 0.1s infinite alternate;
 }
 
+@keyframes flicker {
+  to { transform: scale(1.1) rotate(2deg); opacity: 0.8; }
+}
+
 .btn-blow {
-  margin-top: 30px;
-  padding: 15px 45px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  border: 2px solid var(--glow-ui);
+  padding: 12px 40px;
   color: #fff;
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-.btn-blow:hover {
-  background: #fff;
-  color: var(--bg-color);
-  transform: scale(1.1);
-}
+.btn-blow:hover { background: var(--glow-ui); transform: translateY(-3px); }
 
-@keyframes flicker {
-  from { transform: scale(1) rotate(-1deg); opacity: 0.9; }
-  to { transform: scale(1.1) rotate(1deg); opacity: 1; }
-}
-
-.off { display: none; }
+.off { display: none !important; }
