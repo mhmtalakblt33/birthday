@@ -133,7 +133,7 @@ elements.nextBtn.addEventListener("click", () => {
     // Sayfa geçiş animasyonu için ufak bir bekleme eklenebilir
     document.body.style.opacity = "0";
     setTimeout(() => {
-        window.location.href = "ikinci.html";
+        window.location.href = "cake.html";
     }, 500);
 });
 
