@@ -3,59 +3,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Giriş</title>
+  <title>Sonsuz Bir Yolculuk</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="bg">
-    <div class="glow"></div>
-    <div class="glow g2"></div>
-    <div class="glow g3"></div>
+  <div class="space-background">
+    <div class="stars"></div>
+    <div class="nebula"></div>
   </div>
 
   <main class="wrap">
     <section class="card">
-      <h1 class="title">✨ Bir yolculuk... ✨</h1>
+      <div class="card-inner">
+        <h1 class="title">Sonsuz Bir Yolculuk</h1>
+        
+        <div class="counter-container">
+            <div class="counter">
+              <div class="unit">
+                <div class="num" id="dVal">22</div>
+                <div class="lbl">Gün</div>
+              </div>
+              <div class="sep">•</div>
+              <div class="unit">
+                <div class="num" id="mVal">07</div>
+                <div class="lbl">Ay</div>
+              </div>
+              <div class="sep">•</div>
+              <div class="unit">
+                <div class="num" id="yVal">2005</div>
+                <div class="lbl">Yıl</div>
+              </div>
+            </div>
+            <p class="sub-date">22.07.2005 <span class="arrow">→</span> 22.07.2026</p>
+        </div>
 
-      <div class="counter">
-        <div class="unit">
-          <div class="num" id="dVal">22</div>
-          <div class="lbl">Gün</div>
+        <button class="btn main-btn" id="startBtn">
+          <span>Macerayı Başlat</span>
+          <i class="icon">🚀</i>
+        </button>
+
+        <div class="progress-section hidden" id="progressWrap">
+          <div class="track" id="track">
+            <div class="fill" id="fill"></div>
+            <div class="avatar left">🤱</div>
+            <div class="avatar right">👱‍♀️</div>
+            <div class="avatar mover" id="mover">🤱</div>
+            <div class="age-badge" id="age">Yaş: 0</div>
+          </div>
         </div>
-        <div class="sep">•</div>
-        <div class="unit">
-          <div class="num" id="mVal">07</div>
-          <div class="lbl">Ay</div>
-        </div>
-        <div class="sep">•</div>
-        <div class="unit">
-          <div class="num" id="yVal">2005</div>
-          <div class="lbl">Yıl</div>
-        </div>
+
+        <button class="btn next-btn hidden" id="nextBtn">
+          Kutlamaya Geç 🎉
+        </button>
+
+        <p class="hint-text" id="hint">Hazır mısın?</p>
       </div>
-
-      <p class="sub">22.07.2005 → 22.07.2026</p>
-
-      <button class="btn" id="startBtn">🚀 Başlat</button>
-
-      <div class="progressWrap hidden" id="progressWrap">
-        <div class="track" id="track">
-          <div class="fill" id="fill"></div>
-
-          <div class="avatar left">🤱🏼</div>
-          <div class="avatar right">👱🏼‍♀️</div>
-          <div class="avatar mover" id="mover">🤱🏼</div>
-
-          <div class="age" id="age">Yaş: 0</div>
-        </div>
-      </div>
-
-      <button class="btn next hidden" id="nextBtn">🎉 Devam Et →</button>
-
-      <div class="hint" id="hint">Hazır.</div>
     </section>
   </main>
 
   <script src="script.js"></script>
+  <script>
+    // Sayfa yüklendiğinde ve dinamik içerik değiştiğinde emojileri tara
+    twemoji.parse(document.body);
+  </script>
 </body>
 </html>
