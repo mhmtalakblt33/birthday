@@ -2,51 +2,65 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1\" />
   <title>Mutlu Yıllar ✨</title>
   <link rel="stylesheet" href="cake.css" />
 </head>
 <body>
-  <div class="bokeh"></div>
+  <div class="bg">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+  </div>
 
-  <main class="scene">
-    <div class="cake-display">
-      
-      <div class="candle-box">
-        <div class="flame" id="flame"></div>
-        <div class="candle"></div>
-      </div>
+  <main class="wrap">
+    <section class="card">
+      <header class="top">
+        <h1 class="title">İyi ki doğdun!</h1>
+        <p class="sub" id="status">Dileğini tut… sonra mumları üfle.</p>
+      </header>
 
-      <div class="cake-premium">
-        <div class="toppings">
-          <div class="berry b1">🍓</div>
-          <div class="berry b2">🍓</div>
-          <div class="berry b3">🍓</div>
+      <div class="stage">
+        <div class="cake" id="cake">
+          <div class="topFrost">
+            <div class="strawberry s1">🍓</div>
+            <div class="strawberry s2">🍓</div>
+            <div class="strawberry s3">🍓</div>
+          </div>
+
+          <div class="candles" id="candles">
+            <div class="candle" style="--x:25%;">
+              <div class="cBody"></div><div class="flame"></div>
+            </div>
+            <div class="candle" style="--x:50%;">
+              <div class="cBody"></div><div class="flame"></div>
+            </div>
+            <div class="candle" style="--x:75%;">
+              <div class="cBody"></div><div class="flame"></div>
+            </div>
+          </div>
+
+          <div class="tier tierTop"></div>
+          <div class="tier tierMid"></div>
+          <div class="tier tierBot">
+            <div class="drip" style="left:10%; height:40px;"></div>
+            <div class="drip" style="left:40%; height:25px;"></div>
+            <div class="drip" style="left:70%; height:45px;"></div>
+          </div>
         </div>
+        <div class="plate"></div>
+        <div class="plateGlow"></div>
+      </div>
 
-        <div class="icing-layer">
-          <div class="drip d1"></div>
-          <div class="drip d2"></div>
-          <div class="drip d3"></div>
-          <div class="drip d4"></div>
-          <div class="icing-top"></div>
+      <div class="actions">
+        <button class="btn blow" id="blowBtn">🌬️ Üfle</button>
+        <div class="giftArea hidden" id="giftArea">
+          <button class="btn gift" id="giftBtn">Sürprizi Aç 🎁</button>
         </div>
-
-        <div class="cake-body layer-top"></div>
-        <div class="cake-body layer-bottom"></div>
       </div>
+    </section>
 
-      <div class="plate-system">
-        <div class="glass-plate"></div>
-        <div class="neon-glow"></div>
-      </div>
-    </div>
-
-    <div class="ui">
-      <h1 id="wishText">Bir dilek tut... 🕯️</h1>
-      <button class="btn-blow" id="blowBtn">🌬️ Üfle!</button>
-    </div>
-  </main>
+    </main>
 
   <script src="cake.js"></script>
 </body>
