@@ -7,30 +7,40 @@
   <link rel="stylesheet" href="cake.css" />
 </head>
 <body>
-  <div class="stars"></div>
-  <div class="glow-orb"></div>
+  <div class="stars-container" id="stars"></div>
 
-  <main class="content">
-    <div class="cake-container">
-      <div class="candle-section">
+  <main class="scene">
+    <div class="cake-display">
+      <div class="candle-box">
         <div class="flame" id="flame"></div>
         <div class="candle"></div>
       </div>
-      
-      <div class="cake">
-        <div class="dripping-cream"></div>
-        <div class="cake-top"></div>
-        <div class="cake-bottom"></div>
+
+      <div class="cake-premium">
+        <div class="cream-top"></div>
+        <div class="dripping-effect">
+          <div class="drip"></div>
+          <div class="drip"></div>
+          <div class="drip"></div>
+        </div>
+        <div class="cake-layer layer-1"></div>
+        <div class="cake-layer layer-2"></div>
         <div class="strawberries">
-          <span>🍓</span><span>🍓</span><span>🍓</span>
+          <span class="sb">🍓</span>
+          <span class="sb">🍓</span>
+          <span class="sb">🍓</span>
         </div>
       </div>
-      <div class="plate"></div>
+
+      <div class="glass-plate"></div>
+      <div class="plate-shadow"></div>
     </div>
 
-    <div class="ui">
-      <h1 id="statusText">Bir dilek tut ve ışığı söndür...</h1>
-      <button class="btn-action" id="actionBtn">🌬️ Üfle</button>
+    <div class="interface">
+      <h1 class="wish-text" id="wishText">Bir dilek tut... 🕯️</h1>
+      <button class="btn-blow" id="blowBtn">
+        <span class="icon">🌬️</span> Üfle!
+      </button>
     </div>
   </main>
 
