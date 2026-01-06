@@ -1,22 +1,36 @@
-const flame = document.getElementById('flame');
-const blowBtn = document.getElementById('blowBtn');
-const wishText = document.getElementById('wishText');
+const blowBtn = document.getElementById("blowBtn");
+const statusEl = document.getElementById("status");
+const candles = document.querySelectorAll(".candle");
+const giftArea = document.getElementById("giftArea");
 
-blowBtn.addEventListener('click', () => {
-    // Sönme Efekti
-    flame.style.transition = "all 0.5s ease";
-    flame.style.opacity = "0";
-    flame.style.transform = "scale(0) translateY(-20px)";
-    
+let blown = false;
+
+function blowOut() {
+    if (blown) return;
+    blown = true;
+
+    blowBtn.classList.add("hidden");
+    statusEl.textContent = "Dileğin tutuldu... ✨";
+
+    // Mumları sırayla söndür
+    candles.forEach((c, i) => {
+        setTimeout(() => {
+            const flame = c.querySelector(".flame");
+            if(flame) flame.style.display = "none";
+        }, i * 200);
+    });
+
     setTimeout(() => {
-        flame.style.display = "none";
-        wishText.textContent = "Mutlu Yıllar Prenses! ✨";
-        wishText.style.color = "#ffb7c5";
-        
-        blowBtn.innerHTML = "Hediyeni Gör 🎁";
-        blowBtn.onclick = () => {
-            document.body.style.opacity = "0";
-            setTimeout(() => window.location.href = "gift.html", 800);
-        };
-    }, 500);
+        giftArea.classList.remove("hidden");
+        statusEl.textContent = "Sana bir sürprizim var 🎁";
+    }, 1200);
+}
+
+blowBtn.addEventListener("click", blowOut);
+
+// Hediye butonu senin orijinal menü sistemini açacak şekilde ayarlandı
+document.getElementById("giftBtn").addEventListener("click", () => {
+    // Burada senin ikinci.js'deki menuOverlay açma mantığı çalışacak
+    console.log("Menü açılıyor...");
+    // window.location.href = "hediye.html"; // İstersen başka sayfaya da atabilirsin
 });
