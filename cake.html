@@ -3,29 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Doğum Günü Pastası</title>
+  <title>Mutlu Yıllar ✨</title>
   <link rel="stylesheet" href="cake.css" />
 </head>
 <body>
-  <div class="bg"></div>
+  <div class="stars"></div>
+  <div class="glow-orb"></div>
 
-  <main class="container">
-    <div class="cake-complex">
-      <div class="candle">
+  <main class="content">
+    <div class="cake-container">
+      <div class="candle-section">
         <div class="flame" id="flame"></div>
+        <div class="candle"></div>
       </div>
       
-      <div class="layer layer-top"></div>
-      <div class="layer layer-mid"></div>
-      <div class="layer layer-bottom"></div>
-      
+      <div class="cake">
+        <div class="dripping-cream"></div>
+        <div class="cake-top"></div>
+        <div class="cake-bottom"></div>
+        <div class="strawberries">
+          <span>🍓</span><span>🍓</span><span>🍓</span>
+        </div>
+      </div>
       <div class="plate"></div>
     </div>
 
-    <div class="ui-wrap">
-      <h1 class="msg" id="msg">Bir dilek tut... 🕯️</h1>
-      <button class="btn-blow" id="blowBtn">🌬️ Üfle!</button>
-      <button class="btn-next hidden" id="finalBtn">Devam Et ✨</button>
+    <div class="ui">
+      <h1 id="statusText">Bir dilek tut ve ışığı söndür...</h1>
+      <button class="btn-action" id="actionBtn">🌬️ Üfle</button>
     </div>
   </main>
 
