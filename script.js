@@ -25,7 +25,7 @@ const elements = {
     startBtn: document.getElementById("startBtn"),
     nextBtn: document.getElementById("nextBtn"),
     hint: document.getElementById("hint"),
-    progressWrap: document.getElementById("progressWrap"),
+    progressWrap: document.getElementById("progressWrap"), // HTML'de id="progressWrap" olduğundan emin olun
     track: document.getElementById("track"),
     fill: document.getElementById("fill"),
     mover: document.getElementById("mover"),
