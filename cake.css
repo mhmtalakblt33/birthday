@@ -1,75 +1,159 @@
 :root {
-    --cake-pink: #f48fb1;
-    --cake-dark-pink: #d81b60;
-    --cream: #ffffff;
+  --bg: #050b1a;
+  --pink: #e07a9b;
+  --white: #ffffff;
+  --neon: #00d2ff;
 }
 
 body {
-    margin: 0; background: #050b1a; color: #fff;
-    overflow: hidden; perspective: 1000px;
-    font-family: sans-serif;
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at center, #0d1b3e 0%, var(--bg) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: white;
 }
 
-.viewport { height: 100vh; display: flex; align-items: center; justify-content: center; }
-
-.scene-3d {
-    position: relative; width: 300px; height: 300px;
-    transform-style: preserve-3d;
+.scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.cake-pivot {
-    width: 100%; height: 100%;
-    transform-style: preserve-3d;
-    transform: rotateX(-15deg) rotateY(0deg);
-    transition: transform 0.1s ease-out;
+/* PASTA KONUMLANDIRMA */
+.cake-premium {
+  position: relative;
+  width: 260px;
+  height: 160px;
+  margin-top: 40px;
+  z-index: 5;
 }
 
-/* 3D Pasta Gövdesi */
-.cake-3d {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px; height: 100px; transform-style: preserve-3d;
+.cake-body {
+  position: absolute;
+  width: 100%;
+  background: var(--pink);
+  border-radius: 50% / 25px;
+  box-shadow: inset -10px -5px 20px rgba(0,0,0,0.2);
 }
 
-.top-face {
-    position: absolute; width: 200px; height: 200px;
-    background: var(--cake-pink);
-    border-radius: 50%; transform: rotateX(90deg) translateZ(50px);
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.2);
-    z-index: 5;
+.layer-top { height: 70px; top: 15px; width: 85%; left: 7.5%; z-index: 2; }
+.layer-bottom { height: 90px; bottom: 0; z-index: 1; }
+
+/* AKAN KREMA SİSTEMİ (DÜZELTİLDİ) */
+.icing-layer {
+  position: absolute;
+  top: 30px;
+  width: 85%;
+  left: 7.5%;
+  z-index: 3;
 }
 
-.side-face {
-    position: absolute; width: 200px; height: 100px;
-    background: linear-gradient(to bottom, var(--cake-pink), var(--cake-dark-pink));
-    border-radius: 0 0 100px 100px / 0 0 50px 50px;
-    transform: translateZ(0);
+.icing-top {
+  width: 100%;
+  height: 35px;
+  background: var(--white);
+  border-radius: 50% / 15px;
+  position: relative;
 }
 
-/* Cam Tabak */
-.plate-3d {
-    position: absolute; top: 70%; left: 50%;
-    width: 320px; height: 320px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) rotateX(90deg) translateZ(-60px);
-    backdrop-filter: blur(10px);
+.drip {
+  position: absolute;
+  background: var(--white);
+  width: 20px;
+  border-radius: 0 0 10px 10px;
+  top: 15px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
-/* Alev Efekti */
+.d1 { left: 10%; height: 40px; }
+.d2 { left: 35%; height: 25px; }
+.d3 { left: 65%; height: 45px; }
+.d4 { right: 10%; height: 30px; }
+
+/* SÜSLEMELER */
+.toppings {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.berry { font-size: 28px; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3)); position: absolute; }
+.b1 { left: 20%; transform: rotate(-15deg); }
+.b2 { left: 47%; top: -10px; }
+.b3 { right: 20%; transform: rotate(15deg); }
+
+/* TABAK VE IŞIKLANDIRMA */
+.plate-system {
+  position: relative;
+  width: 380px;
+  margin-top: -60px;
+}
+
+.glass-plate {
+  width: 100%;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+}
+
+.neon-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px; height: 60px;
+  background: var(--neon);
+  filter: blur(40px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* MUM VE ALEV */
+.candle-box {
+  position: absolute;
+  top: -40px;
+  z-index: 10;
+}
+
+.candle {
+  width: 10px; height: 45px;
+  background: linear-gradient(to right, #eee, #ccc);
+  border-radius: 3px;
+}
+
 .flame {
-    width: 15px; height: 25px; background: orange;
-    border-radius: 50%; filter: blur(2px);
-    box-shadow: 0 0 20px orange;
-    animation: flicker 0.1s infinite alternate;
+  width: 16px; height: 26px;
+  background: radial-gradient(circle at bottom, #fff, #ffdb58, #ff8c00);
+  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+  margin: 0 auto 5px;
+  box-shadow: 0 0 20px #ffdb58, 0 0 40px #ff8c00;
+  animation: flicker 0.1s infinite alternate;
 }
 
-@keyframes flicker { to { transform: scale(1.1) translateY(-2px); } }
+@keyframes flicker {
+  to { transform: scale(1.1); opacity: 0.8; }
+}
 
-.ui-overlay { position: fixed; bottom: 50px; text-align: center; width: 100%; }
+.ui { margin-top: 50px; text-align: center; }
+
 .btn-blow {
-    padding: 15px 40px; border-radius: 30px; border: 2px solid #00d2ff;
-    background: transparent; color: #fff; cursor: pointer;
+  background: rgba(0, 210, 255, 0.1);
+  border: 1px solid var(--neon);
+  color: white;
+  padding: 12px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+  transition: 0.3s;
 }
-.gyro-hint { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 10px; }
+
+.btn-blow:hover { background: var(--neon); color: black; }
