@@ -1,91 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+
 :root {
   --space-dark: #020617;
   --accent-blue: #38bdf8;
   --accent-purple: #818cf8;
-  --glass: rgba(15, 23, 42, 0.7);
-  --border-glass: rgba(255, 255, 255, 0.1);
+  --glass: rgba(15, 23, 42, 0.85);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --trackH: 60px;
 }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  margin: 0;
   background-color: var(--space-dark);
-  color: white;
-  font-family: 'Inter', -apple-system, sans-serif;
-  overflow: hidden;
+  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Gelişmiş Arka Plan Katmanları */
-.space-background {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(circle at bottom, #1e293b 0%, #020617 100%);
-}
-
-.stars {
+/* Arka Plan Efekti */
+body::before {
+  content: '';
   position: absolute;
-  width: 100%; height: 100%;
-  background-image: 
-    radial-gradient(1px 1px at 10% 20%, #fff, transparent),
-    radial-gradient(2px 2px at 50% 50%, #fff, transparent),
-    radial-gradient(1px 1px at 80% 90%, #fff, transparent);
-  background-size: 250px 250px;
-  opacity: 0.4;
-  animation: starPulse 4s infinite alternate;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, #1e293b 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, #0f172a 0%, transparent 50%);
+  z-index: -1;
 }
 
-/* Kart Tasarımı */
+/* Kartın Merkezlenmesi ve Tasarımı */
+.wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
 .card {
+  width: min(600px, 95vw);
   background: var(--glass);
-  backdrop-filter: blur(24px);
+  backdrop-filter: blur(20px);
   border: 1px solid var(--border-glass);
-  border-radius: 32px;
-  padding: 40px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease;
+  border-radius: 28px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
 }
 
+/* Başlık */
 .title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 800;
-  text-align: center;
+  margin-bottom: 25px;
   background: linear-gradient(to right, #fff, var(--accent-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 30px;
 }
 
-/* Buton Efektleri */
-.main-btn {
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-  border: none;
-  padding: 20px;
-  border-radius: 16px;
-  font-weight: bold;
-  color: white;
+/* Sayaç Alanı */
+.counter {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.num { font-size: 32px; font-weight: 800; color: var(--accent-blue); }
+.lbl { font-size: 12px; color: #94a3b8; text-transform: uppercase; margin-top: 4px; }
+.sep { color: #475569; font-size: 24px; }
+
+.sub-date { margin-top: 10px; color: #64748b; font-size: 14px; }
+
+/* Butonlar */
+.btn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 25px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: 0.3s;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  color: white;
 }
 
-.main-btn:hover {
-  transform: scale(1.02) translateY(-5px);
-  box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4);
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3); }
+
+/* Progress Bar (Yolculuk Çubuğu) */
+.progress-section { margin-top: 30px; }
+
+.track {
+  position: relative;
+  height: var(--trackH);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+  border: 1px solid var(--border-glass);
+  overflow: hidden; /* Fill'in dışarı taşmasını engeller */
 }
 
-/* Twemoji Uyumluluğu */
+.fill {
+  position: absolute;
+  top: 0; left: 0; height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  box-shadow: 0 0 15px var(--accent-blue);
+  transition: width 0.1s linear;
+}
+
+/* Emojiler */
+.avatar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar.left { left: 10px; }
+.avatar.right { right: 10px; }
+.avatar.mover { left: 10px; transition: left 0.1s linear; }
+
+/* Twemoji Görsel Boyutlandırma */
 img.emoji {
-   height: 1.2em;
-   width: 1.2em;
-   margin: 0 .05em 0 .1em;
-   vertical-align: -0.1em;
+  width: 32px;
+  height: 32px;
 }
 
-.avatar img.emoji {
-    width: 32px;
-    height: 32px;
+.age-badge {
+  margin-top: 15px;
+  display: inline-block;
+  padding: 6px 15px;
+  background: var(--accent-blue);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
 }
+
+.hidden { display: none; }
