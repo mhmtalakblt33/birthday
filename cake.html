@@ -2,38 +2,49 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mutlu Yıllar ✨</title>
   <link rel="stylesheet" href="cake.css" />
 </head>
 <body>
-  <div class="stars" id="stars"></div>
+  <div class="bokeh"></div>
 
-  <main class="viewport">
-    <div class="scene-3d" id="scene">
-      <div class="cake-pivot" id="cakePivot">
-        
-        <div class="candle-3d">
-            <div class="flame" id="flame"></div>
-            <div class="wick"></div>
+  <main class="scene">
+    <div class="cake-display">
+      
+      <div class="candle-box">
+        <div class="flame" id="flame"></div>
+        <div class="candle"></div>
+      </div>
+
+      <div class="cake-premium">
+        <div class="toppings">
+          <div class="berry b1">🍓</div>
+          <div class="berry b2">🍓</div>
+          <div class="berry b3">🍓</div>
         </div>
 
-        <div class="cake-3d">
-          <div class="top-face">
-            <div class="icing-dripping"></div>
-            <div class="berries">🍓🍓🍓</div>
-          </div>
-          <div class="side-face"></div>
+        <div class="icing-layer">
+          <div class="drip d1"></div>
+          <div class="drip d2"></div>
+          <div class="drip d3"></div>
+          <div class="drip d4"></div>
+          <div class="icing-top"></div>
         </div>
 
-        <div class="plate-3d"></div>
+        <div class="cake-body layer-top"></div>
+        <div class="cake-body layer-bottom"></div>
+      </div>
+
+      <div class="plate-system">
+        <div class="glass-plate"></div>
+        <div class="neon-glow"></div>
       </div>
     </div>
 
-    <div class="ui-overlay">
+    <div class="ui">
       <h1 id="wishText">Bir dilek tut... 🕯️</h1>
       <button class="btn-blow" id="blowBtn">🌬️ Üfle!</button>
-      <p class="gyro-hint">Telefonu hareket ettirerek bakabilirsin</p>
     </div>
   </main>
 
