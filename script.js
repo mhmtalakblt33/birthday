@@ -1,113 +1,144 @@
-function pad2(n){ return String(n).padStart(2,"0"); }
-function clamp(v,a,b){ return Math.min(b, Math.max(a,v)); }
+/**
+ * Profesyonel Web Geliştirme Standartları: 
+ * Temiz kod, modüler yapı ve performans optimizasyonu.
+ */
 
-const START_MS = Date.UTC(2005,6,22);
-const END_MS   = Date.UTC(2026,6,22);
-const DURATION_MS = 10000;
+// Yardımcı Fonksiyonlar
+const pad2 = (n) => String(n).padStart(2, "0");
+const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 
-function easeInOut(t){
-  return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2,3)/2;
+// Zaman Ayarları (UTC kullanarak tutarlılık sağlıyoruz)
+const START_MS = Date.UTC(2005, 6, 22);
+const END_MS = Date.UTC(2026, 6, 22);
+const DURATION_MS = 10000; // 10 saniye sürecek yolculuk
+
+// Yumuşak Geçiş (Easing) Fonksiyonu - Daha doğal bir hareket hissi verir
+function easeInOutQuart(t) {
+    return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
 }
 
-const dEl = document.getElementById("dVal");
-const mEl = document.getElementById("mVal");
-const yEl = document.getElementById("yVal");
-
-const startBtn = document.getElementById("startBtn");
-const nextBtn = document.getElementById("nextBtn");
-const hint = document.getElementById("hint");
-
-const progressWrap = document.getElementById("progressWrap");
-const trackEl = document.getElementById("track");
-const fillEl = document.getElementById("fill");
-const moverEl = document.getElementById("mover");
-const ageEl = document.getElementById("age");
+// DOM Elementleri
+const elements = {
+    d: document.getElementById("dVal"),
+    m: document.getElementById("mVal"),
+    y: document.getElementById("yVal"),
+    startBtn: document.getElementById("startBtn"),
+    nextBtn: document.getElementById("nextBtn"),
+    hint: document.getElementById("hint"),
+    progressWrap: document.getElementById("progressWrap"),
+    track: document.getElementById("track"),
+    fill: document.getElementById("fill"),
+    mover: document.getElementById("mover"),
+    age: document.getElementById("age")
+};
 
 let running = false;
 let lastP = 0;
 
-// Yaşa göre emoji
-function emojiForByAge(age){
-  if (age <= 2) return "🤱🏼";
-  if (age <= 5) return "👶🏻";
-  if (age <= 12) return "👧🏻";
-  if (age <= 17) return "👩🏻‍🦱";
-  if (age <= 19) return "👩🏻";
-  return "👱🏼‍♀️";
+/**
+ * Yaşa göre emoji belirler.
+ * Twemoji kütüphanesi bu metinleri yakalayıp şık görsellere dönüştürecektir.
+ */
+function getEmojiByAge(age) {
+    if (age <= 2) return "🤱";
+    if (age <= 5) return "👶";
+    if (age <= 12) return "👧";
+    if (age <= 17) return "👩‍🦱";
+    if (age <= 19) return "👩";
+    return "👱‍♀️";
 }
 
-function setDateUTC(ms){
-  const d = new Date(ms);
-  dEl.textContent = pad2(d.getUTCDate());
-  mEl.textContent = pad2(d.getUTCMonth()+1);
-  yEl.textContent = d.getUTCFullYear();
+function updateDateDisplay(ms) {
+    const d = new Date(ms);
+    elements.d.textContent = pad2(d.getUTCDate());
+    elements.m.textContent = pad2(d.getUTCMonth() + 1);
+    elements.y.textContent = d.getUTCFullYear();
 }
 
-function layout(p){
-  lastP = p;
+/**
+ * Arayüz yerleşimi ve emoji dönüşümü
+ */
+function renderFrame(p) {
+    lastP = p;
+    elements.fill.style.width = `${p * 100}%`;
 
-  fillEl.style.width = `${Math.round(p*100)}%`;
-
-  const age = Math.round(p * 21);
-  ageEl.textContent = `Yaş: ${age}`;
-  moverEl.textContent = emojiForByAge(age);
-
-  const leftPad = 8;
-  const rightPad = 8;
-  const avatarW = moverEl.offsetWidth || 44;
-  const w = trackEl.clientWidth;
-  const usable = Math.max(0, w - leftPad - rightPad - avatarW);
-  moverEl.style.left = `${leftPad + usable * p}px`;
-
-  const scale = 1 + 0.5*p;
-  moverEl.style.transform = `translateY(-50%) scale(${scale})`;
-}
-
-function animate(){
-  const t0 = performance.now();
-  running = true;
-  hint.textContent = "Çalışıyor…";
-
-  function frame(now){
-    const raw = clamp((now - t0)/DURATION_MS, 0, 1);
-    const p = easeInOut(raw);
-
-    const cur = START_MS + p*(END_MS-START_MS);
-    setDateUTC(cur);
-    layout(p);
-
-    if(raw < 1){
-      requestAnimationFrame(frame);
-    }else{
-      setDateUTC(END_MS);
-      layout(1);
-
-      hint.textContent = "Hazır.";
-      // ❌ bar gizlenmiyor
-      nextBtn.classList.remove("hidden"); // ✅ alttan çıkıyor
-      running = false;
+    const currentAge = Math.floor(p * 21);
+    elements.age.textContent = `Yaş: ${currentAge}`;
+    
+    // Emoji değişimi kontrolü
+    const newEmoji = getEmojiByAge(currentAge);
+    if (elements.mover.textContent !== newEmoji) {
+        elements.mover.textContent = newEmoji;
+        // Kritik Nokta: Yeni emojiyi her platformda iOS görünümüne zorla
+        if (window.twemoji) twemoji.parse(elements.mover);
     }
-  }
-  requestAnimationFrame(frame);
+
+    // Pozisyon Hesaplama (Responsive)
+    const trackWidth = elements.track.clientWidth;
+    const moverWidth = elements.mover.offsetWidth || 44;
+    const padding = 10;
+    const maxMove = trackWidth - moverWidth - (padding * 2);
+    
+    const posX = padding + (maxMove * p);
+    elements.mover.style.left = `${posX}px`;
+
+    // Hafif büyüme efekti
+    const scale = 1 + (0.3 * p);
+    elements.mover.style.transform = `translateY(-50%) scale(${scale})`;
 }
 
-// başlangıç
-setDateUTC(START_MS);
-layout(0);
-progressWrap.classList.add("hidden");
-nextBtn.classList.add("hidden");
+function startJourney() {
+    if (running) return;
+    
+    const startTime = performance.now();
+    running = true;
+    elements.hint.textContent = "Zaman akıyor...";
+    
+    function step(now) {
+        const elapsed = now - startTime;
+        const rawProgress = clamp(elapsed / DURATION_MS, 0, 1);
+        const easedProgress = easeInOutQuart(rawProgress);
 
-startBtn.addEventListener("click", ()=>{
-  if(running) return;
-  startBtn.classList.add("hidden");
-  progressWrap.classList.remove("hidden");
-  animate();
+        const currentTimestamp = START_MS + easedProgress * (END_MS - START_MS);
+        
+        updateDateDisplay(currentTimestamp);
+        renderFrame(easedProgress);
+
+        if (rawProgress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            finalizeJourney();
+        }
+    }
+    requestAnimationFrame(step);
+}
+
+function finalizeJourney() {
+    running = false;
+    updateDateDisplay(END_MS);
+    renderFrame(1);
+    elements.hint.textContent = "Yeni bir yaş, yeni bir başlangıç!";
+    elements.nextBtn.classList.remove("hidden");
+    // Küçük bir konfeti veya kutlama tetikleyicisi buraya eklenebilir
+}
+
+// Event Listeners
+elements.startBtn.addEventListener("click", () => {
+    elements.startBtn.classList.add("hidden");
+    elements.progressWrap.classList.remove("hidden");
+    startJourney();
 });
 
-nextBtn.addEventListener("click", ()=>{
-  window.location.href = "ikinci.html";
+elements.nextBtn.addEventListener("click", () => {
+    // Sayfa geçiş animasyonu için ufak bir bekleme eklenebilir
+    document.body.style.opacity = "0";
+    setTimeout(() => {
+        window.location.href = "ikinci.html";
+    }, 500);
 });
 
-window.addEventListener("resize", ()=>{
-  layout(lastP);
-});
+window.addEventListener("resize", () => renderFrame(lastP));
+
+// İlk yükleme
+updateDateDisplay(START_MS);
+if (window.twemoji) twemoji.parse(document.body);
