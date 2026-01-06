@@ -7,40 +7,46 @@
   <link rel="stylesheet" href="cake.css" />
 </head>
 <body>
-  <div class="stars-container" id="stars"></div>
+  <div class="bokeh"></div>
 
   <main class="scene">
     <div class="cake-display">
-      <div class="candle-box">
+      
+      <div class="candle-wrap">
         <div class="flame" id="flame"></div>
         <div class="candle"></div>
       </div>
 
-      <div class="cake-premium">
-        <div class="cream-top"></div>
-        <div class="dripping-effect">
-          <div class="drip"></div>
-          <div class="drip"></div>
-          <div class="drip"></div>
+      <div class="premium-cake">
+        <div class="icing">
+          <div class="drip drip-1"></div>
+          <div class="drip drip-2"></div>
+          <div class="drip drip-3"></div>
+          <div class="drip drip-4"></div>
         </div>
-        <div class="cake-layer layer-1"></div>
-        <div class="cake-layer layer-2"></div>
-        <div class="strawberries">
-          <span class="sb">🍓</span>
-          <span class="sb">🍓</span>
-          <span class="sb">🍓</span>
+        
+        <div class="toppings">
+          <div class="berry b1">🍓</div>
+          <div class="berry b2">🍓</div>
+          <div class="berry b3">🍓</div>
+          <div class="swirl s1"></div>
+          <div class="swirl s2"></div>
         </div>
+
+        <div class="cake-body top-layer"></div>
+        <div class="cake-body bottom-layer"></div>
       </div>
 
-      <div class="glass-plate"></div>
-      <div class="plate-shadow"></div>
+      <div class="plate-system">
+        <div class="glass-plate"></div>
+        <div class="plate-glow"></div>
+      </div>
+
     </div>
 
-    <div class="interface">
-      <h1 class="wish-text" id="wishText">Bir dilek tut... 🕯️</h1>
-      <button class="btn-blow" id="blowBtn">
-        <span class="icon">🌬️</span> Üfle!
-      </button>
+    <div class="ui">
+      <h1 class="wish-text" id="wish">Bir dilek tut... 🕯️</h1>
+      <button class="btn-blow" id="blowBtn">🌬️ Üfle!</button>
     </div>
   </main>
 
