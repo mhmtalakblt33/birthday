@@ -1,0 +1,458 @@
+/* =========================================
+   1. GENEL AYARLAR VE RENKLER (:root)
+   Buradan sitenin ana renklerini tek seferde değiştirebilirsin.
+   ========================================= */
+:root{
+  --bg1:#06112a;  /* Arka plan en koyu lacivert tonu */
+  --bg2:#081b3f;  /* Arka plan orta ton */
+  --bg3:#3f0b66;  /* Arka plan açık ton (gradyan için) */
+  --text:#eaf1ff; /* Yazı rengi (hafif buz mavisi beyaz) */
+  --muted:#b9c6e6; /* Silik yazılar (GÜN, AY, YIL yazıları gibi) */
+  --stroke:rgba(255,255,255,.10); /* Kutuların kenarındaki ince çizgi rengi */
+  --shadow: 0 20px 70px rgba(0,0,0,.55); /* Kutuların gölgesi */
+  --radius: 22px; /* Köşelerin yuvarlaklık derecesi */
+  --trackH: 64px; /* İlerleme çubuğunun (timeline) yüksekliği */
+  --avatar: 52px; /* Bebek/Kadın ikonunun boyutu */
+  --glow-primary: rgba(122,167,255,.4); /* Parlama efekti ana renk */
+  --glow-secondary: rgba(139,255,218,.3); /* Parlama efekti ikinci renk */
+}
+
+*{ box-sizing:border-box; } /* Kutuların boyutu padding eklenince bozulmasın diye standart ayar */
+html,body{ height:100%; }
+
+/* Sayfanın genel gövdesi */
+body{
+  margin:0;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  color:var(--text);
+  /* Arka plan renk geçişleri burada yapılıyor */
+  background:
+    radial-gradient(1200px 700px at 20% 15%, var(--bg3), transparent 55%),
+    radial-gradient(900px 600px at 80% 70%, #0a2c5c, transparent 55%),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
+  overflow:hidden; /* Sayfa sağa sola kaymasın */
+  position: relative;
+}
+
+/* =========================================
+   2. ARKA PLAN ANİMASYONLARI (Baloncuklar)
+   Sayfanın arkasında yüzen o büyük yuvarlaklar.
+   ========================================= */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%; /* Tam yuvarlak yapar */
+  pointer-events: none; /* Tıklanmaz, sadece süs */
+  z-index: 0; /* En arkada dursun */
+}
+
+/* Üstteki mavi baloncuk */
+body::before {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(220, 151, 0, 0.372), transparent 70%);
+  animation: float 13s ease-in-out infinite; /* 20 saniyede bir süzülür */
+}
+
+/* Alttaki yeşilimsi baloncuk */
+body::after {
+  width: 400px;
+  height: 400px;
+  bottom: -100px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(2, 84, 146, 0.171), transparent 70%);
+  animation: float 2s ease-in-out infinite reverse; /* 25 saniyede tersten süzülür */
+}
+
+/* Süzülme (Float) Hareketinin Tanımı */
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(50px, -50px) scale(1.1); } /* Sağa yukarı git, büyü */
+  66% { transform: translate(-30px, 30px) scale(0.9); } /* Sola aşağı git, küçül */
+}
+
+.bg{ 
+  position:fixed; 
+  inset:0; 
+  pointer-events:none;
+  z-index: 1;
+}
+
+/* Arkadaki minik yıldız/pırıltı efektleri */
+.bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Burada tek tek noktalar oluşturuluyor */
+  background-image: 
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent);
+  background-size: 200% 200%;
+  animation: sparkle 9s ease-in-out infinite; /* 8 saniyede bir yanıp söner */
+  opacity: 0.3;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.2; background-position: 0% 0%; }
+  50% { opacity: 0.5; background-position: 100% 100%; }
+}
+
+/* =========================================
+   3. MERKEZ KUTU (CARD) TASARIMI
+   Tüm içeriği ortalayan ana kapsayıcı.
+   ========================================= */
+.wrap{
+  height:100%;
+  display:grid;
+  place-items:center; /* Tam ortaya hizalar */
+  padding:16px;
+  position: relative;
+  z-index: 2;
+}
+
+.card{
+  width:min(780px,94vw); /* Genişlik en fazla 780px olsun, mobilde %94 kaplasın */
+  padding:42px 32px; /* İç boşluklar */
+  border-radius:var(--radius);
+  background:rgba(8,15,35,.92); /* Kutu rengi (yarı saydam) */
+  border:1px solid rgba(255,255,255,.15); /* İnce beyaz çerçeve */
+  /* Cam efekti (Buzlu cam) */
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  animation: cardEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); /* Açılış animasyonu */
+}
+
+/* Kartın ekrana geliş animasyonu (aşağıdan yukarı) */
+@keyframes cardEntry {
+  from { opacity: 0; transform: scale(0.9) translateY(50px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Kartın arkasındaki hafif parlama */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(122,167,255,.08), transparent 50%);
+  animation: cardGlow 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cardGlow {
+  0%, 100% { transform: translate(0, 0); opacity: 0.5; }
+  50% { transform: translate(20px, 20px); opacity: 0.8; }
+}
+
+/* Başlık (Bir yolculuk...) */
+.title{ 
+  margin:0 0 18px; 
+  font-size: 2.8em; /* Yazı boyutu */
+  font-weight: 800;
+  text-align: center;
+  /* Yazıya gradyan (renk geçişi) verme */
+  background: linear-gradient(135deg, #fff, var(--glow-primary), var(--glow-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(122,167,255,.3);
+  animation: titleShimmer 3s ease-in-out infinite; /* Parlama efekti */
+}
+
+@keyframes titleShimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+.sub{ 
+  color:var(--muted); 
+  font-size:15px; 
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   4. SAYAÇ KUTULARI (GÜN, AY, YIL)
+   Telefonda taşan kısım burasıydı, düzelttik.
+   ========================================= */
+.counter{
+  display:flex; 
+  justify-content:center; 
+  gap:18px; /* Kutular arası boşluk (Bilgisayarda 18px) */
+  padding:24px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(5,10,25,.5);
+  box-shadow: 
+    inset 0 2px 20px rgba(0,0,0,.3),
+    0 8px 32px rgba(0,0,0,.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sayacın üzerindeki yansıma efekti */
+.counter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.unit{ 
+  min-width:110px; /* Her kutu en az 110px genişlikte olsun (Mobilde bunu eziyoruz) */
+  text-align:center;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Mouse ile üzerine gelince kutu zıplasın */
+.unit:hover {
+  transform: translateY(-4px);
+}
+
+/* Rakamların Tasarımı (22, 07, 2005) */
+.num{ 
+  font-size:52px; /* Rakam boyutu */
+  font-weight:900;
+  background: linear-gradient(180deg, #fff, var(--glow-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 12px rgba(122,167,255,.4));
+  line-height: 1;
+}
+
+/* Alt yazılar (GÜN, AY) */
+.lbl{ 
+  font-size:13px; 
+  color:var(--muted); 
+  text-transform:uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Aradaki Noktalar (•) */
+.sep{ 
+  display:flex; 
+  align-items:center;
+  font-size: 28px;
+  color: var(--glow-primary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* =========================================
+   5. BUTONLAR (BAŞLAT, DEVAM ET)
+   ========================================= */
+.btn{
+  margin-top:20px;
+  width:100%;
+  padding:18px;
+  border-radius:16px;
+  border:1px solid rgba(122,167,255,.4);
+  background:linear-gradient(135deg, rgba(122,167,255,.25), rgba(139,255,218,.2));
+  color:var(--text);
+  font-weight:700;
+  font-size: 16px;
+  cursor:pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(122,167,255,.2),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Butonun üzerine gelince (Hover) */
+.btn:hover {
+  transform: translateY(-3px); /* Hafif yukarı kalkar */
+  box-shadow: 
+    0 8px 25px rgba(122,167,255,.4),
+    inset 0 1px 0 rgba(255,255,255,.2);
+  border-color: rgba(122,167,255,.6);
+}
+
+.hidden{ display:none; } /* JavaScript ile gizleyip açmak için */
+
+/* =========================================
+   6. İLERLEME ÇUBUĞU (Timeline / Progress)
+   Bebek ikonu soldan sağa giderkenki alan.
+   ========================================= */
+.progressWrap{ 
+  margin-top:24px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.track{
+  position:relative;
+  height:var(--trackH); /* Yükseklik 64px */
+  border-radius:999px; /* Tam yuvarlak kenarlar */
+  background:rgba(4,9,22,.95); /* Çubuğun içi koyu renk */
+  border:1px solid rgba(255,255,255,.12);
+  overflow:hidden;
+}
+
+/* Dolum efekti (Soldan sağa dolan renkli kısım) */
+.fill{
+  position:absolute;
+  inset:0;
+  width:0%; /* JS ile artırılıyor */
+  background:linear-gradient(90deg, 
+    rgba(122,167,255,.35), 
+    rgba(139,255,218,.45),
+    rgba(122,167,255,.35));
+  background-size: 200% 100%;
+  animation: fillGlow 2s ease-in-out infinite;
+  transition: width 60ms linear;
+}
+
+/* Hareket eden avatar (Bebek -> Kadın) */
+.avatar{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:var(--avatar);
+  height:var(--avatar);
+  display:grid;
+  place-items:center;
+  font-size:32px; /* Emoji boyutu */
+  background:rgba(0,0,0,.4);
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(10px);
+}
+
+.avatar.left{ left:8px; } /* En soldaki sabit ikon */
+.avatar.right{ right:8px; } /* En sağdaki sabit ikon */
+
+.avatar.mover{ 
+  left:8px; 
+  transition:left 60ms linear; /* Kayma efekti hızı */
+  z-index: 10;
+  border-color: rgba(122,167,255,.6);
+  box-shadow: 0 8px 30px rgba(122,167,255,.6);
+}
+
+/* Anlık Yaş Göstergesi (Yaş: 12 gibi) */
+.age{
+  position:absolute;
+  right:80px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:14px;
+  font-weight: 700;
+  background:rgba(0,0,0,.5);
+  padding:8px 16px;
+  border-radius:999px;
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+.hint{ 
+  margin-top:14px; 
+  font-size:13px; 
+  color:var(--muted);
+  text-align: center;
+}
+
+/* İkinci sayfaya geçiş butonu */
+.next{
+  position: relative;
+  transform: translateY(30px);
+  opacity: 0;
+  animation: slideUp .6s ease forwards;
+  /* Pembe tonlarında buton rengi */
+  background:linear-gradient(135deg, rgba(245,87,108,.3), rgba(240,147,251,.25));
+  border-color: rgba(245,87,108,.4);
+}
+
+@keyframes slideUp{
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================================
+   7. MOBİL UYUMLULUK AYARLARI (KRİTİK BÖLÜM)
+   iPhone ve telefonlarda sığmayan yerleri burası düzeltiyor.
+   ======================================================= */
+@media (max-width: 600px) {
+  
+  /* Kartın kenar boşluklarını daraltıp ekrana yaydık */
+  .card {
+    padding: 38px 16px;
+    width: 92vw;
+  }
+
+  /* Başlığı mobilde çok büyük durmasın diye küçülttük */
+  .title { 
+    font-size: 2em; 
+  }
+
+  /* ------------------------------------------------
+     BURASI KUTULARIN TAŞMASINI ENGELLEYEN KISIM
+     ------------------------------------------------ */
+  .counter {
+    gap: 4px;       /* Kutular birbirine yapışsın (18px yerine 4px) */
+    padding: 14px;  /* İç boşluğu azalttık */
+  }
+
+  .unit {
+    min-width: unset; /* "En az 110px olsun" kuralını iptal ettik */
+    width: 32%;       /* Her kutu ekranın 3'te 1'ini alsın */
+  }
+
+  .num {
+    font-size: 35px; /* Rakamları 52px'den 28px'e indirdik ki sığsın */
+  }
+
+  .lbl {
+    font-size: 10px; /* "YIL" yazısını küçülttük */
+    letter-spacing: 1px;
+  }
+  
+  .sep {
+    font-size: 16px; /* Aradaki noktaları küçülttük */
+    margin: 0 2px;
+  }
+
+  /* Timeline'daki yaş yazısının yeri mobilde kaymasın */
+  .age {
+    right: 145px;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
+/* Twemoji Ayarları: Emojilerin yazı gibi durmasını sağlar */
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 .05em 0 .1em;
+  vertical-align: -0.1em;
+  pointer-events: none; /* Resimlere tıklanmasın, seçilmesin */
+}
