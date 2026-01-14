@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Arkadaşlarından Mesajlar</title>
+  <link rel="stylesheet" href="friends.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Segoe+UI:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="fluid-bg"></div>
+
+  <main class="container">
+    
+    <header class="page-header">
+      <div class="header-icon">💌</div>
+      <h1>Güzel Dilekler</h1>
+      <p>Senin için kalpten dökülenler...</p>
+    </header>
+
+    <div class="grid-layout" id="envelopesGrid">
+      </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">
+      ⬅ Menüye Dön
+    </button>
+
+  </main>
+
+  <div class="letter-overlay hidden" id="letterOverlay" onclick="closeLetter(event)">
+    <div class="letter-paper" id="letterPaper">
+      <button class="close-x" onclick="closeLetter(null)">✕</button>
+      <div class="letter-content">
+        <div class="quote-icon">“</div>
+        <p id="msgText">...</p>
+        <div class="quote-icon right">”</div>
+      </div>
+      <div class="letter-signature">
+        <span class="from-tag">Sevgilerle,</span>
+        <h3 id="msgSign">İsim</h3>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // RENKLİ MEKTUPLAR LİSTESİ
+    // ==========================================
+    const messages = [
+      { 
+        name: "İpek", 
+        text: "Doğum günün kutlu olsun! Nice mutlu, sağlıklı ve başarı dolu yıllara. İyi ki varsın!",
+        color: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)" // Pembe
+      },
+      { 
+        name: "Ali", 
+        text: "Kardeşim, yeni yaşın sana istediğin her şeyi getirsin. Birlikte daha nice anılara!",
+        color: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)" // Mor
+      },
+      { 
+        name: "Yusuf", 
+        text: "Bu sene senin senen olsun kral. Her şey gönlünce olsun, iyi ki doğdun.",
+        color: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)" // Yeşil/Mavi
+      },
+      { 
+        name: "Ayşe", 
+        text: "Gülüşün hiç eksik olmasın. Mutlu yıllar!",
+        color: "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)" // Turuncu/Mor
+      },
+      { 
+        name: "Mehmet", 
+        text: "Hayatının en güzel yılı olması dileğiyle. Doğum günün kutlu olsun.",
+        color: "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)" // Açık Mavi
+      },
+      { 
+        name: "Zeynep", 
+        text: "Nice senelere, nice başarılara! İyi ki tanımışım seni.",
+        color: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)" // Şeftali
+      }
+    ];
+
+    const grid = document.getElementById('envelopesGrid');
+    
+    messages.forEach((msg, index) => {
+      const card = document.createElement('div');
+      card.className = 'envelope-card';
+      
+      // 1. ÖZEL RENK AYARI
+      card.style.background = msg.color;
+      
+      // 2. Gecikmeli animasyon
+      card.style.animationDelay = `${index * 0.1}s`;
+      
+      card.onclick = () => openLetter(index);
+      
+      // 3. İÇERİK (Sadece İkon ve Uyarı)
+      card.innerHTML = `
+        <div class="env-icon">📩</div>
+        <div class="click-hint">Okumak için dokun</div>
+      `;
+      
+      grid.appendChild(card);
+    });
+
+    function openLetter(index) {
+      const data = messages[index];
+      const overlay = document.getElementById('letterOverlay');
+      const paper = document.getElementById('letterPaper');
+      
+      document.getElementById('msgText').textContent = data.text;
+      document.getElementById('msgSign').textContent = data.name;
+      
+      overlay.classList.remove('hidden');
+      
+      paper.classList.remove('open-anim');
+      void paper.offsetWidth;
+      paper.classList.add('open-anim');
+    }
+
+    function closeLetter(e) {
+      if (!e || e.target.id === 'letterOverlay') {
+        document.getElementById('letterOverlay').classList.add('hidden');
+      }
+    }
+
+    window.onload = function() {
+      if (window.twemoji) twemoji.parse(document.body);
+    }
+  </script>
+</body>
+</html>

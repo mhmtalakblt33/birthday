@@ -1,0 +1,97 @@
+/* ... (Genel Ayarlar, Arka Plan, Sahne, Ekran, Karakter Grupları ve Işık AYNI) ... */
+/* Sadece değiştirdiğim ve eklediğim yerleri aşağıya koyuyorum, diğerleri aynı kalmalı */
+
+:root {
+  --joy: #ffd700; --sadness: #4a90e2; --anger: #ff3b30; --fear: #af52de; --disgust: #30d158;
+  --active-color: #fff; --next-color: #fff;
+}
+body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #000; height: 100vh; overflow: hidden; color: #fff; }
+.hq-background { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at 50% 120%, #150f20 0%, #000 100%); }
+.particles { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.2) 1px, transparent 1px); background-size: 90px 90px; animation: floatUp 40s infinite linear; opacity: 0.3; }
+@keyframes floatUp { from{background-position:0 0;} to{background-position:0 -90px;} }
+.stage-container { height: 100%; width: 100%; position: relative; z-index: 10; transition: all 1s; overflow: hidden; }
+
+/* 1. EKRAN */
+.projector-area { position: absolute; top: 5%; width: 100%; display: flex; justify-content: center; z-index: 20; }
+.projector-screen { width: 70%; max-width: 700px; aspect-ratio: 16/9; background: #000; border-radius: 12px; border: 3px solid #333; overflow: hidden; position: relative; opacity: 0.3; transform: scale(0.9); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.projector-screen.on { opacity: 1; transform: scale(1); border-color: #fff; box-shadow: 0 0 40px var(--active-color); }
+.screen-content img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: opacity 1s; }
+.projector-screen.on .screen-content img { opacity: 1; }
+
+/* 2. KARAKTERLER */
+.char-group { position: fixed; bottom: 20px; z-index: 25; pointer-events: none; display: flex; align-items: flex-end; }
+.left-group { left: 20px; justify-content: flex-start; }
+.right-group { right: 20px; justify-content: flex-end; }
+.char-img { height: 250px; width: auto; filter: drop-shadow(0 0 15px var(--active-color)); opacity: 0; transform: translateY(50px) scale(0.8); transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); transform-origin: bottom center; display: none; }
+.char-img.pop-in { display: block; opacity: 1; transform: translateY(0) scale(1); }
+img#char-joy { height: 240px; } img#char-sadness { height: 180px; } img#char-anger { height: 170px; } img#char-fear { height: 260px; } img#char-disgust { height: 200px; }
+
+/* 3. IŞIK HÜZMESİ */
+.projector-beam { position: absolute; top: calc(5% + (70vw * 9 / 16)); left: 50%; transform: translateX(-50%); width: 50%; height: 0; clip-path: polygon(0% 0%, 100% 0%, 60% 100%, 40% 100%); background: linear-gradient(to bottom, var(--active-color) 0%, transparent 100%); opacity: 0; transition: all 0.5s; pointer-events: none; mix-blend-mode: screen; z-index: 5; }
+.projector-beam.on { height: 35%; opacity: 0.5; }
+@media (min-width: 1000px) { .projector-beam { top: 45%; } .projector-beam.on { height: 25%; } }
+
+/* 4. KÜRE VE SAYAÇ */
+.orb-wrapper { position: absolute; bottom: 25%; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; z-index: 30; }
+.orb-container { position: relative; display: flex; justify-content: center; align-items: center; }
+.main-orb { width: 130px; height: 130px; border-radius: 50%; position: relative; cursor: pointer; box-shadow: inset -10px -10px 20px rgba(0,0,0,0.8), 0 0 20px var(--next-color); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; border: 2px solid rgba(255,255,255,0.3); background: #000; }
+.theme-joy .main-orb { box-shadow: 0 0 60px var(--joy), inset 0 0 20px var(--joy); border-color: #fff; }
+.theme-sadness .main-orb { box-shadow: 0 0 60px var(--sadness), inset 0 0 20px var(--sadness); border-color: #fff; }
+.theme-anger .main-orb { box-shadow: 0 0 60px var(--anger), inset 0 0 20px var(--anger); border-color: #fff; }
+.theme-fear .main-orb { box-shadow: 0 0 60px var(--fear), inset 0 0 20px var(--fear); border-color: #fff; }
+.theme-disgust .main-orb { box-shadow: 0 0 60px var(--disgust), inset 0 0 20px var(--disgust); border-color: #fff; }
+.orb-tint { position: absolute; inset: 0; z-index: 2; background: var(--next-color); opacity: 0.6; mix-blend-mode: hard-light; transition: background 0.5s; }
+.main-orb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 1; filter: grayscale(0.2); }
+.orb-reflection { position: absolute; top: 10%; left: 15%; width: 40%; height: 25%; background: linear-gradient(to bottom, rgba(255,255,255,0.9), transparent); border-radius: 50%; transform: rotate(-45deg); filter: blur(2px); z-index: 5; pointer-events: none; }
+.click-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 6; font-weight: bold; font-size: 0.85rem; letter-spacing: 2px; color: #fff; text-shadow: 0 0 5px #000; pointer-events: none; animation: pulseText 2s infinite; white-space: nowrap; }
+@keyframes pulseText { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
+.orb-socket-glow { position: absolute; bottom: -20px; width: 100px; height: 30px; background: var(--next-color); filter: blur(25px); opacity: 0.6; z-index: -1; border-radius: 50%; transition: background 0.5s; }
+.orb-counter { margin-top: 15px; font-size: 1.1rem; font-weight: bold; color: var(--next-color); text-shadow: 0 0 10px rgba(0,0,0,0.8); padding: 5px 15px; background: rgba(0,0,0,0.5); border-radius: 20px; transition: color 0.5s; }
+
+/* =========================================
+   5. ALTYAZI (DİNAMİK HİZALAMA)
+   ========================================= */
+.caption-container {
+  position: absolute; bottom: 8%; 
+  /* Varsayılan Ortada */
+  left: 50%; transform: translateX(-50%) translateY(20px);
+  width: 55%; max-width: 400px; /* Genişliği kısıtla ki karaktere çarpmasın */
+  opacity: 0; transition: all 0.5s ease 0.2s; z-index: 40;
+}
+.caption-container.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* --- YENİ: Hizalama Sınıfları --- */
+/* Karakter SAĞDA ise -> Yazı SOLA */
+.caption-container.align-left {
+  left: 5%; transform: translateY(20px); /* X ortalamayı iptal et */
+  text-align: left;
+}
+.caption-container.align-left.visible { transform: translateY(0); }
+
+/* Karakter SOLDA ise -> Yazı SAĞA */
+.caption-container.align-right {
+  left: auto; right: 5%; transform: translateY(20px);
+  text-align: right;
+}
+.caption-container.align-right.visible { transform: translateY(0); }
+
+.caption-container h2 { margin: 0; color: #fff; font-size: 1.5rem; text-shadow: 0 2px 10px rgba(0,0,0,1); letter-spacing: 1px; }
+.caption-container p { margin: 10px 0 0; color: #fff; font-weight: 500; font-size: 1.1rem; background: rgba(0,0,0,0.7); display: inline-block; padding: 10px 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); }
+
+/* MOBİL */
+@media (max-width: 600px) {
+  .projector-area { top: 5%; } .projector-screen { width: 95%; }
+  .projector-beam { top: 30%; width: 80%; } .projector-beam.on { height: 30%; opacity: 0.6; }
+  .orb-wrapper { bottom: 30%; } .main-orb { width: 110px; height: 110px; }
+  
+  /* Mobilde yazı biraz daha yukarıda ve geniş olsun */
+  .caption-container { bottom: 12%; width: 60%; }
+  /* Mobilde hizalama daha belirgin olsun */
+  .caption-container.align-left { left: 20px; text-align: left; }
+  .caption-container.align-right { right: 20px; left: auto; text-align: right; }
+  
+  .caption-container h2 { font-size: 1.3rem; } .caption-container p { font-size: 0.95rem; padding: 8px 15px; }
+  .left-group { left: 10px; bottom: 80px; } .right-group { right: 10px; bottom: 80px; }
+  .char-img { height: 150px; } img#char-joy { height: 170px; } img#char-sadness { height: 130px; } img#char-fear { height: 180px; }
+}
+.back-btn { position: fixed; bottom: 20px; left: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); padding: 10px 20px; border-radius: 30px; cursor: pointer; z-index: 100; }

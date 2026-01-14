@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Anı Küreleri</title>
+  <link rel="stylesheet" href="memories.css" />
+</head>
+<body>
+
+  <div class="hq-background">
+    <div class="particles"></div>
+    <div class="vignette"></div>
+  </div>
+
+  <main class="stage-container" id="mainStage">
+    
+    <div class="projector-area">
+      <div class="projector-screen" id="screen">
+        <div class="screen-content"><img id="screenImage" src=""></div>
+        <div class="screen-glare"></div>
+      </div>
+    </div>
+
+    <div class="char-group left-group" id="leftChars">
+        <img src="img/disgust.png" id="char-disgust" class="char-img" alt="Tiksinti">
+        <img src="img/fear.png" id="char-fear" class="char-img" alt="Korku">
+    </div>
+    <div class="char-group right-group" id="rightChars">
+        <img src="img/joy.png" id="char-joy" class="char-img" alt="Neşe">
+        <img src="img/sadness.png" id="char-sadness" class="char-img" alt="Hüzün">
+        <img src="img/anger.png" id="char-anger" class="char-img" alt="Öfke">
+    </div>
+
+    <div class="caption-container" id="captionBox">
+      <h2 id="screenDate">...</h2>
+      <p id="screenNote">Hatırlamak için küreye dokun.</p>
+    </div>
+    
+    <div class="projector-beam" id="beam"></div>
+
+    <div class="orb-wrapper">
+      <div class="orb-container">
+        <div class="main-orb" id="mainOrb" onclick="interactOrb()">
+          <div class="orb-reflection"></div>
+          <div class="orb-tint"></div> 
+          <img id="orbImage" src="">
+          <div class="click-hint">DOKUN</div>
+        </div>
+        <div class="orb-socket-glow"></div>
+      </div>
+      <div class="orb-counter" id="orbCounter">1 / X</div>
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">⬅ Dön</button>
+
+  </main>
+
+  <script>
+    // ==========================================
+    // ANI LİSTESİ
+    // ==========================================
+    const memories = [
+      { src: "anilar/1.jpg", date: "Başlangıç", note: "O günkü enerjimiz bambaşkaydı!", emotion: "joy" },
+      { src: "anilar/2.jpg", date: "Veda Vakti", note: "Hala içimi burkar...", emotion: "sadness" },
+      { 
+        src: "anilar/3.jpg", date: "Trafik!", note: "Sinirden gülmüştük :D", emotion: "anger",
+        angerSide: "left" // Anger SOLDAN çıksın -> Yazı SAĞA gider
+      },
+      { src: "anilar/4.jpg", date: "Yükseklik", note: "Aşağı bakamıyorum!", emotion: "fear" },
+      { src: "anilar/5.jpg", date: "O Yemek", note: "Tadı hala damağımda :(", emotion: "disgust" },
+      { 
+        src: "anilar/6.jpg", date: "Başka Bir Öfke", note: "Burada da çok kızmıştık.", emotion: "anger",
+        angerSide: "right" // Anger SAĞDAN çıksın -> Yazı SOLA gider
+      }
+    ];
+
+    let currentIndex = 0;
+    let state = "idle";
+
+    window.onload = function() {
+      updateOrbVisuals(currentIndex);
+    };
+
+    function interactOrb() {
+      const stage = document.getElementById('mainStage');
+      const screen = document.getElementById('screen');
+      const beam = document.getElementById('beam');
+      const captionBox = document.getElementById('captionBox');
+      const clickHint = document.querySelector('.click-hint');
+      const memory = memories[currentIndex];
+
+      // EKRAN KAPALIYSA -> AÇ
+      if (state === "idle") {
+        stage.className = `stage-container theme-${memory.emotion}`;
+        screen.classList.add('on');
+        beam.classList.add('on');
+        
+        // --- KARAKTER MANTIĞI ---
+        const charImg = document.getElementById(`char-${memory.emotion}`);
+        
+        // Anger'ı taşı (varsa)
+        if (memory.emotion === 'anger' && memory.angerSide) {
+            const targetGroup = memory.angerSide === 'left' ? 'leftChars' : 'rightChars';
+            document.getElementById(targetGroup).appendChild(charImg);
+        }
+        charImg.classList.add('pop-in');
+
+        // --- YAZI HİZALAMA MANTIĞI (YENİ) ---
+        // Önce temizle
+        captionBox.classList.remove('align-left', 'align-right');
+        
+        let charSide = 'right'; // Varsayılan karakter tarafı (Joy, Sadness)
+
+        if (['fear', 'disgust'].includes(memory.emotion)) {
+            charSide = 'left';
+        } else if (memory.emotion === 'anger') {
+            charSide = memory.angerSide || 'right';
+        }
+
+        // Karakter neredeyse yazı TERSİNE gitsin
+        if (charSide === 'right') {
+            captionBox.classList.add('align-left'); // Karakter sağda -> Yazı SOLDA
+        } else {
+            captionBox.classList.add('align-right'); // Karakter solda -> Yazı SAĞDA
+        }
+        // ------------------------------------
+
+        document.getElementById('screenImage').src = memory.src;
+        document.getElementById('screenDate').textContent = memory.date;
+        document.getElementById('screenNote').textContent = memory.note;
+        captionBox.classList.add('visible');
+
+        clickHint.textContent = "DEVAM ET ➜";
+        state = "active";
+      } 
+      
+      // EKRAN AÇIKSA -> KAPAT
+      else {
+        screen.classList.remove('on');
+        beam.classList.remove('on');
+        document.querySelectorAll('.char-img').forEach(img => img.classList.remove('pop-in'));
+        captionBox.classList.remove('visible');
+        
+        const orb = document.getElementById('mainOrb');
+        orb.style.transform = "scale(0) rotate(180deg)";
+
+        setTimeout(() => {
+          currentIndex = (currentIndex + 1) % memories.length;
+          updateOrbVisuals(currentIndex);
+          
+          orb.style.transform = "scale(1) rotate(0deg)";
+          document.querySelector('.click-hint').textContent = "DOKUN";
+          state = "idle";
+        }, 500);
+      }
+    }
+
+    function updateOrbVisuals(index) {
+      const memory = memories[index];
+      document.getElementById('orbImage').src = memory.src;
+      
+      const color = getEmotionColor(memory.emotion);
+      document.getElementById('mainStage').style.setProperty('--next-color', color);
+      
+      const counter = document.getElementById('orbCounter');
+      counter.textContent = `${index + 1} / ${memories.length}`;
+      counter.style.color = color;
+    }
+
+    function getEmotionColor(emotion) {
+      const colors = {
+        joy: '#ffd700', sadness: '#4a90e2', anger: '#ff3b30', fear: '#af52de', disgust: '#30d158'
+      };
+      return colors[emotion] || '#fff';
+    }
+  </script>
+</body>
+</html>

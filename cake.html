@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İyi ki Doğdun!</title>
+    <link rel="stylesheet" href="cake.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div class="glow-source" id="candleGlow"></div>
+    <div class="party-bg" id="partyBg"></div>
+
+    <main class="stage">
+        
+        <div class="header-msg" id="headerMsg">
+            <h1 class="title">İyi ki Doğdun!</h1>
+        </div>
+
+        <div class="cake-wrapper">
+            <div class="cake">
+                
+                <div class="candles-container">
+                    <div class="candle">
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle center">
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                        <div class="smoke"></div>
+                    </div>
+                </div>
+
+                <div class="tier tier-top">
+                    <div class="tier-frosting"></div> <div class="tier-body"></div>     <div class="cherries">
+                        <div class="cherry"></div><div class="cherry"></div><div class="cherry"></div><div class="cherry"></div>
+                    </div>
+                </div>
+
+                <div class="tier tier-middle">
+                    <div class="tier-frosting"></div>
+                    <div class="tier-body"></div>
+                </div>
+
+                <div class="tier tier-bottom">
+                    <div class="tier-frosting"></div>
+                    <div class="tier-body"></div>
+                </div>
+
+                <div class="plate"></div>
+
+            </div>
+        </div>
+
+        <div class="controls" id="controls">
+            <p class="hint">Dileğini tut ve üflemek için<br><span>BASILI TUT</span></p>
+            <div class="btn-group">
+                <svg class="progress-ring" width="90" height="90">
+                    <circle class="progress-circle" stroke="white" stroke-width="4" fill="transparent" r="40" cx="45" cy="45"/>
+                </svg>
+                <button id="blowBtn">💨</button>
+            </div>
+        </div>
+
+        <button id="giftBtn" onclick="window.location.href='menu.html'">
+            Hediyelere Git 🎁
+        </button>
+
+    </main>
+
+    <script src="cake.js"></script>
+</body>
+</html>

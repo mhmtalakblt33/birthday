@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sertifikalar</title>
+  
+  <link rel="stylesheet" href="cake.css" />
+  <link rel="stylesheet" href="surprise.css" />
+  <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="theme-default">
+
+  <div class="bg-gradient"></div>
+  <div class="particles"></div>
+
+  <div id="downloadModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <button class="close-modal" onclick="toggleDownloadModal()">✕</button>
+      <h3 class="modal-title">📂 İyilik Dosyaları</h3>
+      
+      <div class="download-list">
+        <a href="sertifikalar/1.jpg" download="TEMA.jpg" class="dl-item"><span>🌳 TEMA</span> <span class="dl-icon">⬇</span></a>
+        <a href="sertifikalar/2.jpg" download="HACIKO.jpg" class="dl-item"><span>🐾 HAÇİKO</span> <span class="dl-icon">⬇</span></a>
+        <a href="sertifikalar/3.jpg" download="KEDV.jpg" class="dl-item"><span>🤝 KEDV</span> <span class="dl-icon">⬇</span></a>
+        <a href="sertifikalar/4.jpg" download="Darussafaka.jpg" class="dl-item"><span>🏫 Darüşşafaka</span> <span class="dl-icon">⬇</span></a>
+        <a href="sertifikalar/5.jpg" download="KACUV.jpg" class="dl-item"><span>🎗️ KAÇUV</span> <span class="dl-icon">⬇</span></a>
+        <a href="sertifikalar/6.jpg" download="AHBAP.jpg" class="dl-item"><span>💚 AHBAP</span> <span class="dl-icon">⬇</span></a>
+        <a href="sertifikalar/7.jpg" download="UNICEF.jpg" class="dl-item"><span>🌍 UNICEF</span> <span class="dl-icon">⬇</span></a>
+        <a href="sertifikalar/8.jpg" download="Hatira.jpg" class="dl-item special"><span>🎂 Mektup</span> <span class="dl-icon">⬇</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="imageZoomModal" class="image-modal hidden" onclick="closeImageModal()">
+    <span class="image-close-btn">&times;</span>
+    <img class="image-modal-content" id="zoomedImage">
+  </div>
+
+  <main class="snap-container">
+
+    <section class="snap-page" data-theme="theme-tema">
+      <div class="content-box">
+        <div class="icon-area">🌳</div>
+        <h2 class="cert-title">TEMA Vakfı</h2>
+        <span class="cert-date">22 OCAK 2026</span>
+        <span class="cert-tag">"Geleceğe kök salan umutlar."</span>
+        <img src="sertifikalar/1.jpg" class="cert-img clickable-img" alt="TEMA" onerror="this.src='https://placehold.co/400x500/1a4d1a/fff?text=TEMA'">
+        <p class="cert-msg">Sen nefes aldıkça dünya güzelleşiyor. Bu fidanlar, senin gibi sağlam ve hayat dolu olsun diye dikildi.</p>
+      </div>
+      <div class="scroll-hint">Kaydır ⬇</div>
+    </section>
+
+    <section class="snap-page" data-theme="theme-haciko">
+      <div class="content-box">
+        <div class="icon-area">🐾</div>
+        <h2 class="cert-title">HAÇİKO</h2>
+        <span class="cert-date">22 ŞUBAT 2026</span>
+        <span class="cert-tag">"Sessiz dostlara sıcak bir el."</span>
+        <img src="sertifikalar/2.jpg" class="cert-img clickable-img" alt="HAÇİKO" onerror="this.src='https://placehold.co/400x500/8b0000/fff?text=HACIKO'">
+        <p class="cert-msg">Senin merhametin, sokaktaki masum canlara yuva, soğukta titreyen patilere sıcaklık oldu.</p>
+      </div>
+      <div class="scroll-hint">Kaydır ⬇</div>
+    </section>
+
+    <section class="snap-page" data-theme="theme-kedv">
+      <div class="content-box">
+        <div class="icon-area">🤝</div>
+        <h2 class="cert-title">KEDV</h2>
+        <span class="cert-date">22 MART 2026</span>
+        <span class="cert-tag">"Emeğe ve üretime destek."</span>
+        <img src="sertifikalar/3.jpg" class="cert-img clickable-img" alt="KEDV" onerror="this.src='https://placehold.co/400x500/5a2a82/fff?text=KEDV'">
+        <p class="cert-msg">Güçlü duruşun ve azminle, üreten kadınların emeğine katkıda bulunarak dayanışmayı büyütmek istedik.</p>
+      </div>
+      <div class="scroll-hint">Kaydır ⬇</div>
+    </section>
+
+    <section class="snap-page" data-theme="theme-daru">
+      <div class="content-box">
+        <div class="icon-area">🏫</div>
+        <h2 class="cert-title">Darüşşafaka</h2>
+        <span class="cert-date">22 NİSAN 2026</span>
+        <span class="cert-tag">"Aydınlık yarınlar için."</span>
+        <img src="sertifikalar/4.jpg" class="cert-img clickable-img" alt="Darüşşafaka" onerror="this.src='https://placehold.co/400x500/0f3026/fff?text=Darussafaka'">
+        <p class="cert-msg">Senin vizyonun, pırıl pırıl gençlerin eğitim yolculuğunda bir basamak, bir umut ışığı oldu.</p>
+      </div>
+      <div class="scroll-hint">Kaydır ⬇</div>
+    </section>
+
+    <section class="snap-page" data-theme="theme-kacuv">
+      <div class="content-box">
+        <div class="icon-area">🎗️</div>
+        <h2 class="cert-title">KAÇUV</h2>
+        <span class="cert-date">22 MAYIS 2026</span>
+        <span class="cert-tag">"Minik kalplere büyük destek."</span>
+        <img src="sertifikalar/5.jpg" class="cert-img clickable-img" alt="KAÇUV" onerror="this.src='https://placehold.co/400x500/bfa300/fff?text=KACUV'">
+        <p class="cert-msg">Zorlu mücadeleler veren minik kahramanların yanında olmak, senin şefkatli yüreğine çok yakışır.</p>
+      </div>
+      <div class="scroll-hint">Kaydır ⬇</div>
+    </section>
+
+    <section class="snap-page" data-theme="theme-ahbap">
+      <div class="content-box">
+        <div class="icon-area">💚</div>
+        <h2 class="cert-title">AHBAP</h2>
+        <span class="cert-date">22 HAZİRAN 2026</span>
+        <span class="cert-tag">"Dayanışmanın en güzel hali."</span>
+        <img src="sertifikalar/6.jpg" class="cert-img clickable-img" alt="AHBAP" onerror="this.src='https://placehold.co/400x500/005c52/fff?text=AHBAP'">
+        <p class="cert-msg">Yardımlaşmanın ve paylaşmanın gücüne inanarak, senin adına iyiliği çoğalttık.</p>
+      </div>
+      <div class="scroll-hint">Kaydır ⬇</div>
+    </section>
+
+    <section class="snap-page" data-theme="theme-unicef">
+      <div class="content-box">
+        <div class="icon-area">🌍</div>
+        <h2 class="cert-title">UNICEF Türkiye</h2>
+        <span class="cert-date">22 TEMMUZ 2026</span>
+        <span class="cert-tag">"Tüm dünya çocukları için."</span>
+        <img src="sertifikalar/7.jpg" class="cert-img clickable-img" alt="UNICEF" onerror="this.src='https://placehold.co/400x500/1CABE2/fff?text=UNICEF'">
+        <p class="cert-msg">Senin sevgin sınır tanımıyor. Bu destekle, dünyanın neresinde olursa olsun çocukların hayallerine ortak olduk.</p>
+      </div>
+      <div class="scroll-hint">Son 1 ⬇</div>
+    </section>
+
+    <section class="snap-page" data-theme="theme-final">
+      <div class="content-box final-box">
+        
+        <div class="final-top">
+            <div class="icon-area">🎂</div>
+            <h2 class="cert-title" style="color:#ffabc4; font-size: 1.8rem;">İYİ Kİ DOĞDUN!</h2>
+        </div>
+        
+        <div class="final-note">
+          <p>
+            Öncelikle, iyi ki doğmuşsun ve iyi ki yollarımız kesişmiş. Geride bıraktığımız yıl, bizim için (ben ve Ali) unutulmaz anılarla dolu güzel bir yıldı. Umarım senin için de öyle olmuştur.
+          </p>
+          <p>
+            Geçen sene Yusuf'un o biraz amatörce hazırladığı sürprizden sonra, bu sene çıtayı biraz yükseltip yine <strong>Ali ve Yusuf</strong> olarak karşına çıkalım dedik :)
+          </p>
+          <p>
+            Yeni yaşında sağlık, huzur ve kalbinden geçen tüm güzellikler seninle olsun.
+          </p>
+          <p class="sign">Ali & Yusuf</p>
+        </div>
+        
+        <div class="button-group">
+          <button class="compact-btn primary" onclick="toggleDownloadModal()">
+            📥 Sertifikaları İndir
+          </button>
+          
+          <a href="https://yusuf07-lab.github.io/birthdayy/" target="_blank" class="compact-btn history-btn">
+            🔗 Geçen Seneki Sürpriz
+          </a>
+          
+          <button class="compact-btn secondary" onclick="window.location.href='menu.html'">
+            ⬅ Menüye Dön
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+  
+  <script src="surprise.js"></script>
+</body>
+</html>
