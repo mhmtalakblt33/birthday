@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>21 Neden</title>
+  <link rel="stylesheet" href="reasons.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Segoe+UI:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <div class="nebula-bg">
+    <div class="star-field"></div>
+    <div class="fog fog-1"></div>
+    <div class="fog fog-2"></div>
+  </div>
+
+  <main class="container">
+    
+    <header class="page-header">
+      <div class="header-icon">✨</div>
+      <h1>Seni Sevmek İçin<br>21 Neden</h1>
+      <p>Her biri yıldızlar kadar parlak...</p>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </header>
+
+    <div class="cards-list" id="cardsList">
+      </div>
+
+    <button class="back-btn" onclick="window.location.href='menu.html'">
+      ⬅ Menüye Dön
+    </button>
+
+  </main>
+
+  <script>
+    // ==========================================
+    // BURAYI DÜZENLE: 21 NEDEN LİSTESİ
+    // ==========================================
+    const reasonsList = [
+      "Gülüşünle en karanlık günü bile aydınlatman.",
+      "Beni her koşulda yargılamadan dinlemen.",
+      "Hayallerime benden daha çok inanman.",
+      "Zor zamanlarda sığınabileceğim güvenli limanım olman.",
+      "Yaptığın espriye herkesten çok senin gülmen :)",
+      "Merhametli ve sevgi dolu kalbin.",
+      "Birlikte saçmalayabildiğim tek kişi olman.",
+      "Bana kattığın vizyon ve cesaret.",
+      "Sabahları enerjinle güne pozitif başlatman.",
+      "Olaylara her zaman farklı bir pencereden bakabilmen.",
+      "Yemek zevkimizin (çoğu zaman) uyuşması.",
+      "En ufak şeyden bile mutlu olabilmen.",
+      "Dürüstlüğün ve netliğin.",
+      "Benimle saatlerce sıkılmadan sohbet edebilmen.",
+      "Başarısız olduğumda elimden tutup kaldırman.",
+      "Hayvanlara olan o güzel sevgin.",
+      "Sadece varlığınla bile bana huzur vermen.",
+      "Birlikteyken zamanın nasıl geçtiğini anlamamam.",
+      "Sana her baktığımda kendimi şanslı hissetmem.",
+      "Gözlerinin içindeki o samimiyet.",
+      "Çünkü sen, sadece sen olduğun için özelsin. İyi ki doğdun!"
+    ];
+
+    const container = document.getElementById('cardsList');
+    const progressBar = document.getElementById('progressBar');
+    let openCount = 0;
+
+    // Kartları Oluştur
+    reasonsList.forEach((reason, index) => {
+      const num = index + 1;
+      const card = document.createElement('div');
+      card.className = 'reason-card';
+      // Animasyon sırası
+      card.style.animationDelay = `${index * 0.1}s`;
+      
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="number-badge">${num}</div>
+          <span class="tap-text">Nedeni gör</span>
+          <div class="chevron">▼</div>
+        </div>
+        <div class="card-content">
+          <p>${reason}</p>
+        </div>
+      `;
+
+      // Tıklama Olayı
+      card.onclick = function() {
+        // Zaten açıksa kapat
+        if (this.classList.contains('active')) {
+          this.classList.remove('active');
+          openCount--;
+        } else {
+          // Kapalıysa aç
+          // Diğerlerini kapatmak istersen bu kodu aç:
+          // document.querySelectorAll('.reason-card').forEach(c => c.classList.remove('active'));
+          
+          this.classList.add('active');
+          openCount++;
+          
+          // 21. Maddeye tıklandıysa veya hepsi açıldıysa konfeti at
+          if (num === 21 || openCount === reasonsList.length) {
+            triggerConfetti();
+          }
+        }
+        updateProgress();
+      };
+
+      container.appendChild(card);
+    });
+
+    function updateProgress() {
+      const percentage = (openCount / reasonsList.length) * 100;
+      progressBar.style.width = `${percentage}%`;
+    }
+
+    function triggerConfetti() {
+      // Soldan ve Sağdan fırlat
+      var count = 200;
+      var defaults = {
+        origin: { y: 0.7 }
+      };
+
+      function fire(particleRatio, opts) {
+        confetti(Object.assign({}, defaults, opts, {
+          particleCount: Math.floor(count * particleRatio)
+        }));
+      }
+
+      fire(0.25, { spread: 26, startVelocity: 55, });
+      fire(0.2, { spread: 60, });
+      fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+      fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+      fire(0.1, { spread: 120, startVelocity: 45, });
+    }
+  </script>
+</body>
+</html>

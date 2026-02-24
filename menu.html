@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Sürpriz Menüsü</title>
+  <link rel="stylesheet" href="menu.css" />
+  <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="space-bg">
+    <div class="stars-static"></div>
+    <div class="stars-twinkle"></div>
+    
+    <div class="constellation-wrapper">
+      <svg class="constellation-lines" viewBox="0 0 300 300">
+        <line x1="150" y1="130" x2="150" y2="50" />
+        <line x1="150" y1="130" x2="80" y2="240" />
+        <line x1="150" y1="130" x2="220" y2="240" />
+        <line x1="220" y1="240" x2="250" y2="280" />
+      </svg>
+      
+      <div class="c-star s-center"></div>    <div class="c-star s-top"></div>       <div class="c-star s-left-leg"></div>  <div class="c-star s-right-leg"></div> <div class="c-star s-tail"></div>      </div>
+  </div>
+
+  <main class="menu-container">
+    
+    <div class="hologram-stage">
+      <div class="hologram-content" id="previewCard" onclick="goToLink()">
+        <div class="hologram-beam"></div>
+        <div class="holo-details">
+          <div class="p-icon" id="pIcon">🎂</div>
+          <h2 id="pTitle">İyiki Doğdun!</h2>
+          <p id="pDesc">Aşağıdaki bardan bir sürpriz seç.</p>
+          <div class="tap-hint">Girmek için tıkla</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar-wrapper">
+      <div class="usage-hint" id="usageHint">
+        Menüyü kullanmak için ikonlara dokun
+      </div>
+      <div class="fixed-dock">
+        <div class="selection-indicator" id="indicator"></div>
+        <div class="dock-item" data-key="friends" data-index="0" onclick="selectItem(this, 'friends')">
+          <div class="d-icon">📩</div>
+        </div>
+        <div class="dock-item" data-key="memories" data-index="1" onclick="selectItem(this, 'memories')">
+          <div class="d-icon">📷</div>
+        </div>
+        <div class="dock-item" data-key="reasons" data-index="2" onclick="selectItem(this, 'reasons')">
+          <div class="d-icon">✨</div>
+        </div>
+        <div class="dock-item special" data-key="surprise" data-index="3" onclick="selectItem(this, 'surprise')">
+          <div class="d-icon">🎁</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const data = {
+      friends: { icon: "📩", title: "Mesajlar", desc: "Arkadaşlarından sana notlar.", link: "friends.html", color: "#00d2ff" },
+      memories: { icon: "📷", title: "Anılar", desc: "Fotoğraf albümümüz.", link: "memories.html", color: "#ff9800" },
+      reasons: { icon: "✨", title: "21 Neden?", desc: "Seni neden seviyoruz?", link: "reasons.html", color: "#d500f9" },
+      surprise: { icon: "🎁", title: "Büyük Final", desc: "İyilik yolculuğu.", link: "surprise.html", color: "#ff4081" }
+    };
+
+    let currentLink = "#";
+
+    function selectItem(element, key) {
+      const hint = document.getElementById('usageHint');
+      if(hint) hint.style.opacity = '0';
+
+      const indicator = document.getElementById('indicator');
+      const index = element.getAttribute('data-index');
+      indicator.style.transform = `translateX(${index * 100}%)`;
+
+      const item = data[key];
+      const card = document.getElementById('previewCard');
+      
+      document.getElementById('pIcon').textContent = item.icon;
+      document.getElementById('pTitle').textContent = item.title;
+      document.getElementById('pDesc').textContent = item.desc;
+      currentLink = item.link;
+
+      card.style.setProperty('--holo-color', item.color);
+      card.classList.remove('active-anim');
+      void card.offsetWidth; 
+      card.classList.add('active-anim');
+
+      if (window.twemoji) twemoji.parse(document.body);
+    }
+
+    function goToLink() {
+      if(currentLink !== "#") window.location.href = currentLink;
+    }
+
+    window.onload = function() {
+      if (window.twemoji) twemoji.parse(document.body);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Bir Yolculuk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+  <div class="bg" id="bgLayer">
+    <div class="glow"></div>
+    <div class="glow g2"></div>
+  </div>
+
+  <div id="sadContainer"></div>
+
+  <div class="story-stage" id="storyStage">
+    <h1 id="storyText"></h1>
+  </div>
+
+  <main class="wrap">
+    <section class="card" id="mainCard">
+      
+      <div id="introHeader">
+        <h1 class="title">Bir yolculuk...</h1>
+        <p class="sub">2005'ten sonsuzluğa uzanan hikaye.</p>
+      </div>
+
+      <div class="counter" id="counterBox">
+        <div class="unit"><div class="num" id="dVal">00</div><div class="lbl">Gün</div></div>
+        <div class="sep">•</div>
+        <div class="unit"><div class="num" id="mVal">00</div><div class="lbl">Ay</div></div>
+        <div class="sep">•</div>
+        <div class="unit"><div class="num" id="yVal">00</div><div class="lbl">Yıl</div></div>
+      </div>
+
+      <button class="btn start-btn" id="startBtn">🚀 YOLCULUĞU BAŞLAT</button>
+
+      <div class="bottom-area hidden" id="bottomArea">
+        
+        <div class="progressWrap" id="progressWrap">
+          <div class="track" id="track">
+            <div class="fill" id="fill"></div>
+            <div class="avatar left"><img class="emoji" draggable="false" alt="🤱🏼" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@14.0.0/img/apple/64/1f931-1f3fc.png"></div>
+            <div class="avatar right"><img class="emoji" draggable="false" alt="👱🏼‍♀️" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@14.0.0/img/apple/64/1f471-1f3fc-200d-2640-fe0f.png"></div>
+            <div class="avatar mover" id="mover"></div>
+            <div class="age" id="age">Yaş: 0</div>
+          </div>
+        </div>
+
+        <div class="final-action hidden" id="finalAction">
+          <h3 class="final-q">Bu hikayenin devamını yazmaya var mısın?</h3>
+          <div class="btn-group">
+            <button class="btn yes-btn" id="nextBtn">EVET</button>
+            <button class="btn no-btn" id="noBtn">HAYIR</button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

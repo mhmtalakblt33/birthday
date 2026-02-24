@@ -1,0 +1,135 @@
+/* =========================================
+   GENEL AYARLAR
+   ========================================= */
+:root { --text-color: #fff; }
+body { margin: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text-color); background-color: #000; height: 100vh; overflow: hidden; }
+
+/* =========================================
+   ARKA PLAN: TEMİZ VE DERİN UZAY
+   ========================================= */
+.space-bg {
+  position: fixed; inset: 0; z-index: -1;
+  /* Çok koyu, temiz bir gece mavisi */
+  background: radial-gradient(circle at center bottom, #0b1021 0%, #000000 80%);
+}
+
+/* KATMAN 1: Uzak, Statik Yıldızlar (Gürültü yapmasın diye sabit) */
+.stars-static {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(white 1px, transparent 1.5px);
+  background-size: 100px 100px; /* Seyrek */
+  opacity: 0.4; /* Silik */
+}
+
+/* KATMAN 2: Yakın, Yavaşça Parlayan Yıldızlar */
+.stars-twinkle {
+  position: absolute; inset: 0;
+  background-image: 
+    radial-gradient(white 2px, transparent 3px),
+    radial-gradient(rgba(200, 220, 255, 0.8) 1.5px, transparent 2px);
+  background-size: 250px 250px, 400px 400px;
+  background-position: 20px 20px, 100px 150px;
+  animation: calmTwinkle 6s infinite ease-in-out alternate;
+}
+
+@keyframes calmTwinkle {
+  0% { opacity: 0.3; transform: scale(0.9); }
+  100% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/* =========================================
+   YENGEÇ TAKIM YILDIZI (NET VE BELİRGİN)
+   ========================================= */
+.constellation-wrapper {
+  position: absolute; top: 35%; left: 50%; width: 300px; height: 300px;
+  transform: translate(-50%, -50%); pointer-events: none;
+}
+
+/* Çizgiler */
+.constellation-lines {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  stroke: rgba(255, 255, 255, 0.5); stroke-width: 2; fill: none;
+  opacity: 0; animation: formShape 15s infinite ease-in-out;
+}
+
+/* Yıldız Noktaları - BAŞLANGIÇ HALİ */
+.c-star {
+  position: absolute; 
+  width: 6px; height: 6px; 
+  background: #fff; border-radius: 50%;
+  /* Normal hali de belirgin olsun */
+  box-shadow: 0 0 8px rgba(255,255,255,0.8);
+  
+  animation-duration: 15s; 
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- YENGEÇ HAREKETİ (TERS Y) --- */
+
+/* 1. Merkez (Hub) */
+.s-center { animation-name: moveCenter; }
+@keyframes moveCenter {
+  0%, 100% { top: 15%; left: 20%; transform: scale(1); opacity: 0.5; } /* Rastgele konum */
+  40%, 60% { top: 43%; left: 50%; transform: scale(2.2); opacity: 1; box-shadow: 0 0 20px cyan, 0 0 40px blue; } /* (150, 130) */
+}
+
+/* 2. Tepe (Top) */
+.s-top { animation-name: moveTop; }
+@keyframes moveTop {
+  0%, 100% { top: 10%; left: 80%; transform: scale(1); opacity: 0.5; }
+  40%, 60% { top: 16%; left: 50%; transform: scale(1.8); opacity: 1; box-shadow: 0 0 15px cyan; } /* (150, 50) */
+}
+
+/* 3. Sol Bacak (Left Leg) */
+.s-left-leg { animation-name: moveLegLeft; }
+@keyframes moveLegLeft {
+  0%, 100% { top: 80%; left: 10%; transform: scale(1); opacity: 0.5; }
+  40%, 60% { top: 80%; left: 26%; transform: scale(1.8); opacity: 1; box-shadow: 0 0 15px cyan; } /* (80, 240) */
+}
+
+/* 4. Sağ Bacak (Right Leg) */
+.s-right-leg { animation-name: moveLegRight; }
+@keyframes moveLegRight {
+  0%, 100% { top: 70%; left: 90%; transform: scale(1); opacity: 0.5; }
+  40%, 60% { top: 80%; left: 73%; transform: scale(1.8); opacity: 1; box-shadow: 0 0 15px cyan; } /* (220, 240) */
+}
+
+/* 5. Kuyruk (Tail - Sağdan uzanan) */
+.s-tail { animation-name: moveTail; }
+@keyframes moveTail {
+  0%, 100% { top: 90%; left: 60%; transform: scale(1); opacity: 0.5; }
+  40%, 60% { top: 93%; left: 83%; transform: scale(1.5); opacity: 1; box-shadow: 0 0 15px cyan; } /* (250, 280) */
+}
+
+@keyframes formShape {
+  0%, 35%, 65%, 100% { opacity: 0; }
+  45%, 55% { opacity: 1; }
+}
+
+
+/* =========================================
+   HOLOGRAM VE UI (AYNI KALDI)
+   ========================================= */
+.menu-container { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.hologram-stage { width: 100%; display: flex; justify-content: center; margin-bottom: 20px; position: relative; z-index: 10; }
+.hologram-content { --holo-color: #fff; text-align: center; position: relative; width: 100%; max-width: 350px; cursor: pointer; }
+.hologram-beam { position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 80%; height: 300px; background: linear-gradient(to top, rgba(255,255,255,0.1) 0%, transparent 80%); clip-path: polygon(20% 100%, 80% 100%, 100% 0%, 0% 0%); filter: blur(20px); pointer-events: none; opacity: 0; transition: opacity 0.5s; }
+.active-anim .hologram-beam { opacity: 1; animation: beamPulse 2s infinite; }
+@keyframes beamPulse { 0%{opacity:0.3;} 50%{opacity:0.6;} 100%{opacity:0.3;} }
+.holo-details { position: relative; z-index: 2; text-shadow: 0 2px 10px #000; }
+.p-icon { font-size: 70px; margin-bottom: 10px; filter: drop-shadow(0 0 20px var(--holo-color)); transition: transform 0.3s; }
+.active-anim .p-icon { animation: floatIcon 3s infinite ease-in-out; }
+@keyframes floatIcon { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }
+.holo-details h2 { margin: 0; font-size: 2rem; color: #fff; letter-spacing: 1px; }
+.holo-details p { margin: 5px 0 15px; font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 500; }
+.tap-hint { display: inline-block; font-size: 0.8rem; color: var(--holo-color); border: 1px solid var(--holo-color); padding: 6px 16px; border-radius: 20px; background: rgba(0,0,0,0.6); box-shadow: 0 0 10px var(--holo-color); text-transform: uppercase; letter-spacing: 1px; }
+.bottom-bar-wrapper { position: relative; width: 90%; max-width: 400px; margin-bottom: 40px; z-index: 20; }
+.usage-hint { text-align: center; font-size: 0.9rem; color: rgba(255,255,255,0.9); margin-bottom: 15px; animation: fadeInOut 3s infinite; text-shadow: 0 0 5px black; }
+@keyframes fadeInOut { 0%,100%{opacity:0.6;} 50%{opacity:1;} }
+.fixed-dock { display: flex; justify-content: space-between; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; padding: 5px; position: relative; backdrop-filter: blur(5px); }
+.selection-indicator { position: absolute; top: 0; left: 0; width: 25%; height: 100%; border-radius: 25px; background: rgba(255,255,255,0.15); box-shadow: 0 0 15px rgba(255,255,255,0.3); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+.dock-item { flex: 1; height: 60px; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2; transition: transform 0.2s; }
+.dock-item:active { transform: scale(0.9); }
+.d-icon { font-size: 28px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); }
+img.emoji { width: 1.2em; height: 1.2em; vertical-align: -0.2em; }

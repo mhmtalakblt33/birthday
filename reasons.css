@@ -1,0 +1,170 @@
+/* =========================================
+   GENEL AYARLAR
+   ========================================= */
+:root {
+  --primary: #00d2ff;
+  --secondary: #3a7bd5;
+  --accent: #ff00ff;
+  --text: #fff;
+  --glass: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  margin: 0; font-family: 'Segoe UI', sans-serif;
+  background: #000; color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+}
+
+/* =========================================
+   ARKA PLAN (Hareketli Nebula)
+   ========================================= */
+.nebula-bg {
+  position: fixed; inset: 0; z-index: -1;
+  background: radial-gradient(circle at top, #1a0b2e 0%, #000000 100%);
+}
+
+/* Yıldızlar */
+.star-field {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px; opacity: 0.3;
+}
+
+/* Sis Efektleri */
+.fog {
+  position: absolute; width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 60%);
+  filter: blur(40px); animation: fogMove 20s infinite alternate;
+}
+.fog-2 {
+  background: radial-gradient(circle, rgba(255, 0, 255, 0.1) 0%, transparent 60%);
+  animation-duration: 15s; top: 30%; left: -20%;
+}
+@keyframes fogMove { from{transform:translate(0,0);} to{transform:translate(20px, 20px);} }
+
+
+/* =========================================
+   DÜZEN
+   ========================================= */
+.container {
+  max-width: 600px; margin: 0 auto;
+  padding: 20px; padding-bottom: 80px;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.page-header { text-align: center; margin: 20px 0 30px; animation: fadeIn 1s ease; width: 100%; }
+.header-icon { font-size: 50px; margin-bottom: 10px; animation: pulse 2s infinite; }
+@keyframes pulse { 0%{transform:scale(1);} 50%{transform:scale(1.1);} 100%{transform:scale(1);} }
+
+.page-header h1 {
+  margin: 0; font-size: 2rem; 
+  background: linear-gradient(to right, #fff, #aaa); -webkit-background-clip: text; color: transparent;
+}
+.page-header p { margin: 5px 0 15px; color: #888; font-size: 0.9rem; }
+
+/* İlerleme Çubuğu */
+.progress-container {
+  width: 100%; height: 4px; background: rgba(255,255,255,0.1);
+  border-radius: 10px; overflow: hidden; margin-top: 15px;
+}
+.progress-bar {
+  width: 0%; height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+
+/* =========================================
+   KART LİSTESİ
+   ========================================= */
+.cards-list { width: 100%; display: flex; flex-direction: column; gap: 15px; }
+
+.reason-card {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  animation: slideUp 0.6s ease backwards;
+}
+
+/* Kart Kapalıyken Hover */
+.reason-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+
+/* Başlık Kısmı */
+.card-header {
+  padding: 15px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.number-badge {
+  width: 35px; height: 35px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  font-weight: bold; color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s;
+}
+
+.tap-text {
+  font-size: 0.9rem; color: rgba(255,255,255,0.5); 
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+.chevron { color: #888; transition: transform 0.3s; }
+
+
+/* İçerik Kısmı (Gizli) */
+.card-content {
+  max-height: 0; opacity: 0;
+  padding: 0 20px;
+  color: #eee;
+  transition: all 0.4s ease;
+  font-family: 'Dancing Script', cursive; /* El yazısı */
+  font-size: 1.4rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* =========================================
+   AKTİF KART (AÇIK)
+   ========================================= */
+.reason-card.active {
+  background: rgba(20, 20, 30, 0.8);
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+}
+
+.reason-card.active .number-badge {
+  background: var(--primary);
+  box-shadow: 0 0 15px var(--primary);
+  color: #000; border-color: var(--primary);
+}
+
+.reason-card.active .chevron { transform: rotate(180deg); color: var(--primary); }
+.reason-card.active .tap-text { opacity: 0; } /* Yazıyı gizle */
+
+.reason-card.active .card-content {
+  max-height: 200px; /* İçerik için yer aç */
+  opacity: 1;
+  padding-bottom: 20px;
+}
+
+
+/* Animasyonlar */
+@keyframes slideUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+
+/* Geri Butonu */
+.back-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); padding: 10px 24px; border-radius: 30px; cursor: pointer; transition: all 0.2s; z-index: 100; font-weight: 600;}
+.back-btn:hover { background: #fff; color: #000; }

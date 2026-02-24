@@ -1,0 +1,118 @@
+:root {
+  --joy: #ffcc00; --sadness: #00a2ff; --anger: #ff3333; --fear: #c300ff; --disgust: #22ff66;
+  --accent: var(--joy);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #08080a; color: #fff;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  height: 100vh; width: 100vw;
+  overflow: hidden; /* Taşmayı kesinlikle engeller */
+}
+
+/* Atmosferik Efektler */
+.ambient-glow {
+  position: fixed; inset: 0;
+  background: radial-gradient(circle at 50% 50%, var(--accent) 0%, transparent 80%);
+  opacity: 0.12; transition: background 1.2s ease; z-index: -1;
+}
+
+.particles {
+  position: fixed; inset: 0; z-index: -1;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Esnek Layout Sistemi */
+.main-wrapper {
+  height: 100vh; display: flex; flex-direction: column;
+  padding: 20px 40px; max-width: 1400px; margin: 0 auto;
+}
+
+.top-nav {
+  height: 60px; display: flex; justify-content: space-between; align-items: center;
+  font-weight: 800; letter-spacing: 2px; opacity: 0.6; font-size: 0.75rem;
+}
+.emotion-badge { border: 1px solid var(--accent); padding: 4px 12px; border-radius: 20px; color: var(--accent); transition: 0.5s; }
+
+/* Orta Sahne */
+.content-stage {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 30px; min-height: 0;
+}
+
+.media-container {
+  width: 100%; max-height: 55vh;
+  position: relative; display: flex; justify-content: center;
+}
+
+.media-container img {
+  max-width: 100%; max-height: 55vh;
+  object-fit: contain; border-radius: 12px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* --- KARAKTER OPTİMİZASYONU (KUTUSUZ) --- */
+.char-overlay {
+  position: absolute;
+  bottom: -15px; right: -15px; /* Resim çerçevesine demirle */
+  height: clamp(120px, 28vh, 220px);
+  z-index: 10;
+  pointer-events: none;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  animation: floatChar 4s ease-in-out infinite;
+}
+
+.char-overlay img {
+  height: 100% !important; width: auto !important;
+  border: none !important; box-shadow: none !important;
+  background: transparent !important;
+  /* Kutu değil, sadece karakterin silüeti parlar */
+  filter: drop-shadow(0 10px 20px var(--accent)) !important;
+}
+
+@keyframes floatChar {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* Yazı Alanı */
+.text-info { text-align: center; width: 100%; transition: 0.5s; }
+.text-info h2 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; color: #fff; letter-spacing: -1px; }
+.text-info p { font-size: clamp(1rem, 2.5vw, 1.2rem); opacity: 0.6; line-height: 1.5; max-width: 700px; margin: 0 auto; font-weight: 400; }
+
+/* Alt Bar */
+.bottom-controls {
+  height: 100px; display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-dots { display: flex; gap: 12px; }
+.dot { width: 10px; height: 10px; background: rgba(255,255,255,0.15); border-radius: 50%; cursor: pointer; transition: 0.4s; }
+.dot.active { background: var(--accent); transform: scale(1.6); box-shadow: 0 0 15px var(--accent); }
+
+.action-btn {
+  background: #fff; color: #000; border: none;
+  padding: 14px 35px; border-radius: 40px; font-weight: 900;
+  cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 0.85rem; letter-spacing: 1px;
+}
+.action-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(255,255,255,0.2); }
+
+.exit-link { position: fixed; top: 30px; left: 30px; background: none; border: none; color: #fff; opacity: 0.3; cursor: pointer; font-size: 0.7rem; font-weight: bold; transition: 0.3s; }
+.exit-link:hover { opacity: 1; }
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+  .main-wrapper { padding: 20px; }
+  .bottom-controls { height: 80px; }
+  .char-overlay { height: 140px; right: -5px; bottom: -10px; }
+  .text-info p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+}
