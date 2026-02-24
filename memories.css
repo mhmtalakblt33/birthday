@@ -1,118 +1,279 @@
+/* =========================================
+   TEMEL AYARLAR & MOBİL OPTİMİZASYON
+   ========================================= */
 :root {
   --joy: #ffcc00; --sadness: #00a2ff; --anger: #ff3333; --fear: #c300ff; --disgust: #22ff66;
-  --accent: var(--joy);
+  --accent: var(--joy); /* Varsayılan renk */
+  --bg-dark: #08080a;
+  --text-light: #ffffff;
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-  background: #08080a; color: #fff;
+  background: var(--bg-dark); color: var(--text-light);
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  height: 100vh; width: 100vw;
-  overflow: hidden; /* Taşmayı kesinlikle engeller */
+  height: 100dvh; /* Mobil tarayıcı çubukları için dvh kullanımı */
+  width: 100vw; overflow: hidden;
+  display: flex; justify-content: center; align-items: center;
 }
 
-/* Atmosferik Efektler */
+/* Arka plan ışığı */
 .ambient-glow {
   position: fixed; inset: 0;
-  background: radial-gradient(circle at 50% 50%, var(--accent) 0%, transparent 80%);
+  background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
   opacity: 0.12; transition: background 1.2s ease; z-index: -1;
+  filter: blur(50px);
 }
 
-.particles {
-  position: fixed; inset: 0; z-index: -1;
-  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* Esnek Layout Sistemi */
+/* Ana Taşıyıcı - Mobilde kenar boşluklarını daraltıyoruz */
 .main-wrapper {
-  height: 100vh; display: flex; flex-direction: column;
-  padding: 20px 40px; max-width: 1400px; margin: 0 auto;
+  height: 100%; width: 100%; max-width: 1200px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  /* Mobilden masaüstüne artan padding: üst/alt 10-20px, sağ/sol 15-30px */
+  padding: clamp(10px, 2vh, 20px) clamp(15px, 3vw, 30px);
 }
 
+/* =========================================
+   ÜST BİLGİ ÇUBUĞU
+   ========================================= */
 .top-nav {
-  height: 60px; display: flex; justify-content: space-between; align-items: center;
-  font-weight: 800; letter-spacing: 2px; opacity: 0.6; font-size: 0.75rem;
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 10px; border-bottom: 1px solid var(--glass-border);
 }
-.emotion-badge { border: 1px solid var(--accent); padding: 4px 12px; border-radius: 20px; color: var(--accent); transition: 0.5s; }
 
-/* Orta Sahne */
+.counter-box { display: flex; flex-direction: column; }
+.counter-label { font-size: 0.7rem; opacity: 0.6; letter-spacing: 1px; }
+.counter { font-family: 'Courier New', monospace; font-weight: bold; font-size: 1.1rem; }
+
+.emotion-badge {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--accent); color: var(--accent);
+  padding: 6px 12px; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; box-shadow: 0 0 10px var(--accent);
+  transition: 0.4s;
+}
+
+/* =========================================
+   PROFESYONEL RESİM ALANI (Media Frame)
+   ========================================= */
 .content-stage {
-  flex: 1; display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  gap: 30px; min-height: 0;
+  flex-grow: 1; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; position: relative;
+  padding: 2vh 0;
 }
 
+.media-frame-wrapper {
+  position: relative;
+  width: 100%; max-width: 800px; /* Maksimum genişlik sınırı */
+  display: flex; justify-content: center;
+}
+
+/* Resim Çerçevesi - Duygu renginde parlayan cam efekt */
 .media-container {
-  width: 100%; max-height: 55vh;
-  position: relative; display: flex; justify-content: center;
-}
-
-.media-container img {
-  max-width: 100%; max-height: 55vh;
-  object-fit: contain; border-radius: 12px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.7);
-  border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  border-radius: 24px;
+  padding: 8px; /* Çerçeve kalınlığı */
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 20px rgba(255,255,255,0.05);
   transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-/* --- KARAKTER OPTİMİZASYONU (KUTUSUZ) --- */
-.char-overlay {
-  position: absolute;
-  bottom: -15px; right: -15px; /* Resim çerçevesine demirle */
-  height: clamp(120px, 28vh, 220px);
-  z-index: 10;
-  pointer-events: none;
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  animation: floatChar 4s ease-in-out infinite;
+/* Resim çerçevesinin dışındaki parlama efekti */
+.media-container::before {
+  content: ''; position: absolute; inset: -2px;
+  border-radius: 26px; padding: 2px;
+  background: linear-gradient(45deg, var(--accent), transparent, var(--accent));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0.5; transition: opacity 0.8s;
 }
 
-.char-overlay img {
-  height: 100% !important; width: auto !important;
-  border: none !important; box-shadow: none !important;
-  background: transparent !important;
-  /* Kutu değil, sadece karakterin silüeti parlar */
-  filter: drop-shadow(0 10px 20px var(--accent)) !important;
+.media-container img {
+  display: block; width: 100%; height: auto;
+  max-height: 45vh; /* Mobilde çok yer kaplamasın */
+  object-fit: cover; border-radius: 18px;
+  transition: opacity 0.4s ease-out;
 }
+
+/* Karakter Silüeti */
+.char-overlay {
+  position: absolute; bottom: -15px; right: -10px;
+  height: clamp(100px, 25vh, 200px); z-index: 5;
+  filter: drop-shadow(0 5px 15px var(--accent));
+  animation: floatChar 5s ease-in-out infinite;
+  pointer-events: none;
+}
+.char-overlay img { height: 100%; width: auto; }
 
 @keyframes floatChar {
   0%, 100% { transform: translateY(0) rotate(0); }
   50% { transform: translateY(-10px) rotate(2deg); }
 }
 
-/* Yazı Alanı */
-.text-info { text-align: center; width: 100%; transition: 0.5s; }
-.text-info h2 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; color: #fff; letter-spacing: -1px; }
-.text-info p { font-size: clamp(1rem, 2.5vw, 1.2rem); opacity: 0.6; line-height: 1.5; max-width: 700px; margin: 0 auto; font-weight: 400; }
+/* =========================================
+   YÜZEN EL YAZISI METİNLER
+   ========================================= */
+.text-info {
+  text-align: center; margin-top: clamp(15px, 3vh, 30px);
+  font-family: 'Caveat', cursive; position: relative; z-index: 10;
+}
 
-/* Alt Bar */
+.text-info h2 {
+  font-size: clamp(2rem, 6vw, 3.5rem); /* Responsive font */
+  font-weight: 700; color: #fff; margin-bottom: 5px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.text-info p {
+  font-size: clamp(1.3rem, 4vw, 1.6rem); /* Responsive font */
+  color: var(--accent); opacity: 0.95;
+  line-height: 1.3; max-width: 650px; margin: 0 auto;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+}
+
+.text-active { animation: slideUpFade 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards; }
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+/* =========================================
+   ALT KONTROLLER & BUTONLAR
+   ========================================= */
 .bottom-controls {
-  height: 100px; display: flex; justify-content: space-between; align-items: center;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column; gap: 15px;
+  padding-top: 15px; border-top: 1px solid var(--glass-border);
 }
 
-.nav-dots { display: flex; gap: 12px; }
-.dot { width: 10px; height: 10px; background: rgba(255,255,255,0.15); border-radius: 50%; cursor: pointer; transition: 0.4s; }
-.dot.active { background: var(--accent); transform: scale(1.6); box-shadow: 0 0 15px var(--accent); }
-
-.action-btn {
-  background: #fff; color: #000; border: none;
-  padding: 14px 35px; border-radius: 40px; font-weight: 900;
-  cursor: pointer; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  font-size: 0.85rem; letter-spacing: 1px;
+/* =========================================
+   NAVİGASYON NOKTALARI (OKLARI GİZLE)
+   ========================================= */
+.nav-dots-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Kaydırma özelliği kalsın */
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  
+  /* Scrollbar ve Okları Gizleme */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE ve Edge */
 }
-.action-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 15px 30px rgba(255,255,255,0.2); }
 
-.exit-link { position: fixed; top: 30px; left: 30px; background: none; border: none; color: #fff; opacity: 0.3; cursor: pointer; font-size: 0.7rem; font-weight: bold; transition: 0.3s; }
-.exit-link:hover { opacity: 1; }
+/* Chrome, Safari ve Opera için kaydırma çubuğunu tamamen yok et */
+.nav-dots-wrapper::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
 
-/* Mobil Uyumluluk */
+.nav-dots {
+  display: flex; gap: 10px; padding: 5px;
+}
+
+.dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.3); cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+/* Tıklama alanını genişlet (Mobil için önemli) */
+.dot::after { content: ''; position: absolute; inset: -8px; }
+
+.dot.active {
+  background: var(--accent); transform: scale(1.5);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* --- STANDART BUTONLAR --- */
+.action-buttons-group {
+  display: flex; gap: 12px; width: 100%;
+}
+
+.btn-standard {
+  flex: 1; /* Eşit genişlik */
+  display: flex; justify-content: center; align-items: center;
+  height: 50px; /* Sabit yükseklik */
+  border: none; border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif; font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; transition: all 0.3s ease;
+  text-decoration: none; position: relative; overflow: hidden;
+}
+
+.btn-standard:active { transform: scale(0.97); }
+
+/* Birincil Buton (Sıradaki) */
+.btn-primary {
+  background: var(--accent); color: #000;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+/* Parlama efekti */
+.btn-primary::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: 0.5s;
+}
+.btn-primary:hover::before { left: 100%; }
+
+/* İkincil Buton (Galeriye Dön) */
+.btn-secondary {
+  background: rgba(255,255,255,0.05); color: #fff;
+  border: 1px solid var(--glass-border);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);
+}
+
+/* =========================================
+   EKSTRA KÜÇÜK EKRANLAR (Örn: iPhone SE)
+   ========================================= */
+@media (max-height: 700px) {
+  .media-container img { max-height: 35vh; }
+  .char-overlay { height: 120px; }
+  .text-info { margin-top: 15px; }
+  .btn-standard { height: 44px; font-size: 0.9rem; }
+}
+/* =========================================
+   MOBİL CİHAZLAR İÇİN KARAKTER OPTİMİZASYONU
+   (Bu kısmı memories.css'in en altına ekle)
+   ========================================= */
+
+/* 768px ve altı genişlikteki ekranlar (Telefonlar ve dikey tabletler) */
 @media (max-width: 768px) {
-  .main-wrapper { padding: 20px; }
-  .bottom-controls { height: 80px; }
-  .char-overlay { height: 140px; right: -5px; bottom: -10px; }
-  .text-info p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .char-overlay {
+    /* Boyutlandırma:
+       - Eskiden: clamp(100px, 25vh, 200px) idi (çok büyüktü).
+       - Yeni: Minimum 70px, ideal olarak ekran genişliğinin %16'sı, maksimum 130px.
+       Bu sayede karakterler mobilde asla devasa olmayacak.
+    */
+    height: clamp(70px, 16vw, 130px);
+
+    /* Konumlandırma:
+       - Eskiden: bottom: -15px; right: -10px; (çok dışarıdaydı).
+       - Yeni: Daha içeri, çerçeveye daha yakın.
+    */
+    bottom: -8px;
+    right: -8px;
+
+    /* Mobilde dikkat dağıtmaması için süzülme animasyonunu biraz yavaşlatalım */
+    animation-duration: 7s;
+  }
+    
+  /* Karakterin gölgesini mobilde biraz kısalım, daha soft dursun */
+  .char-overlay img {
+      filter: drop-shadow(0 3px 10px var(--accent)) !important;
+  }
+}
+
+/* Çok küçük/eski telefonlar için ekstra güvenlik ayarı */
+@media (max-width: 380px) {
+    .char-overlay {
+        height: 90px !important; /* Sabit küçük boyut */
+        bottom: -5px;
+        right: -5px;
+    }
 }

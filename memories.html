@@ -2,40 +2,51 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>Anı Sahnesi | Inside Out Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="memories.css" />
 </head>
 <body>
 
   <div class="ambient-glow" id="ambientGlow"></div>
-  <div class="particles"></div>
-
   <main class="main-wrapper">
-    
     <header class="top-nav">
-      <div class="counter" id="counter">01 / 05</div>
+      <div class="counter-box">
+        <span class="counter-label">ANI NO.</span>
+        <span class="counter" id="counter">01 / 15</span>
+      </div>
       <div class="emotion-badge" id="emotionTag">NEŞE</div>
     </header>
 
     <section class="content-stage">
-      <div class="media-container" id="memoryFrame">
-        <img id="mainImage" src="" alt="Anı">
+      <div class="media-frame-wrapper">
+        <div class="media-container" id="memoryFrame">
+          <img id="mainImage" src="" alt="Anı">
+        </div>
         <div class="char-overlay" id="charBox"></div>
       </div>
 
-      <div class="text-info">
+      <div class="text-info" id="textInfo">
         <h2 id="memoryDate">---</h2>
         <p id="memoryNote">...</p>
       </div>
     </section>
 
     <footer class="bottom-controls">
-      <div class="nav-dots" id="orbCarousel"></div>
-      <button class="action-btn" onclick="nextMemory()">SIRADAKİ ANIN ➜</button>
+      <div class="nav-dots-wrapper">
+          <div class="nav-dots" id="orbCarousel"></div>
+      </div>
+      
+      <div class="action-buttons-group">
+        <button class="btn-standard btn-secondary" onclick="window.location.href='menu.html'">
+          <span>← Galeri</span>
+        </button>
+        <button class="btn-standard btn-primary" onclick="nextMemory()">
+          <span>Sıradaki Anı ➜</span>
+        </button>
+      </div>
     </footer>
-
-    <button class="exit-link" onclick="window.location.href='menu.html'">← Galeriye Dön</button>
   </main>
 
   <script src="memories.js"></script>
