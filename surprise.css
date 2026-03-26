@@ -22,6 +22,69 @@ html, body {
   background-color: #000;
   touch-action: pan-y;
 }
+/* Sadece final sayfasındaki mektup içeriği için */
+.final-note p {
+  font-family: 'Caveat', cursive; /* Önerdiğim fontlardan biri */
+  font-size: 15px; /* El yazısı küçük durduğu için boyutu artırdık */
+  line-height: 1.5;
+  color: #eaf1ff;
+  font-weight: 500;
+}
+
+/* İmza kısmı için daha zarif bir dokunuş */
+.sign {
+  font-family: 'Dancing Script', cursive;
+  font-size: 16px;
+  color: var(--accent-color) !important;
+  margin-top: 20px;
+  display: block;
+}
+.birthday-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem !important;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  
+  /* Çok hafif ve soft neon parlama */
+  text-shadow: 
+    0 0 7px rgba(255, 255, 255, 0.8),
+    0 0 12px rgba(255, 107, 138, 0.5), /* Pembe ışıltı */
+    0 0 20px rgba(255, 107, 138, 0.3);
+
+  /* Yumuşak nefes alma ve hafif kısılıp açılma animasyonu */
+  animation: elegantNeon 3s ease-in-out infinite alternate;
+}
+
+@keyframes elegantNeon {
+  0%, 15%, 35%, 77%, 100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 7px rgba(255, 255, 255, 0.8),
+      0 0 15px rgba(255, 107, 138, 0.6),
+      0 0 25px rgba(255, 107, 138, 0.4);
+  }
+  /* Arada çok hafif bir elektrik gidip gelmesi gibi kısılma efekti */
+  65%, 83% {
+    opacity: 0.8;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+  }
+  94% {
+    opacity: 0.9;
+  }
+}
+/* Pasta İkonu İçin Nabız Animasyonu */
+.pulse-animation {
+  animation: pulse 2s infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
 
 /* =========================================
    ARKA PLAN GRADYANLARI & TEMALAR
@@ -38,9 +101,10 @@ body.theme-tema .bg-gradient { background: radial-gradient(circle at top right, 
 body.theme-haciko .bg-gradient { background: radial-gradient(circle at top left, #f48fb1, #ec407a, #ad1457); }
 body.theme-kedv .bg-gradient { background: radial-gradient(circle at bottom right, #e57373, #ba68c8, #880e4f); }
 body.theme-daru .bg-gradient { background: radial-gradient(circle at center, #a5d6a7, #fff9c4, #388e3c); }
-body.theme-kacuv .bg-gradient { background: radial-gradient(circle at top, #4fc3f7, #81c784, #0277bd); }
+body.theme-kacuv .bg-gradient { background: radial-gradient(circle at top, #ffd700, #ff8c00, #1e3c72); }
 body.theme-ahbap .bg-gradient { background: radial-gradient(circle at bottom left, #66bb6a, #ffeb3b, #00897b); }
-body.theme-unicef .bg-gradient { background: radial-gradient(circle at center, #81d4fa, #e1f5fe, #01579b); }
+body.theme-unicef .bg-gradient { background: radial-gradient(circle at center, #81d7ff, #e1f5fe, #01579b); }
+body.theme-udemy .bg-gradient { background: radial-gradient(circle at center, #fc1d90, #f72bc0, #640a49); }
 body.theme-final .bg-gradient { background: radial-gradient(circle at center, #f8bbd0, #ec407a, #c2185b); }
 
 /* =========================================
@@ -112,10 +176,10 @@ body.theme-final .bg-gradient { background: radial-gradient(circle at center, #f
 
 .final-note {
   flex-grow: 1; text-align: left; background: rgba(0,0,0,0.3); padding: 15px; 
-  border-radius: 16px; font-size: 0.85rem; line-height: 1.4; color: #eee; 
+  border-radius: 16px; font-size: 15px; line-height: 1.4; color: #eee; 
   overflow-y: auto; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.1);
 }
-.sign { text-align: right; font-weight: bold; color: var(--accent-color); font-style: italic; }
+.sign { text-align: right; font-family: 'Caveat', cursive; font-weight: bold; color: #ff6b8a; font-style: italic;  }
 
 .button-group.optimized {
   display: flex; flex-direction: column; gap: 7px; width: 100%;
@@ -235,36 +299,3 @@ body.theme-final .bg-gradient { background: radial-gradient(circle at center, #f
 }
 
 
-/* Udemy Bölümü Optimizasyonu */
-[data-theme="theme-education"] .content-box {
-    padding: 15px; /* İç boşluğu biraz daraltarak alan kazanalım */
-}
-
-.mini-action-btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 18px; /* Boyut küçültüldü */
-    background-color: #ec5252;
-    color: white !important;
-    text-decoration: none;
-    border-radius: 20px; /* Daha oval/küçük görünüm */
-    font-weight: 600;
-    font-size: 0.8rem; /* Font küçültüldü */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-}
-
-.mini-action-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-
-/* Mesajın taşmasını engellemek için */
-.cert-msg {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-bottom: 10px;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
