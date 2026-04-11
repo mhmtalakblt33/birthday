@@ -133,5 +133,3 @@ body { margin: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 .dock-item:active { transform: scale(0.9); }
 .d-icon { font-size: 28px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); }
 img.emoji { width: 1.2em; height: 1.2em; vertical-align: -0.2em; }
-
-/*11.04.26*/

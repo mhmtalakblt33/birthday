@@ -28,12 +28,13 @@ const storyPoints = [
         ];
 
 const sadMessages = [
-    "Yapma...", "Kalbim çıt...", "Gerçekten mi?", 
-    "Beni üzüyorsun :(", "Ama pasta var?", "Lütfen evet de!", 
-    "İnatçı şey!", "Yakala beni :)", "Küserim bak.", 
-    "Son kararın mı?", "Emin misin?", "Bir daha düşün.", "Bence evet demelisin.", 
-     "Üzdün...", "Peki ya sürprizler?",
-     "Kırma beni...", "Ağlarım bak!", "Ciddi olamazsın!"
+    "😯 Yapma...", "💔 Kalbim çıt...", "🥺 Gerçekten mi?",
+"😢 Beni üzüyorsun", "🙄 Ama pasta var?", "🙏 Lütfen evet de!",
+"😤 İnatçı şey!", "😜 Yakala beni :)", "😒 Küserim bak.",
+"🧐 Son kararın mı?", "🤔 Emin misin?", "🤨 Bir daha düşün.",
+"😇 Bence evet demelisin.", "🥀 Üzdün...", "🎁 Peki ya sürprizler?",
+"😞 Kırma beni...", "😭 Ağlarım bak!", "😱 Ciddi olamazsın!",
+"🫠 Yıkıldım şu an...", "👋 Gidiyorum ben...", "😥 Gözüme toz kaçtı..."
 ];
 
 const elements = {
@@ -222,8 +223,8 @@ function moveButton(e) {
 
     // --- EVET BUTONUNU BÜYÜTME ---
     noClickCount++;
-    if (noClickCount % 5 === 0) {
-        yesScale += 0.15;
+    if (noClickCount % 1 === 0) {
+        yesScale += 0.25;
         elements.nextBtn.style.transform = `scale(${yesScale})`;
     }
 }
@@ -242,5 +243,3 @@ elements.nextBtn.addEventListener("click", () => {
 window.onload = function() {
     updateDateDisplay(START_MS);
 };
-
-/*11.04.26*/

@@ -113,6 +113,3 @@ body {
 .back-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 .back-btn:hover { background: #fff; color: #000; }
 img.emoji { width: 1.2em; height: 1.2em; vertical-align: -0.2em; }
-
-
-/*11.04.26*/

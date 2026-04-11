@@ -105,5 +105,3 @@ blowBtn.addEventListener('mouseup', stopBlowing);
 blowBtn.addEventListener('mouseleave', stopBlowing);
 blowBtn.addEventListener('touchstart', startBlowing);
 blowBtn.addEventListener('touchend', stopBlowing);
-
-/*11.04.26*/

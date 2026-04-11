@@ -54,5 +54,3 @@ document.querySelectorAll('.clickable-img').forEach(img => {
 function closeImageModal() {
     imageModal.classList.add('hidden');
 }
-
-/*11.04.26*/
